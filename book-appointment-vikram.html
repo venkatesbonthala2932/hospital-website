@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aadityaa Hospital - Book Appointment</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e4e9e9",
+                        "on-primary-container": "#9becf7",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#00201e",
+                        "primary": "#00535b",
+                        "on-surface": "#171d1d",
+                        "surface-dim": "#d6dbdb",
+                        "primary-container": "#006d77",
+                        "inverse-on-surface": "#edf2f2",
+                        "on-tertiary-container": "#ffd5d2",
+                        "on-surface-variant": "#3e494a",
+                        "surface-tint": "#006972",
+                        "primary-fixed": "#9ff0fb",
+                        "inverse-surface": "#2c3132",
+                        "tertiary": "#911a23",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3b0",
+                        "surface-container": "#eaefef",
+                        "error": "#ba1a1a",
+                        "background": "#f5fafa",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#b33338",
+                        "tertiary-fixed": "#ffdad8",
+                        "surface-container-low": "#eff5f5",
+                        "outline-variant": "#bec8ca",
+                        "surface-variant": "#dee3e3",
+                        "secondary-fixed": "#acefe7",
+                        "on-tertiary-fixed": "#410006",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "outline": "#6f797a",
+                        "surface-bright": "#f5fafa",
+                        "primary-fixed-dim": "#82d3de",
+                        "surface-container-highest": "#dee3e3",
+                        "secondary-fixed-dim": "#90d3cb",
+                        "on-primary-fixed-variant": "#004f56",
+                        "on-primary-fixed": "#001f23",
+                        "error-container": "#ffdad6",
+                        "surface": "#f5fafa",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#236863",
+                        "on-tertiary-fixed-variant": "#8c1520",
+                        "on-background": "#171d1d",
+                        "inverse-primary": "#82d3de",
+                        "secondary-container": "#a9ece5",
+                        "on-secondary-container": "#286d67"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "display": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow { box-shadow: 0px 12px 40px rgba(23, 29, 29, 0.06); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col antialiased selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- Top Utility Bar from SCREEN_44 -->
+<div class="bg-primary-container text-on-primary-container py-3 px-8 hidden md:block">
+<div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-label tracking-wide">
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                PI/466, 8, ZP Rd, Phase 4, Teachers Colony, Hastinapuram, Hyderabad, 500070
+            </span>
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                Mon-Sat: 10:00 AM – 6:00 PM
+            </span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:underline" href="#">Emergency Services</a>
+<span class="h-3 w-[1px] bg-white/20"></span>
+<a class="font-bold" href="tel:+914012345678">+91 40 1234 5678</a>
+</div>
+</div>
+</div>
+<!-- TopAppBar from SCREEN_44 -->
+<header class="w-full sticky top-0 z-50 bg-[#F5FAFA] dark:bg-slate-900 shadow-[0px_12px_40px_rgba(23,29,29,0.06)]">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="text-2xl font-black">A</span>
+</div>
+<span class="text-2xl font-bold text-[#00535B] dark:text-teal-500 tracking-tighter">Aadityaa Hospital</span>
+</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-[#00535B] font-bold border-b-2 border-[#00535B] pb-1 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">About Us</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Departments</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Doctors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Health Packages</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">call</button>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">schedule</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm scale-95 duration-200 active:opacity-80 shadow-lg shadow-primary/20">Book Appointment</button>
+</div>
+</nav>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-16 pb-24 px-6 md:px-12 max-w-7xl mx-auto w-full flex flex-col gap-10">
+<!-- Page Header -->
+<div class="flex flex-col gap-2 max-w-2xl">
+<h1 class="font-headline text-4xl md:text-5xl font-bold tracking-tight text-on-surface">Select Date and Time</h1>
+<p class="font-body text-lg text-on-surface-variant">Please choose a convenient slot for your consultation.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+<!-- Left Column: Context & Actions -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Selected Doctor Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_12px_40px_rgba(23,29,29,0.06)] sticky top-32">
+<h3 class="font-headline text-sm font-semibold uppercase tracking-wider text-outline mb-4">Selected Provider</h3>
+<div class="flex flex-col gap-4 mb-6 border-b border-surface-variant pb-6">
+<div class="flex items-start gap-4">
+<div class="w-20 h-20 rounded-xl overflow-hidden bg-surface-container-high flex-shrink-0">
+<img alt="Portrait of Dr. Vikram Sharma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABE_oOk7bXzB_KXXhHrz_C_N6MGDfDtCx1Ju4ymEnwdWAJLkPImgN_hRQoqyXIS90-7LgRzH7DXl_3q3tG8_YG0Pi-0WLi6XvBM9sXTpst-fkpFdwOA-uZjQN2GUxoJCW1bKWHmFg5ZYZPjlY0EKVPJqv-SSwH9zKHpkSMMvMDwHVFHoG-XmUX6LuW_Yhtwmpo85-ot7aPeeFBWbbejefUafq9_cU4kTXGKfGAG6tWn1XOXyOGLCMD7gguqZ7eyCQrtJiHwKC3Fk-h"/>
+</div>
+<div>
+<h4 class="font-headline text-xl font-bold text-on-surface leading-tight mb-1">Dr. Vikram Sharma</h4>
+<p class="font-body text-primary-container font-medium text-sm">Cardiology</p>
+<p class="font-body text-on-surface-variant text-xs mt-1 font-medium">MBBS, MD, DM (Cardiology)</p>
+<p class="font-body text-on-surface-variant text-xs mt-0.5">15+ Years Experience</p>
+</div>
+</div>
+<div>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">Expert in interventional cardiology and structural heart diseases. Dedicated to providing compassionate and evidence-based care for complex cardiovascular conditions.</p>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant text-sm bg-surface-container-low px-3 py-2 rounded-lg inline-flex w-fit mt-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-medium">Main Campus</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-4 mb-8">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">event_available</span>
+<div>
+<p class="font-headline font-semibold text-on-surface">October 4, 2023</p>
+<p class="font-body text-on-surface-variant text-sm mt-1">10:00 AM - 10:30 AM</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<button class="w-full py-4 rounded-lg bg-primary text-white font-headline font-bold text-lg hover:bg-primary-container transition-colors shadow-[0_8px_20px_rgba(0,83,91,0.15)] flex items-center justify-center gap-2">
+                            Book Appointment
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full py-3 rounded-lg bg-transparent text-on-surface font-body font-medium hover:bg-surface-container transition-colors">
+                            Back
+                        </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Calendar & Time Selection -->
+<div class="lg:col-span-8 flex flex-col gap-10">
+<!-- Calendar Section -->
+<section class="bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-[0_12px_40px_rgba(23,29,29,0.04)]">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline text-2xl font-semibold text-primary">October 2023</h2>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-surface hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-2 mb-4">
+<div class="text-center font-body text-sm font-medium text-outline">Sun</div>
+<div class="text-center font-body text-sm font-medium text-outline">Mon</div>
+<div class="text-center font-body text-sm font-medium text-outline">Tue</div>
+<div class="text-center font-body text-sm font-medium text-outline">Wed</div>
+<div class="text-center font-body text-sm font-medium text-outline">Thu</div>
+<div class="text-center font-body text-sm font-medium text-outline">Fri</div>
+<div class="text-center font-body text-sm font-medium text-outline">Sat</div>
+</div>
+<div class="grid grid-cols-7 gap-2 md:gap-4">
+<!-- Empty slots -->
+<div class="aspect-square"></div>
+<div class="aspect-square"></div>
+<!-- Days -->
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant opacity-50 cursor-not-allowed" disabled="">
+<span class="font-headline font-medium text-lg">1</span>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant opacity-50 cursor-not-allowed" disabled="">
+<span class="font-headline font-medium text-lg">2</span>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-low hover:bg-surface-container transition-colors text-on-surface relative">
+<span class="font-headline font-medium text-lg">3</span>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container absolute bottom-2"></div>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-primary text-on-primary shadow-[0_8px_20px_rgba(0,83,91,0.2)] transition-transform scale-105">
+<span class="font-headline font-bold text-lg">4</span>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-low hover:bg-surface-container transition-colors text-on-surface relative">
+<span class="font-headline font-medium text-lg">5</span>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container absolute bottom-2"></div>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant opacity-50 cursor-not-allowed" disabled="">
+<span class="font-headline font-medium text-lg">6</span>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant opacity-50 cursor-not-allowed" disabled="">
+<span class="font-headline font-medium text-lg">7</span>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-low hover:bg-surface-container transition-colors text-on-surface relative">
+<span class="font-headline font-medium text-lg">8</span>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container absolute bottom-2"></div>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-low hover:bg-surface-container transition-colors text-on-surface relative">
+<span class="font-headline font-medium text-lg">9</span>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container absolute bottom-2"></div>
+</button>
+<button class="aspect-square rounded-lg flex flex-col items-center justify-center gap-1 bg-surface-container-low hover:bg-surface-container transition-colors text-on-surface relative">
+<span class="font-headline font-medium text-lg">10</span>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container absolute bottom-2"></div>
+</button>
+</div>
+</section>
+<!-- Time Slots Section -->
+<section class="flex flex-col gap-6">
+<h3 class="font-headline text-xl font-semibold text-on-surface">Available Slots on Oct 4</h3>
+<div class="flex flex-col gap-4">
+<!-- Morning -->
+<div>
+<div class="flex items-center gap-2 mb-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">light_mode</span>
+<h4 class="font-headline text-sm font-semibold uppercase tracking-wider">Morning</h4>
+</div>
+<div class="grid grid-cols-3 md:grid-cols-4 gap-3">
+<button class="py-3 px-4 rounded-lg font-body font-medium text-on-surface bg-surface-container-low hover:bg-surface-container transition-colors text-center border border-transparent hover:border-outline-variant/30">09:00 AM</button>
+<button class="py-3 px-4 rounded-lg font-body font-medium text-on-surface bg-surface-container-low hover:bg-surface-container transition-colors text-center border border-transparent hover:border-outline-variant/30">09:30 AM</button>
+<button class="py-3 px-4 rounded-lg font-body font-medium text-on-primary-container bg-secondary-container text-center border-2 border-primary-container shadow-sm">10:00 AM</button>
+<button class="py-3 px-4 rounded-lg font-body font-medium text-on-surface bg-surface-container-low hover:bg-surface-container transition-colors text-center border border-transparent hover:border-outline-variant/30">10:30 AM</button>
+<button class="py-3 px-4 rounded-lg font-body font-medium text-outline bg-surface-container-lowest opacity-50 cursor-not-allowed text-center line-through decoration-outline/30">11:00 AM</button>
+<button class="py-3 px-4 rounded-lg font-body font-medium text-on-surface bg-surface-container-low hover:bg-surface-container transition-colors text-center border border-transparent hover:border-outline-variant/30">11:30 AM</button>
+</div>
+</div>
+<!-- Afternoon -->
+<div class="mt-4">
+<div class="flex items-center gap-2 mb-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">partly_cloudy_day</span>
+<h4 class="font-headline text-sm font-semibold uppercase tracking-wider">Afternoon</h4>
+</div>
+<div class="grid grid-cols-3 md:grid-cols-4 gap-3">
+<button class="py-3 px-4 rounded-lg font-body font-medium text-on-surface bg-surface-container-low hover:bg-surface-container transition-colors text-center border border-transparent hover:border-outline-variant/30">02:00 PM</button>
+<button class="py-3 px-4 rounded-lg font-body font-medium text-on-surface bg-surface-container-low hover:bg-surface-container transition-colors text-center border border-transparent hover:border-outline-variant/30">02:30 PM</button>
+<button class="py-3 px-4 rounded-lg font-body font-medium text-on-surface bg-surface-container-low hover:bg-surface-container transition-colors text-center border border-transparent hover:border-outline-variant/30">03:00 PM</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer from SCREEN_44 -->
+<footer class="w-full bg-[#006D77] dark:bg-slate-950 text-white pt-12 pb-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
+<div class="space-y-6">
+<div class="text-xl font-black text-white">Aadityaa Hospital</div>
+<p class="text-teal-100/80 font-['Inter'] text-sm leading-relaxed">Providing high-end editorial care and world-class medical excellence to our community for over 15 years.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Patient Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Book Appointment</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Find a Doctor</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Health Packages</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Lab Test Results</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Privacy Policy</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Terms of Service</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Patient Rights</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Careers</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Newsletter</h4>
+<p class="text-teal-100/80 text-xs mb-4">Get health tips and hospital updates delivered to your inbox.</p>
+<form class="space-y-2">
+<input class="w-full bg-white/10 border-none rounded-lg p-3 text-sm text-white placeholder:text-teal-100/40 focus:ring-2 focus:ring-teal-200" placeholder="Email Address" type="email"/>
+<button class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm hover:bg-teal-50 transition-colors">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-teal-100/60">
+<div>© 2024 Aadityaa Hospital. Editorial Excellence in Care.</div>
+<div class="flex gap-8">
+<a class="hover:text-white" href="#">Accreditations</a>
+<a class="hover:text-white" href="#">Hospital Rules</a>
+<a class="hover:text-white" href="#">Feedback</a>
+</div>
+</div>
+</footer>
+</body></html>

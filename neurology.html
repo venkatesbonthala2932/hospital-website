@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Neurology Specialists - Aadityaa Hospital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eaefef",
+                        "secondary": "#236863",
+                        "background": "#f5fafa",
+                        "tertiary": "#911a23",
+                        "on-tertiary-fixed-variant": "#8c1520",
+                        "outline": "#6f797a",
+                        "surface-bright": "#f5fafa",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "tertiary-container": "#b33338",
+                        "surface-container-high": "#e4e9e9",
+                        "on-primary-fixed-variant": "#004f56",
+                        "primary-fixed-dim": "#82d3de",
+                        "surface-variant": "#dee3e3",
+                        "tertiary-fixed-dim": "#ffb3b0",
+                        "primary": "#00535b",
+                        "on-background": "#171d1d",
+                        "surface-tint": "#006972",
+                        "surface-dim": "#d6dbdb",
+                        "surface": "#f5fafa",
+                        "secondary-fixed": "#acefe7",
+                        "primary-container": "#006d77",
+                        "on-primary-container": "#9becf7",
+                        "on-primary-fixed": "#001f23",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#3e494a",
+                        "on-tertiary-container": "#ffd5d2",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#a9ece5",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#410006",
+                        "on-surface": "#171d1d",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#bec8ca",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#edf2f2",
+                        "tertiary-fixed": "#ffdad8",
+                        "surface-container-highest": "#dee3e3",
+                        "on-secondary-fixed": "#00201e",
+                        "inverse-surface": "#2c3132",
+                        "surface-container-low": "#eff5f5",
+                        "on-secondary-container": "#286d67",
+                        "secondary-fixed-dim": "#90d3cb",
+                        "primary-fixed": "#9ff0fb",
+                        "inverse-primary": "#82d3de"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope", "sans-serif"],
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Utility Bar -->
+<div class="bg-primary-container text-on-primary-container py-3 px-8 hidden md:block">
+<div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-label tracking-wide">
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                PI/466, 8, ZP Rd, Phase 4, Teachers Colony, Hastinapuram, Hyderabad, 500070
+            </span>
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                Mon-Sat: 10:00 AM – 6:00 PM
+            </span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:underline" href="#">Emergency Services</a>
+<span class="h-3 w-[1px] bg-white/20"></span>
+<a class="font-bold" href="tel:+914012345678">+91 40 1234 5678</a>
+</div>
+</div>
+</div>
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-[#F5FAFA] dark:bg-slate-900 shadow-[0px_12px_40px_rgba(23,29,29,0.06)]">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="text-2xl font-black">A</span>
+</div>
+<span class="text-2xl font-bold text-[#00535B] dark:text-teal-500 tracking-tighter">Aadityaa Hospital</span>
+</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-[#00535B] font-bold border-b-2 border-[#00535B] pb-1 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">About Us</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Departments</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Doctors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Health Packages</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">call</button>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">schedule</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm scale-95 duration-200 active:opacity-80 shadow-lg shadow-primary/20">Book Appointment</button>
+</div>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<!-- Header -->
+<header class="mb-16">
+<h1 class="font-display text-4xl md:text-5xl lg:text-[2.75rem] font-extrabold text-primary tracking-[-0.02em] leading-tight mb-4">
+                Neurology Specialists
+            </h1>
+<p class="font-body text-lg text-on-surface-variant max-w-3xl leading-relaxed">
+                Expert care for conditions of the brain, spinal cord, and nervous system, guided by advanced diagnostics and compassionate treatment.
+            </p>
+</header>
+<!-- Doctors Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Doctor Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden group">
+<div class="relative h-72 w-full bg-surface-container-low">
+<img alt="Dr. Alok Sharma" class="w-full h-full object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="portrait of a mature indian male doctor in white lab coat smiling gently, bright clinical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPxP53jEsmxOZV4oc0U_fwSJUrMeeampd_jdatv0m-h_i6_H8NcdmStfhRkPhVVDitOEv615HDYvsIJVfc09R5A2dtCq5vLtKY8YAAJiXW3rIegTH8aavX4up6CpdE2cpMJ6fjlQbx8qLTGGYjlepbkIlVrloDyJJ-gRocQB6Wj_T_9xP7ByxkxO8XEt1LAvsC4STetfQpEwDiPPdZ73TFRhy8cpFSqWT933oq6VqEtxqH6mlX6S510pCD0-jnxbXnw6jU8WCTVmHm"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent bottom-0 h-1/2 mt-auto"></div>
+</div>
+<div class="p-6 relative bg-surface-container-lowest z-10 pt-8 mt-[-2rem] rounded-xl">
+<h2 class="font-display text-2xl font-bold text-primary mb-1">Dr. Alok Sharma</h2>
+<p class="font-body text-on-surface-variant text-sm mb-4">MBBS, MD, DM (Neurology)</p>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="clinical_notes">clinical_notes</span>
+<span class="font-body text-on-surface text-sm">22+ Years Experience</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="neurology">neurology</span>
+<span class="font-body text-on-surface text-sm">Specializes in Stroke Management, Epilepsy, Movement Disorders</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label font-medium py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+<span>Book Consultation</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Doctor Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden group">
+<div class="relative h-72 w-full bg-surface-container-low">
+<img alt="Dr. Meera Patel" class="w-full h-full object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="portrait of a confident female indian doctor with stethoscope looking directly at camera, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTetj_UVkuZkvDkzYyoqtP_0soZMtEo4EKq3YAEJshllLy6AE2W9aVgDecAUxZTXlyeAo1wiTNeYjWzH5qiA4A_nQJKNlBUB7uPkuEKpOjX3TiuLTBK6bXfPqrDTtYxBKXifhEUGaM3sg3Pz9Zgbx8MmT_qt97wnhfP49RWny-xAQhMUA6LWv3JDIhAnYA8Vylj8E-CHvXN8caKDfIqtVlf48FSMzRDRHeEk0y9Hj5BH5qQe-JaK0Vhk_aRoX2VAKTWgO4NG-I--o2"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent bottom-0 h-1/2 mt-auto"></div>
+</div>
+<div class="p-6 relative bg-surface-container-lowest z-10 pt-8 mt-[-2rem] rounded-xl">
+<h2 class="font-display text-2xl font-bold text-primary mb-1">Dr. Meera Patel</h2>
+<p class="font-body text-on-surface-variant text-sm mb-4">MBBS, MD, DM (Neurology)</p>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="clinical_notes">clinical_notes</span>
+<span class="font-body text-on-surface text-sm">15+ Years Experience</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="neurology">neurology</span>
+<span class="font-body text-on-surface text-sm">Specializes in Neuroimmunology, Multiple Sclerosis, Headaches</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label font-medium py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+<span>Book Consultation</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Doctor Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden group">
+<div class="relative h-72 w-full bg-surface-container-low">
+<img alt="Dr. Sanjay Gupta" class="w-full h-full object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="portrait of a distinguished older male doctor in scrubs and lab coat, professional hospital background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvcI2RGO5Ie10HCWww1_B63y8nmEHkCKWiGhv4VnW5N4Kd36GJMFf9PoAbrzkjvP9k_g9rN5zMSXqdEecZDImNKLiO5tRLeBBO5KooDrwy9M_EnuMHW96UeLxIqvjYYD8K8p2h70K8O0ZOaaVjHXSvthGRp_VJGTUcxi2g7fVszDrt9tWlhxkb-4Ri9ncf8dv8NWGchD81PuREd04SNkC-tdWzonLoFvWCRDMFBUYyRKrsUfTleX3eLxPcIZpDbIg0BpowaVU91jQT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent bottom-0 h-1/2 mt-auto"></div>
+</div>
+<div class="p-6 relative bg-surface-container-lowest z-10 pt-8 mt-[-2rem] rounded-xl">
+<h2 class="font-display text-2xl font-bold text-primary mb-1">Dr. Sanjay Gupta</h2>
+<p class="font-body text-on-surface-variant text-sm mb-4">MBBS, MS, MCh (Neurosurgery)</p>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="clinical_notes">clinical_notes</span>
+<span class="font-body text-on-surface text-sm">28+ Years Experience</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="neurology">neurology</span>
+<span class="font-body text-on-surface text-sm">Specializes in Complex Spine Surgery, Brain Tumors, Neurotrauma</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label font-medium py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+<span>Book Consultation</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Doctor Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden group">
+<div class="relative h-72 w-full bg-surface-container-low">
+<img alt="Dr. Priya Desai" class="w-full h-full object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="portrait of a young female indian doctor smiling in clinical setting, bright and modern hospital environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ_V7rSsYjxTXhzTtsim0LDSE2eEov6m3S9NYl_AFKai-mcb5kNg7Bib1f3nIdQF4qE1MjazuiOyRYcEPhvkxDU-bjN6EnPRjsh-kHELJlj8GyttrFTt5HY8VR-do9R3c05QqDkOqcmPBfdb6BjLNqFS4nE4FQKkeSLinymD-Ye3q-VM8zDgQZy62LLZZSCO8RXjqxWOqhxI83x4lrG2gNVoCUpgspgGW5lP5gGqEN_SaQN0Q0s3e0dsUrYTz_kKjnu798czzC7EZ2"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent bottom-0 h-1/2 mt-auto"></div>
+</div>
+<div class="p-6 relative bg-surface-container-lowest z-10 pt-8 mt-[-2rem] rounded-xl">
+<h2 class="font-display text-2xl font-bold text-primary mb-1">Dr. Priya Desai</h2>
+<p class="font-body text-on-surface-variant text-sm mb-4">MBBS, MD, DM (Pediatric Neurology)</p>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="clinical_notes">clinical_notes</span>
+<span class="font-body text-on-surface text-sm">12+ Years Experience</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="neurology">neurology</span>
+<span class="font-body text-on-surface text-sm">Specializes in Pediatric Epilepsy, Neurodevelopmental Disorders</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label font-medium py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+<span>Book Consultation</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Doctor Card 5 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden group">
+<div class="relative h-72 w-full bg-surface-container-low">
+<img alt="Dr. Vikram Singh" class="w-full h-full object-cover rounded-t-xl group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="portrait of a focused male indian doctor reviewing notes, soft cool clinical lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLpzgyuDp2naNGDRfosGDMzcgBUeHGewRc7XNYDribRAm-ibITdF2mjg-kldMDDGcBW6WdURpPK_wH_NLOzK_nZxqXsDg4FRIfnLxC5QvTE6rCB7Y1SiPuO_DP2HdL8Qzsfl4JCwhoOV6HA7BdYrXcUm_UMv8WFxcZiASxjbmeJ1tRi5r-C3Rkbfwni4Ry_oE6OdXLcrOCYutnj49VrwGES7iJWIuSkwI2z6Ywm-OoEVFMS0L4QIF_4B2NMxReH7AexKWkBnleabtH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent bottom-0 h-1/2 mt-auto"></div>
+</div>
+<div class="p-6 relative bg-surface-container-lowest z-10 pt-8 mt-[-2rem] rounded-xl">
+<h2 class="font-display text-2xl font-bold text-primary mb-1">Dr. Vikram Singh</h2>
+<p class="font-body text-on-surface-variant text-sm mb-4">MBBS, MD, DM (Neurology)</p>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="clinical_notes">clinical_notes</span>
+<span class="font-body text-on-surface text-sm">18+ Years Experience</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="neurology">neurology</span>
+<span class="font-body text-on-surface text-sm">Specializes in Parkinson's Disease, Neuromuscular Disorders, Dementia</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label font-medium py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2">
+<span>Book Consultation</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#006D77] dark:bg-slate-950 text-white pt-12 pb-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
+<div class="space-y-6">
+<div class="text-xl font-black text-white">Aadityaa Hospital</div>
+<p class="text-teal-100/80 font-['Inter'] text-sm leading-relaxed">Providing high-end editorial care and world-class medical excellence to our community for over 15 years.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Patient Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Book Appointment</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Find a Doctor</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Health Packages</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Lab Test Results</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Privacy Policy</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Terms of Service</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Patient Rights</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Careers</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Newsletter</h4>
+<p class="text-teal-100/80 text-xs mb-4">Get health tips and hospital updates delivered to your inbox.</p>
+<form class="space-y-2">
+<input class="w-full bg-white/10 border-none rounded-lg p-3 text-sm text-white placeholder:text-teal-100/40 focus:ring-2 focus:ring-teal-200" placeholder="Email Address" type="email"/>
+<button class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm hover:bg-teal-50 transition-colors">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-teal-100/60">
+<div>© 2024 Aadityaa Hospital. Editorial Excellence in Care.</div>
+<div class="flex gap-8">
+<a class="hover:text-white" href="#">Accreditations</a>
+<a class="hover:text-white" href="#">Hospital Rules</a>
+<a class="hover:text-white" href="#">Feedback</a>
+</div>
+</div>
+</footer>
+</body></html>

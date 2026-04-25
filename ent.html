@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ENT Specialists - Aadityaa Hospital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eaefef",
+                        "secondary": "#236863",
+                        "background": "#f5fafa",
+                        "tertiary": "#911a23",
+                        "on-tertiary-fixed-variant": "#8c1520",
+                        "outline": "#6f797a",
+                        "surface-bright": "#f5fafa",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "tertiary-container": "#b33338",
+                        "surface-container-high": "#e4e9e9",
+                        "on-primary-fixed-variant": "#004f56",
+                        "primary-fixed-dim": "#82d3de",
+                        "surface-variant": "#dee3e3",
+                        "tertiary-fixed-dim": "#ffb3b0",
+                        "primary": "#00535b",
+                        "on-background": "#171d1d",
+                        "surface-tint": "#006972",
+                        "surface-dim": "#d6dbdb",
+                        "surface": "#f5fafa",
+                        "secondary-fixed": "#acefe7",
+                        "primary-container": "#006d77",
+                        "on-primary-container": "#9becf7",
+                        "on-primary-fixed": "#001f23",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#3e494a",
+                        "on-tertiary-container": "#ffd5d2",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#a9ece5",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#410006",
+                        "on-surface": "#171d1d",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#bec8ca",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#edf2f2",
+                        "tertiary-fixed": "#ffdad8",
+                        "surface-container-highest": "#dee3e3",
+                        "on-secondary-fixed": "#00201e",
+                        "inverse-surface": "#2c3132",
+                        "surface-container-low": "#eff5f5",
+                        "on-secondary-container": "#286d67",
+                        "secondary-fixed-dim": "#90d3cb",
+                        "primary-fixed": "#9ff0fb",
+                        "inverse-primary": "#82d3de"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope", "sans-serif"],
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Utility Bar -->
+<div class="bg-primary-container text-on-primary-container py-3 px-8 hidden md:block">
+<div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-label tracking-wide">
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                PI/466, 8, ZP Rd, Phase 4, Teachers Colony, Hastinapuram, Hyderabad, 500070
+            </span>
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                Mon-Sat: 10:00 AM – 6:00 PM
+            </span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:underline" href="#">Emergency Services</a>
+<span class="h-3 w-[1px] bg-white/20"></span>
+<a class="font-bold" href="tel:+914012345678">+91 40 1234 5678</a>
+</div>
+</div>
+</div>
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-[#F5FAFA] dark:bg-slate-900 shadow-[0px_12px_40px_rgba(23,29,29,0.06)]">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="text-2xl font-black">A</span>
+</div>
+<span class="text-2xl font-bold text-[#00535B] dark:text-teal-500 tracking-tighter">Aadityaa Hospital</span>
+</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-[#00535B] font-bold border-b-2 border-[#00535B] pb-1 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">About Us</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Departments</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Doctors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Health Packages</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">call</button>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">schedule</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm scale-95 duration-200 active:opacity-80 shadow-lg shadow-primary/20">Book Appointment</button>
+</div>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-24 flex flex-col gap-16">
+<!-- Header Section -->
+<section class="flex flex-col gap-6 max-w-3xl">
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-primary tracking-[-0.02em] leading-tight">
+                ENT Specialists
+            </h1>
+<p class="text-lg text-on-surface-variant font-body leading-relaxed pl-0 md:pl-6 border-l-0 md:border-l-4 border-surface-container-high">
+                Our world-class otolaryngologists provide comprehensive care for conditions affecting the ear, nose, throat, and related structures of the head and neck. We combine advanced diagnostic technology with compassionate expertise.
+            </p>
+</section>
+<!-- Doctors Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Doctor Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group relative isolation-auto">
+<div class="relative h-72 w-full overflow-hidden bg-surface-container">
+<img alt="Dr. Rajesh Kumar" class="object-cover w-full h-full object-top group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Portrait of a confident middle-aged male doctor with glasses, wearing a white coat over a blue shirt, standing in a brightly lit modern hospital corridor, looking directly at camera with a reassuring smile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA67OpZD0JKXG1Ew-MuUyZ-h2Gt-wyVSNfa2XQIWjYbO-VQK9QTSiooPI7XxvAfoIhAGVhv5LL23urvhcZektXgjH3eGZEp154W8gu5xPCvnuoPFXLnxLv3zXTUdEbu-7-bOBMgqhSqN0sZ6knjR18GEbmdD2cVMYiPmyfMQ2FvSvYzX3c-9Cso5Sqcd0Wu7oEY3wqv8eOHRdoy0CiGdY6HAc2v_v2dQ-ATekFp-A4S7hjf0MAs3kr8dX-9DaticUNXrPC1tHAK4Z0H"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-90 mix-blend-multiply"></div>
+</div>
+<div class="p-8 flex flex-col gap-6 relative bg-surface-container-lowest z-10 -mt-6 rounded-t-[1.5rem]">
+<div class="flex flex-col gap-1 border-b border-surface-container-high pb-4">
+<h2 class="text-2xl font-display font-bold text-primary">Dr. Rajesh Kumar</h2>
+<p class="text-sm font-label text-secondary font-semibold">MBBS, MS (ENT), Fellowship in Head &amp; Neck Oncology</p>
+<p class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-lg">work_history</span>
+                            18 Years Experience
+                        </p>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed flex-grow">
+                        Dr. Kumar specializes in complex head and neck surgeries and advanced sinus procedures. He is renowned for his meticulous surgical technique and patient-centered approach to chronic ENT conditions.
+                    </p>
+<button class="mt-auto w-full bg-primary hover:bg-primary-container text-on-primary py-3 px-6 rounded-lg font-label font-medium transition-colors shadow-sm flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Doctor Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group relative isolation-auto">
+<div class="relative h-72 w-full overflow-hidden bg-surface-container">
+<img alt="Dr. Ananya Sharma" class="object-cover w-full h-full object-top group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Portrait of a female doctor in her late 30s with dark hair tied back, wearing a stethoscope and white coat, standing in a softly lit clinical setting with a gentle, professional expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1kSUTKt0luCSYB7hET7D5eT_SBU7497aAv39gAiBGAxtg7HOS9q7_KHW4xOvpP4nXAzVj8lEVMaQvrV-KjNflaXRIMGxYsoxV4Qis-Et8p8kKNc9enEWiJohsHncogTPi8dCJHKpPXb_U2RVbJ7GcipSm6BtE15CZgtQBbuT6aQh5mtZLeSuUZuYSBwNuLjOrXzU3y21YoLcgyxNVqWuQDu477Ou3SjOlLwxEraJZWur23w8zSxPAC4xX1JLZz-8lzHsFHhVb7DKh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-90 mix-blend-multiply"></div>
+</div>
+<div class="p-8 flex flex-col gap-6 relative bg-surface-container-lowest z-10 -mt-6 rounded-t-[1.5rem]">
+<div class="flex flex-col gap-1 border-b border-surface-container-high pb-4">
+<h2 class="text-2xl font-display font-bold text-primary">Dr. Ananya Sharma</h2>
+<p class="text-sm font-label text-secondary font-semibold">MBBS, DNB (ENT)</p>
+<p class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-lg">work_history</span>
+                            12 Years Experience
+                        </p>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed flex-grow">
+                        An expert in pediatric otolaryngology, Dr. Sharma brings a gentle, empathetic approach to treating children with ear infections, tonsil issues, and airway disorders. She is dedicated to family-inclusive care.
+                    </p>
+<button class="mt-auto w-full bg-primary hover:bg-primary-container text-on-primary py-3 px-6 rounded-lg font-label font-medium transition-colors shadow-sm flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Doctor Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group relative isolation-auto">
+<div class="relative h-72 w-full overflow-hidden bg-surface-container">
+<img alt="Dr. Vikram Singh" class="object-cover w-full h-full object-top group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Portrait of an experienced older male doctor with grey hair and glasses, wearing a white coat and tie, looking thoughtful and approachable in a modern medical office setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAX8VHA2h1pZSyFMlCe5TWJzKxC01fBaRGe2v_CXRZ7ZbG0OEAJ6BpW4_6IIjSxtfrB3OSRs8pTKTiIhcHNrME48INnn5pzWD0oNcMMXzj_SU6n5s3oYmoetNgkZQzL5cL7ijdrNtXfcj6ZSjGmpGG8ajS_dr_WLJ1dWlZRRDSEZAsfYbBr4vfO4q4-lXRKEG4gsBY_cNo8YwkFAT0O5Sr4Go6R5t2_5j-DwWbsd2FZucrCB9Ob3vztIp-Ck8n9Tk-KX26fL9Rjxf1"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-90 mix-blend-multiply"></div>
+</div>
+<div class="p-8 flex flex-col gap-6 relative bg-surface-container-lowest z-10 -mt-6 rounded-t-[1.5rem]">
+<div class="flex flex-col gap-1 border-b border-surface-container-high pb-4">
+<h2 class="text-2xl font-display font-bold text-primary">Dr. Vikram Singh</h2>
+<p class="text-sm font-label text-secondary font-semibold">MBBS, MS (ENT), FRCS</p>
+<p class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-lg">work_history</span>
+                            25 Years Experience
+                        </p>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed flex-grow">
+                        Dr. Singh is a pioneer in endoscopic sinus surgery and cochlear implants. His decades of experience and commitment to incorporating the latest technological advancements ensure superior outcomes for complex auditory issues.
+                    </p>
+<button class="mt-auto w-full bg-primary hover:bg-primary-container text-on-primary py-3 px-6 rounded-lg font-label font-medium transition-colors shadow-sm flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Doctor Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group relative isolation-auto">
+<div class="relative h-72 w-full overflow-hidden bg-surface-container">
+<img alt="Dr. Meera Patel" class="object-cover w-full h-full object-top group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Portrait of a young female doctor wearing glasses and a lab coat, smiling warmly with crossed arms, standing against a clean white background in a well-lit clinic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1PHzsHrjKoDGYrdBiTYCUAeOw7htB7h9NNRv7itsKyG5WQkrpiD8b-YMmnBSNMtkVkJ-eXOLqHJWkAjG74EvgNZTVDnkauG0vnjBdlJxUNCZngz3BmmJ4cgL8TiVUyaFDBYaTIsxhtuDN1z7MewO_DfhLBbgjbesdZ4v7ovjwDKyfmBsHNR9zu24cplCgy_C1gJONTlb0XC6smxUTNXzw6DuSzdaJ4_gS-Wv4ihgRxohQnmAXi4OEqcK-qIlnrltnBEeGG3hvO-lF"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-90 mix-blend-multiply"></div>
+</div>
+<div class="p-8 flex flex-col gap-6 relative bg-surface-container-lowest z-10 -mt-6 rounded-t-[1.5rem]">
+<div class="flex flex-col gap-1 border-b border-surface-container-high pb-4">
+<h2 class="text-2xl font-display font-bold text-primary">Dr. Meera Patel</h2>
+<p class="text-sm font-label text-secondary font-semibold">MBBS, MS (ENT), Fellowship in Laryngology</p>
+<p class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-lg">work_history</span>
+                            9 Years Experience
+                        </p>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed flex-grow">
+                        Focusing on voice and swallowing disorders, Dr. Patel utilizes state-of-the-art stroboscopy and laser treatments. She is highly sought after by professional voice users for her specialized laryngology expertise.
+                    </p>
+<button class="mt-auto w-full bg-primary hover:bg-primary-container text-on-primary py-3 px-6 rounded-lg font-label font-medium transition-colors shadow-sm flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Doctor Card 5 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group relative isolation-auto">
+<div class="relative h-72 w-full overflow-hidden bg-surface-container">
+<img alt="Dr. Sanjay Gupta" class="object-cover w-full h-full object-top group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Portrait of a cheerful male doctor of South Asian descent, wearing blue scrubs and a stethoscope around his neck, standing in a hospital setting with soft natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj_GaCIBIolbYA-FRPxMkv6SAhTJzmfQm0QCF3yefywGMnzaV_-ZjG6cEgLq89dtqMSbY40off0pA-QJbpME33-0Kr5ZjavVAIPEIoLWFTdKB8XnmK5gNsuFKE9uAHmd7w-3s3VCNBHw4xLgfFAOZ-hRjG9pBUV3riZUjHtuK5MWku1ddMU-6Maqyv1TKZdwbVCpxt5q1ZYuqiPAYGNMCGCGMJoCeRfwPo4c3omXnv1mTnEj1Dq38nFguHj8mKJmEch6MwYs0Kq6ss"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-90 mix-blend-multiply"></div>
+</div>
+<div class="p-8 flex flex-col gap-6 relative bg-surface-container-lowest z-10 -mt-6 rounded-t-[1.5rem]">
+<div class="flex flex-col gap-1 border-b border-surface-container-high pb-4">
+<h2 class="text-2xl font-display font-bold text-primary">Dr. Sanjay Gupta</h2>
+<p class="text-sm font-label text-secondary font-semibold">MBBS, MS (ENT)</p>
+<p class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-lg">work_history</span>
+                            15 Years Experience
+                        </p>
+</div>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed flex-grow">
+                        Dr. Gupta specializes in general otolaryngology with a particular interest in allergy management and sleep apnea. He focuses on non-invasive therapies and holistic treatment plans for chronic sufferers.
+                    </p>
+<button class="mt-auto w-full bg-primary hover:bg-primary-container text-on-primary py-3 px-6 rounded-lg font-label font-medium transition-colors shadow-sm flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</article>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#006D77] dark:bg-slate-950 text-white pt-12 pb-6 mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
+<div class="space-y-6">
+<div class="text-xl font-black text-white">Aadityaa Hospital</div>
+<p class="text-teal-100/80 font-['Inter'] text-sm leading-relaxed">Providing high-end editorial care and world-class medical excellence to our community for over 15 years.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Patient Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Book Appointment</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Find a Doctor</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Health Packages</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Lab Test Results</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Privacy Policy</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Terms of Service</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Patient Rights</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Careers</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Newsletter</h4>
+<p class="text-teal-100/80 text-xs mb-4">Get health tips and hospital updates delivered to your inbox.</p>
+<form class="space-y-2">
+<input class="w-full bg-white/10 border-none rounded-lg p-3 text-sm text-white placeholder:text-teal-100/40 focus:ring-2 focus:ring-teal-200" placeholder="Email Address" type="email"/>
+<button class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm hover:bg-teal-50 transition-colors">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-teal-100/60">
+<div>© 2024 Aadityaa Hospital. Editorial Excellence in Care.</div>
+<div class="flex gap-8">
+<a class="hover:text-white" href="#">Accreditations</a>
+<a class="hover:text-white" href="#">Hospital Rules</a>
+<a class="hover:text-white" href="#">Feedback</a>
+</div>
+</div>
+</footer>
+</body></html>

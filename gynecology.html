@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gynecology Specialists - Aadityaa Hospital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "surface-container": "#eaefef",
+                    "secondary": "#236863",
+                    "background": "#f5fafa",
+                    "tertiary": "#911a23",
+                    "on-tertiary-fixed-variant": "#8c1520",
+                    "outline": "#6f797a",
+                    "surface-bright": "#f5fafa",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "tertiary-container": "#b33338",
+                    "surface-container-high": "#e4e9e9",
+                    "on-primary-fixed-variant": "#004f56",
+                    "primary-fixed-dim": "#82d3de",
+                    "surface-variant": "#dee3e3",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "primary": "#00535b",
+                    "on-background": "#171d1d",
+                    "surface-tint": "#006972",
+                    "surface-dim": "#d6dbdb",
+                    "surface": "#f5fafa",
+                    "secondary-fixed": "#acefe7",
+                    "primary-container": "#006d77",
+                    "on-primary-container": "#9becf7",
+                    "on-primary-fixed": "#001f23",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#3e494a",
+                    "on-tertiary-container": "#ffd5d2",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#a9ece5",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#410006",
+                    "on-surface": "#171d1d",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#bec8ca",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#edf2f2",
+                    "tertiary-fixed": "#ffdad8",
+                    "surface-container-highest": "#dee3e3",
+                    "on-secondary-fixed": "#00201e",
+                    "inverse-surface": "#2c3132",
+                    "surface-container-low": "#eff5f5",
+                    "on-secondary-container": "#286d67",
+                    "secondary-fixed-dim": "#90d3cb",
+                    "primary-fixed": "#9ff0fb",
+                    "inverse-primary": "#82d3de"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "display": ["Manrope", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-surface');
+            font-family: theme('fontFamily.body');
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: theme('fontFamily.headline');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- Top Utility Bar -->
+<div class="bg-primary-container text-on-primary-container py-3 px-8 hidden md:block">
+<div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-label tracking-wide">
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                PI/466, 8, ZP Rd, Phase 4, Teachers Colony, Hastinapuram, Hyderabad, 500070
+            </span>
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                Mon-Sat: 10:00 AM – 6:00 PM
+            </span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:underline" href="#">Emergency Services</a>
+<span class="h-3 w-[1px] bg-white/20"></span>
+<a class="font-bold" href="tel:+914012345678">+91 40 1234 5678</a>
+</div>
+</div>
+</div>
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-[#F5FAFA] dark:bg-slate-900 shadow-[0px_12px_40px_rgba(23,29,29,0.06)]">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="text-2xl font-black">A</span>
+</div>
+<span class="text-2xl font-bold text-[#00535B] dark:text-teal-500 tracking-tighter">Aadityaa Hospital</span>
+</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">About Us</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Departments</a>
+<a class="text-[#00535B] font-bold border-b-2 border-[#00535B] pb-1 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Doctors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Health Packages</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">call</button>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">schedule</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm scale-95 duration-200 active:opacity-80 shadow-lg shadow-primary/20">Book Appointment</button>
+</div>
+</nav>
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-8 py-16">
+<!-- Header Section -->
+<div class="mb-16 md:w-2/3">
+<h1 class="text-5xl font-extrabold tracking-tight text-primary mb-6 leading-tight">Gynecology Specialists</h1>
+<p class="text-lg text-on-surface-variant font-body leading-relaxed max-w-3xl">
+                Our team of dedicated gynecologists provides comprehensive care for women at every stage of life. From routine screenings to advanced surgical interventions, we are committed to your health and well-being.
+            </p>
+</div>
+<!-- Specialists Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+<!-- Doctor Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group hover:shadow-[0_12px_40px_rgba(23,29,29,0.06)] transition-shadow duration-300">
+<div class="relative h-72 w-full bg-surface-container-low overflow-hidden">
+<img alt="Dr. Ananya Sharma" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" data-alt="Professional portrait of a female doctor in a white coat with a stethoscope, warm natural lighting, modern clinic background, approachable smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKVf8XoehK_JVONposV69r_Bef7HorKmvj8sCJJl2dsEHGJYLgUpzKNlbcCqKL5a0u45lZMoR3LOTE4B-jR33Sqqwp022ymJ4JmBa9VtTNKVyBIK5dq17bSAYdjeqrYCTk1ARTFCkKEVUya5kPaa47JLlRmCX5skmH7kXYucdhpfper8qpMXBs0LJREDkf9GDMSuxeIe9QH29WbDAEPzTuPy6PctNxgxcYwZQ4ZFvzM3zKf7qoEzs4Vudu5cSpJammyi51A8xmCXjh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<span class="text-on-primary font-body text-sm font-medium">Available today</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col">
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Ananya Sharma</h3>
+<p class="text-secondary font-medium font-body text-sm mb-4">MBBS, MS OBGYN • 15 Years Exp.</p>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8 flex-grow">
+                        Specializes in high-risk obstetrics and minimally invasive gynecological surgeries. Dedicated to providing compassionate, patient-centered care.
+                    </p>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-body font-semibold py-3 px-6 rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group hover:shadow-[0_12px_40px_rgba(23,29,29,0.06)] transition-shadow duration-300">
+<div class="relative h-72 w-full bg-surface-container-low overflow-hidden">
+<img alt="Dr. Priya Patel" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" data-alt="Professional portrait of a female doctor in scrubs and a white coat, standing in a well-lit hospital corridor, confident and reassuring expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXhC6v20djzi3ugxXvj5-NPpGTBw-_Jw3ulPPMi7ICW0DGTttWyMuaGrAZ9erDA0PzPjIQM30S2x08nvf30nI_0KfJLp5by553SoTfVGB4_vGQlqR9-QdISjMkUO-sI9OFGV8r08GPn1MEVyZTZBamPbUShpSlLNrAvPOotS0jOu2tCOn2Zv8pR4SbImTezSorXOOAnQPwruIWCDHqmc1WO_C1LygLTSetujOOjhr8rJ4UsgbaVjLcH-Tcrp3MDLiuhfmmTfZknCqr"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<span class="text-on-primary font-body text-sm font-medium">Next available: Tomorrow</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col">
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Priya Patel</h3>
+<p class="text-secondary font-medium font-body text-sm mb-4">MBBS, DGO, MD • 12 Years Exp.</p>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8 flex-grow">
+                        Expertise in adolescent gynecology and reproductive endocrinology. Known for her empathetic approach to complex hormonal disorders.
+                    </p>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-body font-semibold py-3 px-6 rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group hover:shadow-[0_12px_40px_rgba(23,29,29,0.06)] transition-shadow duration-300">
+<div class="relative h-72 w-full bg-surface-container-low overflow-hidden">
+<img alt="Dr. Vikram Singh" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" data-alt="Professional portrait of a male doctor in a tailored white coat over a blue shirt, standing in a modern clinic with soft ambient lighting, trustworthy expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2I6DTwuvjdWpHcqbdg5HWOBU9fMdpEr-7fuGYyB0hmWvp9GgIQJH9pWCIS4t8nENWpYQFIXpCN4mx4N1IDSbNQz35-0f5tnvcJkPXxGmJIke-S7XPNsP0YEGnCf-4E2cwYdCz35sNt7sS2S9keFWjAlL1KIYft7pV8fuhmjAC55l1bwDwx3XwWk8njYx2Ak5KelvhDz50HYvyx2u44KVNFqiSY4BcAFqXN_0hX-k-RgCRlgTINbdU5GMzg-AGowKHmGCECaQdBfeT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<span class="text-on-primary font-body text-sm font-medium">Available today</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col">
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Vikram Singh</h3>
+<p class="text-secondary font-medium font-body text-sm mb-4">MBBS, MS OBGYN, Fellowship in Urogynecology • 20 Years Exp.</p>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8 flex-grow">
+                        Renowned specialist in urogynecology and pelvic floor reconstruction. Pioneering advanced treatments for complex pelvic disorders.
+                    </p>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-body font-semibold py-3 px-6 rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group hover:shadow-[0_12px_40px_rgba(23,29,29,0.06)] transition-shadow duration-300">
+<div class="relative h-72 w-full bg-surface-container-low overflow-hidden">
+<img alt="Dr. Neha Kapoor" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" data-alt="Professional portrait of a female doctor sitting at a desk in a well-lit office, wearing glasses and a white coat, looking warmly at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSwPDRisQ2AWwSROymZJ-_XotPuO6a1zO5KorJQurW_UZaV1JBBAdp4geqGF0EEqK35vzNuGTBKb8ps2pwYEXOB_rimOKoWLJPXAOIn8T5QrBjkbVJP5MgakhSSc1hQewBshaj9dRsyA4BNs3rwRWaFg6wYkOdaf7-ZTs5hJ0-WXQaWShy3BELJJ_weWqVM9U7v6dX_bHGg4MBe_PjYvgoNZu4CmYsSgJkH_lI3fhqRQ5EdiUXyxzOK2Yg5BQuc4a2Aoo4dGh9KDeX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<span class="text-on-primary font-body text-sm font-medium">Available Thursday</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col">
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Neha Kapoor</h3>
+<p class="text-secondary font-medium font-body text-sm mb-4">MBBS, MD OBGYN • 8 Years Exp.</p>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8 flex-grow">
+                        Focuses on preventive care, family planning, and normal deliveries. Passionate about empowering women through health education.
+                    </p>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-body font-semibold py-3 px-6 rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Doctor Card 5 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col group hover:shadow-[0_12px_40px_rgba(23,29,29,0.06)] transition-shadow duration-300">
+<div class="relative h-72 w-full bg-surface-container-low overflow-hidden">
+<img alt="Dr. Arjun Desai" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" data-alt="Professional portrait of a male doctor standing in a hospital setting, arms crossed, wearing a white coat over a light blue shirt, confident and approachable" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq5bBFxqNgzuEbLavnXxJWgV0xksOM2LbUrMivkU0gmYi9IjTg9JgN3Jk6KKkqn14XAwQ1oKas_1jWels5vMyse4AFjC0SvZbaL56lHtVQOpjdrdrOjP5O1SxVKjiUcHxX9wMjXQxYPJF4yhPgpRRBpasafs6VBIrhJQPWhB0Oh410M5ITd63uaDu_Fv-m1Nbe13BCmsQVyw7vXP29FC0nG3NmrPRU5pP4SnNmNT4Rfas_ntXzDzJrwrEFYGEJ6COsyhQAmwTphRyZ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<span class="text-on-primary font-body text-sm font-medium">Next available: Friday</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col">
+<h3 class="text-2xl font-bold text-primary mb-2">Dr. Arjun Desai</h3>
+<p class="text-secondary font-medium font-body text-sm mb-4">MBBS, MS OBGYN, Fellowship in Gynae Oncology • 18 Years Exp.</p>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8 flex-grow">
+                        Leading expert in gynecological oncology. Provides comprehensive screening, diagnosis, and treatment plans for gynecological cancers.
+                    </p>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-body font-semibold py-3 px-6 rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        Book Consultation
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#006D77] dark:bg-slate-950 text-white pt-12 pb-6 mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
+<div class="space-y-6">
+<div class="text-xl font-black text-white">Aadityaa Hospital</div>
+<p class="text-teal-100/80 font-['Inter'] text-sm leading-relaxed">Providing high-end editorial care and world-class medical excellence to our community for over 15 years.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Patient Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Book Appointment</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Find a Doctor</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Health Packages</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Lab Test Results</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Privacy Policy</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Terms of Service</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Patient Rights</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Careers</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Newsletter</h4>
+<p class="text-teal-100/80 text-xs mb-4">Get health tips and hospital updates delivered to your inbox.</p>
+<form class="space-y-2">
+<input class="w-full bg-white/10 border-none rounded-lg p-3 text-sm text-white placeholder:text-teal-100/40 focus:ring-2 focus:ring-teal-200" placeholder="Email Address" type="email"/>
+<button class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm hover:bg-teal-50 transition-colors">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-teal-100/60">
+<div>© 2024 Aadityaa Hospital. Editorial Excellence in Care.</div>
+<div class="flex gap-8">
+<a class="hover:text-white" href="#">Accreditations</a>
+<a class="hover:text-white" href="#">Hospital Rules</a>
+<a class="hover:text-white" href="#">Feedback</a>
+</div>
+</div>
+</footer>
+</body></html>

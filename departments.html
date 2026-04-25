@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Specialties | Aadityaa Hospital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Hide scrollbar for clean aesthetic */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5fafa; }
+        ::-webkit-scrollbar-thumb { background: #dee3e3; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #bec8ca; }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#9ff0fb",
+                    "on-tertiary-container": "#ffd5d2",
+                    "on-primary-fixed": "#001f23",
+                    "on-error": "#ffffff",
+                    "surface": "#f5fafa",
+                    "outline-variant": "#bec8ca",
+                    "surface-variant": "#dee3e3",
+                    "inverse-surface": "#2c3132",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#286d67",
+                    "background": "#f5fafa",
+                    "primary": "#00535b",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#82d3de",
+                    "outline": "#6f797a",
+                    "inverse-on-surface": "#edf2f2",
+                    "on-secondary-fixed": "#00201e",
+                    "surface-container": "#eaefef",
+                    "surface-container-low": "#eff5f5",
+                    "on-surface-variant": "#3e494a",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#911a23",
+                    "secondary-fixed-dim": "#90d3cb",
+                    "tertiary-fixed": "#ffdad8",
+                    "surface-dim": "#d6dbdb",
+                    "secondary": "#236863",
+                    "on-tertiary-fixed": "#410006",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "on-primary-container": "#9becf7",
+                    "on-surface": "#171d1d",
+                    "secondary-fixed": "#acefe7",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#a9ece5",
+                    "surface-tint": "#006972",
+                    "surface-bright": "#f5fafa",
+                    "on-tertiary-fixed-variant": "#8c1520",
+                    "on-primary-fixed-variant": "#004f56",
+                    "surface-container-highest": "#dee3e3",
+                    "tertiary-container": "#b33338",
+                    "primary-container": "#006d77",
+                    "surface-container-high": "#e4e9e9",
+                    "inverse-primary": "#82d3de",
+                    "on-error-container": "#93000a",
+                    "on-background": "#171d1d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "display": ["Manrope", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- Top Utility Bar -->
+<div class="bg-primary-container text-on-primary-container py-3 px-8 hidden md:block">
+<div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-label tracking-wide">
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                PI/466, 8, ZP Rd, Phase 4, Teachers Colony, Hastinapuram, Hyderabad, 500070
+            </span>
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                Mon-Sat: 10:00 AM – 6:00 PM
+            </span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:underline" href="#">Emergency Services</a>
+<span class="h-3 w-[1px] bg-white/20"></span>
+<a class="font-bold" href="tel:+914012345678">+91 40 1234 5678</a>
+</div>
+</div>
+</div>
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-[#F5FAFA] dark:bg-slate-900 shadow-[0px_12px_40px_rgba(23,29,29,0.06)]">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="text-2xl font-black">A</span>
+</div>
+<span class="text-2xl font-bold text-[#00535B] dark:text-teal-500 tracking-tighter">Aadityaa Hospital</span>
+</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-[#00535B] font-bold border-b-2 border-[#00535B] pb-1 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">About Us</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Departments</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Doctors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Health Packages</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">call</button>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">schedule</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm scale-95 duration-200 active:opacity-80 shadow-lg shadow-primary/20">Book Appointment</button>
+</div>
+</nav>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
+<!-- Hero Editorial Section -->
+<div class="mb-16 md:mb-24 max-w-4xl">
+<span class="inline-block mb-4 px-3 py-1 bg-surface-container-low text-secondary font-label text-sm font-semibold rounded-full uppercase tracking-widest">
+                Clinical Excellence
+            </span>
+<h1 class="font-display text-5xl md:text-7xl font-extrabold text-primary tracking-[-0.02em] leading-tight mb-6">
+                Centers of <br/><span class="text-primary-container">Specialized Care</span>
+</h1>
+<p class="font-body text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-2xl">
+                World-class medical expertise delivered through dedicated departments. Our clinical sanctuary is designed to provide comprehensive, focused care for your specific health journey.
+            </p>
+</div>
+<!-- Asymmetric Bento Grid for Specialties -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 auto-rows-min">
+<!-- Featured Card (Spans more columns) -->
+<a class="group col-span-1 md:col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col md:flex-row items-start md:items-center gap-8 transition-transform duration-300 hover:-translate-y-1 relative overflow-hidden" href="#">
+<div class="absolute -right-12 -bottom-12 w-64 h-64 bg-primary-fixed-dim/20 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
+<div class="flex-shrink-0 w-20 h-20 bg-surface-container text-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl" data-icon="favorite" data-weight="fill">favorite</span>
+</div>
+<div class="flex-grow z-10">
+<h2 class="font-headline text-3xl font-bold text-primary mb-3">Cardiology</h2>
+<p class="font-body text-on-surface-variant text-lg mb-6 max-w-md">
+                        Advanced cardiovascular care, comprehensive diagnostics, and pioneering interventional procedures for optimal heart health.
+                    </p>
+<div class="flex items-center gap-2 text-secondary font-label font-semibold bg-secondary/10 w-max px-4 py-2 rounded-full">
+<span class="material-symbols-outlined text-sm">group</span>
+                        18 Specialists Available
+                    </div>
+</div>
+</a>
+<!-- Standard Cards -->
+<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
+<div>
+<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="neurology">neurology</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">Neurology</h3>
+<p class="font-body text-on-surface-variant mb-8">
+                        Expert diagnosis and treatment for complex brain, spinal cord, and central nervous system disorders.
+                    </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+<span class="material-symbols-outlined text-sm">group</span>
+                    9 Specialists
+                </div>
+</a>
+<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
+<div>
+<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="bone">skeleton</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">Orthopedics</h3>
+<p class="font-body text-on-surface-variant mb-8">
+                        Comprehensive musculoskeletal care, from complex sports injuries to advanced joint replacement.
+                    </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+<span class="material-symbols-outlined text-sm">group</span>
+                    14 Specialists
+                </div>
+</a>
+<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
+<div>
+<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="child_care">child_care</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">Pediatrics</h3>
+<p class="font-body text-on-surface-variant mb-8">
+                        Compassionate, comprehensive healthcare specialized for infants, children, and adolescents.
+                    </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+<span class="material-symbols-outlined text-sm">group</span>
+                    22 Specialists
+                </div>
+</a>
+<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
+<div>
+<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="pregnant_woman">pregnant_woman</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">Gynecology</h3>
+<p class="font-body text-on-surface-variant mb-8">
+                        Comprehensive women's health, specialized obstetrics, and advanced reproductive care.
+                    </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+<span class="material-symbols-outlined text-sm">group</span>
+                    15 Specialists
+                </div>
+</a>
+<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
+<div>
+<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="stomach">gastroenterology</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">Gastroenterology</h3>
+<p class="font-body text-on-surface-variant mb-8">
+                        Specialized clinical care for complex digestive system and gastrointestinal tract disorders.
+                    </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+<span class="material-symbols-outlined text-sm">group</span>
+                    11 Specialists
+                </div>
+</a>
+<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
+<div>
+<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="healing">healing</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">Dermatology</h3>
+<p class="font-body text-on-surface-variant mb-8">
+                        Advanced clinical and cosmetic skin care solutions tailored to your individual needs.
+                    </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+<span class="material-symbols-outlined text-sm">group</span>
+                    7 Specialists
+                </div>
+</a>
+<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
+<div>
+<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="pulmonology">pulmonology</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">Pulmonology</h3>
+<p class="font-body text-on-surface-variant mb-8">
+                        Advanced respiratory and lung disease diagnostics, treatment, and ongoing management.
+                    </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+<span class="material-symbols-outlined text-sm">group</span>
+                    8 Specialists
+                </div>
+</a>
+<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
+<div>
+<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl" data-icon="hearing">hearing</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-2">ENT</h3>
+<p class="font-body text-on-surface-variant mb-8">
+                        Expert ear, nose, throat, and complex head/neck surgical care by dedicated specialists.
+                    </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+<span class="material-symbols-outlined text-sm">group</span>
+                    10 Specialists
+                </div>
+</a>
+<!-- Full Width Bottom Card -->
+<a class="group col-span-1 md:col-span-12 bg-surface-container-low rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.04)] flex flex-col sm:flex-row items-center justify-between border-none transition-all hover:bg-surface-container" href="#">
+<div class="flex items-center gap-6 mb-6 sm:mb-0">
+<div class="w-16 h-16 bg-surface-container-lowest text-primary rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-3xl" data-icon="medical_services">medical_services</span>
+</div>
+<div>
+<h3 class="font-headline text-2xl font-bold text-primary">General Medicine</h3>
+<p class="font-body text-on-surface-variant mt-1">Primary care, preventative medicine, and comprehensive health management.</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right hidden sm:block">
+<p class="font-label text-sm font-semibold text-secondary">Largest Department</p>
+<p class="font-body text-xs text-on-surface-variant">30 Specialists</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</div>
+</a>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#006D77] dark:bg-slate-950 text-white pt-12 pb-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
+<div class="space-y-6">
+<div class="text-xl font-black text-white">Aadityaa Hospital</div>
+<p class="text-teal-100/80 font-['Inter'] text-sm leading-relaxed">Providing high-end editorial care and world-class medical excellence to our community for over 15 years.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Patient Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Book Appointment</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Find a Doctor</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Health Packages</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Lab Test Results</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Privacy Policy</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Terms of Service</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Patient Rights</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Careers</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Newsletter</h4>
+<p class="text-teal-100/80 text-xs mb-4">Get health tips and hospital updates delivered to your inbox.</p>
+<form class="space-y-2">
+<input class="w-full bg-white/10 border-none rounded-lg p-3 text-sm text-white placeholder:text-teal-100/40 focus:ring-2 focus:ring-teal-200" placeholder="Email Address" type="email"/>
+<button class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm hover:bg-teal-50 transition-colors">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-teal-100/60">
+<div>© 2024 Aadityaa Hospital. Editorial Excellence in Care.</div>
+<div class="flex gap-8">
+<a class="hover:text-white" href="#">Accreditations</a>
+<a class="hover:text-white" href="#">Hospital Rules</a>
+<a class="hover:text-white" href="#">Feedback</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aadityaa Hospital | Editorial Excellence in Care</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-highest": "#dee3e3",
+                "tertiary-fixed-dim": "#ffb3b0",
+                "primary": "#00535b",
+                "tertiary-container": "#b33338",
+                "on-secondary-container": "#286d67",
+                "on-primary-fixed": "#001f23",
+                "secondary-fixed-dim": "#90d3cb",
+                "on-secondary-fixed": "#00201e",
+                "on-error": "#ffffff",
+                "tertiary": "#911a23",
+                "on-error-container": "#93000a",
+                "surface-bright": "#f5fafa",
+                "surface-container-high": "#e4e9e9",
+                "on-surface": "#171d1d",
+                "primary-fixed": "#9ff0fb",
+                "outline": "#6f797a",
+                "error-container": "#ffdad6",
+                "on-tertiary": "#ffffff",
+                "on-tertiary-container": "#ffd5d2",
+                "on-tertiary-fixed-variant": "#8c1520",
+                "background": "#f5fafa",
+                "surface-tint": "#006972",
+                "surface-container-lowest": "#ffffff",
+                "surface-container": "#eaefef",
+                "primary-fixed-dim": "#82d3de",
+                "on-secondary-fixed-variant": "#00504b",
+                "on-primary-container": "#9becf7",
+                "surface-container-low": "#eff5f5",
+                "error": "#ba1a1a",
+                "secondary": "#236863",
+                "inverse-on-surface": "#edf2f2",
+                "on-secondary": "#ffffff",
+                "inverse-primary": "#82d3de",
+                "tertiary-fixed": "#ffdad8",
+                "on-surface-variant": "#3e494a",
+                "on-background": "#171d1d",
+                "on-primary-fixed-variant": "#004f56",
+                "outline-variant": "#bec8ca",
+                "surface-variant": "#dee3e3",
+                "on-tertiary-fixed": "#410006",
+                "on-primary": "#ffffff",
+                "inverse-surface": "#2c3132",
+                "secondary-fixed": "#acefe7",
+                "secondary-container": "#a9ece5",
+                "primary-container": "#006d77",
+                "surface": "#f5fafa",
+                "surface-dim": "#d6dbdb"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { backdrop-filter: blur(20px); background: rgba(245, 250, 250, 0.85); }
+        .editorial-shadow { box-shadow: 0px 12px 40px rgba(23, 29, 29, 0.06); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- Top Utility Bar -->
+<div class="bg-primary-container text-on-primary-container py-3 px-8 hidden md:block">
+<div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-label tracking-wide">
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                PI/466, 8, ZP Rd, Phase 4, Teachers Colony, Hastinapuram, Hyderabad, 500070
+            </span>
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                Mon-Sat: 10:00 AM – 6:00 PM
+            </span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:underline" href="#">Emergency Services</a>
+<span class="h-3 w-[1px] bg-white/20"></span>
+<a class="font-bold" href="tel:+914012345678">+91 40 1234 5678</a>
+</div>
+</div>
+</div>
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-[#F5FAFA] dark:bg-slate-900 shadow-[0px_12px_40px_rgba(23,29,29,0.06)]">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="text-2xl font-black">A</span>
+</div>
+<span class="text-2xl font-bold text-[#00535B] dark:text-teal-500 tracking-tighter">Aadityaa Hospital</span>
+</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-[#00535B] font-bold border-b-2 border-[#00535B] pb-1 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">About Us</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Departments</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Doctors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#00535B] transition-colors duration-300 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Health Packages</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">call</button>
+<button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">schedule</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm scale-95 duration-200 active:opacity-80 shadow-lg shadow-primary/20">Book Appointment</button>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative flex items-center overflow-hidden bg-surface min-h-[700px]">
+<div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 bg-primary-fixed px-4 py-2 rounded-full text-on-primary-fixed font-bold text-xs uppercase tracking-widest">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    Multispeciality Excellence
+                </div>
+<h1 class="font-headline text-5xl lg:text-7xl font-extrabold text-on-surface leading-[1.1] tracking-tighter">
+                    Where Excellence <br/>
+<span class="text-primary-container">Meets Compassionate Care</span>
+</h1>
+<p class="text-on-surface-variant text-lg lg:text-xl max-w-lg leading-relaxed">
+                    Redefining healthcare through clinical precision, world-class medical expertise, and a patient-centric approach that treats you like family.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="px-8 py-4 bg-primary text-white rounded-xl font-bold editorial-shadow hover:translate-y-[-2px] transition-transform">Book Appointment</button>
+<button class="px-8 py-4 bg-surface-container-high text-primary rounded-xl font-bold hover:bg-surface-container-highest transition-colors">Explore Specialties</button>
+</div>
+</div>
+<div class="relative">
+<div class="grid grid-cols-2 gap-4 items-start">
+<div class="space-y-4 pt-12">
+<div class="rounded-[2.5rem] overflow-hidden editorial-shadow">
+<img alt="Dr. Aaditya Varma, Lead Cardiologist" class="w-full h-[400px] object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uigIJd37AujjqhXLff2dPrWIvjh7iQx2mz6-Erq3nrK_wrYIsqabpxLrVAh-dANKC5I4GbMi9djnX9hJiEbe-L0dGOVjgSzwEk09q13JbGpRTsKSGogE_unV_VUIqdqxDQ-dr77-ygLDdYsyRvaFHLYRvyYrHaX1Q6PLF_SyT3vyY9G0ra0-CpwkrzNkry_0NdDJMnfZW-3s6ZhJIqqSgoG5KlXKMqRULa6Fox_Ab-tBoizTWK-5b3glbMFVg4z0tbaTWF1JPM7Aq8"/>
+</div>
+<div class="bg-white/80 backdrop-blur-md p-4 rounded-2xl editorial-shadow border border-white/40">
+<p class="font-headline font-bold text-sm text-primary">Dr. Aaditya Varma</p>
+<p class="text-xs text-on-surface-variant">Chief Medical Officer</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="rounded-[2.5rem] overflow-hidden editorial-shadow">
+<img alt="Dr. Meera Reddy, Senior Surgeon" class="w-full h-[400px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4tBz033TqpfhHfxDp49v5NVFEGbk3MaToixFSU3dODzX-KCl04u_Jv1CUNh_tBzdrcBYIarBjNdvgByqIYpX9cC-GYx6aD10bcIrD2VZ55b9ilkG6YPQ2-5dcZHwwt4YBeVKgQyqoPsBm9W0GhlvRFFh308pkVwDtYvCdti_uITDjZBKo7OOBV0NJXEMpMyL8Z2LsSVAYkfPEs7Y_S_fqy2-QZcRhqT0IxTpOf1vvYD90KPd8sL-KVVJLm3nv0zjwX-p3nEm4GuFk"/>
+</div>
+<div class="bg-white/80 backdrop-blur-md p-4 rounded-2xl editorial-shadow border border-white/40">
+<p class="font-headline font-bold text-sm text-primary">Dr. Meera Reddy</p>
+<p class="text-xs text-on-surface-variant">Director of Surgical Excellence</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-surface-container-low -z-10 skew-x-[-12deg] translate-x-1/2"></div>
+</section>
+<!-- Quick Action Cards (Bento Style) -->
+<section class="max-w-7xl mx-auto px-8 py-12">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+<a class="group bg-surface-container-lowest p-6 rounded-3xl editorial-shadow hover:bg-primary transition-all duration-300 text-center" href="#">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white mb-4 block">person_search</span>
+<span class="font-headline font-bold text-sm text-on-surface group-hover:text-white">Find a Doctor</span>
+</a>
+<a class="group bg-surface-container-lowest p-6 rounded-3xl editorial-shadow hover:bg-primary transition-all duration-300 text-center" href="#">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white mb-4 block">lab_research</span>
+<span class="font-headline font-bold text-sm text-on-surface group-hover:text-white">Lab Reports</span>
+</a>
+<a class="group bg-surface-container-lowest p-6 rounded-3xl editorial-shadow hover:bg-primary transition-all duration-300 text-center" href="#">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white mb-4 block">medication</span>
+<span class="font-headline font-bold text-sm text-on-surface group-hover:text-white">Pharmacy</span>
+</a>
+<a class="group bg-surface-container-lowest p-6 rounded-3xl editorial-shadow hover:bg-primary transition-all duration-300 text-center" href="#">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white mb-4 block">health_and_safety</span>
+<span class="font-headline font-bold text-sm text-on-surface group-hover:text-white">Health Check</span>
+</a>
+<a class="group bg-surface-container-lowest p-6 rounded-3xl editorial-shadow hover:bg-primary transition-all duration-300 text-center border-2 border-primary border-dashed" href="#">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white mb-4 block">calendar_add_on</span>
+<span class="font-headline font-bold text-sm text-on-surface group-hover:text-white">Book Appointment</span>
+</a>
+<a class="group bg-surface-container-lowest p-6 rounded-3xl editorial-shadow hover:bg-primary transition-all duration-300 text-center" href="#">
+<span class="material-symbols-outlined text-3xl text-primary group-hover:text-white mb-4 block">contact_support</span>
+<span class="font-headline font-bold text-sm text-on-surface group-hover:text-white">Contact Hospital</span>
+</a>
+</div>
+</section>
+<!-- About Aadityaa Hospital Preview -->
+<section class="bg-surface-container-low overflow-hidden py-12">
+<div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-20 items-center">
+<div class="relative">
+<div class="aspect-square rounded-[3rem] overflow-hidden editorial-shadow">
+<img class="w-full h-full object-cover" data-alt="close up of a professional doctor hands holding a digital tablet showing medical data with modern hospital blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFC_GVhK6cGnnJHDO5Wfz5_fxxPxZeOPr8qf0Gw0Hs4OTIU_L4f1QTsQO2TtI14uGYC87HwLkjqIWoMTa8jTpxREsdM88StxTd45AfeIwpJli8ZoqSsWVJrbDPFEM59wm9CFUieBsloUpm7qQPwNi7zXKQLiV9KIVidi3c7JSQdQcYGxUizwfo4IS0a_4p_TzYnNJkvz3t9ghoWINLRUNU1cef3PyPiWc13S5Q_b2rBp9kcLTfHgcpQuSylrlhlbJCU8YdNa8420OM"/>
+</div>
+<div class="absolute -top-10 -right-10 w-48 h-48 bg-primary rounded-full flex flex-col items-center justify-center text-white p-4 text-center editorial-shadow">
+<span class="text-4xl font-extrabold">15+</span>
+<span class="text-xs font-label uppercase tracking-widest leading-tight">Years of Clinical Excellence</span>
+</div>
+</div>
+<div class="space-y-6">
+<h2 class="font-headline text-4xl font-extrabold text-primary-container tracking-tight">Your Health, Our Commitment.</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed italic">"At Aadityaa Hospital, we believe healing starts with a calm heart and a clear mind. We have created a sanctuary where technology meets human touch."</p>
+<p class="text-on-surface leading-relaxed">Located in the heart of Hyderabad, Aadityaa Hospital has emerged as a beacon of medical excellence. Our facility is designed to provide comprehensive care across a spectrum of specialties, ensuring that every patient receives personalized attention from our expert team of consultants and caring staff.</p>
+<div class="pt-4">
+<button class="group flex items-center gap-3 font-headline font-bold text-primary">
+                        Read Our Story
+                        <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Us -->
+<section class="max-w-7xl mx-auto px-8 py-12">
+<div class="text-center mb-8">
+<h2 class="font-headline text-4xl font-extrabold text-on-surface mb-4">Why Aadityaa Hospital?</h2>
+<div class="h-1 w-20 bg-primary mx-auto rounded-full"></div>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="p-8 bg-surface-container-lowest rounded-3xl editorial-shadow hover:translate-y-[-8px] transition-all">
+<div class="w-14 h-14 bg-primary-fixed text-primary rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl">precision_manufacturing</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3">Advanced Tech</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">State-of-the-art diagnostic and surgical infrastructure for precise treatments.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest rounded-3xl editorial-shadow hover:translate-y-[-8px] transition-all">
+<div class="w-14 h-14 bg-primary-fixed text-primary rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl">stethoscope</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3">Expert Doctors</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">A team of globally recognized specialists dedicated to patient wellness.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest rounded-3xl editorial-shadow hover:translate-y-[-8px] transition-all">
+<div class="w-14 h-14 bg-primary-fixed text-primary rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl">support_agent</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3">24/7 Care</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Round-the-clock emergency and trauma support with immediate response.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest rounded-3xl editorial-shadow hover:translate-y-[-8px] transition-all">
+<div class="w-14 h-14 bg-primary-fixed text-primary rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl">patient_list</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3">Patient Centric</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Tailored care plans focused on individual recovery and comfort.</p>
+</div>
+</div>
+</section>
+<!-- Key Trust Metrics -->
+<section class="bg-primary-container text-white py-10">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+<div class="space-y-2">
+<div class="text-5xl font-headline font-extrabold">15+</div>
+<div class="text-teal-100 uppercase tracking-widest text-xs font-bold">Years Experience</div>
+</div>
+<div class="space-y-2">
+<div class="text-5xl font-headline font-extrabold">50k+</div>
+<div class="text-teal-100 uppercase tracking-widest text-xs font-bold">Happy Patients</div>
+</div>
+<div class="space-y-2">
+<div class="text-5xl font-headline font-extrabold">100+</div>
+<div class="text-teal-100 uppercase tracking-widest text-xs font-bold">Expert Doctors</div>
+</div>
+<div class="space-y-2">
+<div class="text-5xl font-headline font-extrabold">20+</div>
+<div class="text-teal-100 uppercase tracking-widest text-xs font-bold">Specialties</div>
+</div>
+</div>
+</section>
+<!-- Featured Departments -->
+<section class="bg-surface py-12">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline text-4xl font-extrabold text-on-surface mb-2">Our Specialized Care</h2>
+<p class="text-on-surface-variant">World-class treatments across major medical disciplines.</p>
+</div>
+<button class="text-primary font-bold hover:underline flex items-center gap-2">
+                    View All Departments <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Cardiology -->
+<div class="group relative overflow-hidden rounded-3xl editorial-shadow">
+<img class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" data-alt="red glowing digital heart scan on a medical monitor in a dark room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOeFNq8PFn1LHwMTh9W1V-K-6zCQBgRjQ9juKXEHRTH58lSJN7OlS2IrKJwRcoxyUhLWwAT75fL4aFiTs-9esp4u9Sf9yYbjEmPVwdfLFo2lLwCi2BGRxV5JBoCdXv2znmKB62vrMuziV7WnwXD0tUNj4vRqsiPeg7kMt_JStYtZCxQKxsgXeBWcwZufWZDvO1qEgwz-jKs04o3CFO6BXKLJXnz08DNxjr6VNZZrr5vgvO2ikejHZoubWLvyR3fbvd9KnCwtCZQtR_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white font-headline font-bold text-xl mb-1">Cardiology</h3>
+<p class="text-teal-50 text-sm opacity-0 group-hover:opacity-100 transition-opacity">Heart &amp; Vascular Excellence</p>
+</div>
+</div>
+<!-- Neurology -->
+<div class="group relative overflow-hidden rounded-3xl editorial-shadow">
+<img class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" data-alt="detailed scientific model of the human brain with neurons firing and neural pathways highlighted" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2C2G8yYkMdYR1QICHpxCRujzudsXDZCMV8eKtJ3C0yVqR1Kt4dUZYsg5CazJ5MgWhRDLAzYLFDNbolU3WHDEw0s-xX5hmdhH86JpHNRo4S88DjJCpDrTPoeRxF_Qhj3UXHt94UOjTLYP32dFCdieWg_h86tetIhTdZppTDIeBdrLmXCEn4TsKbO8kJP_G1slROdQZkUPXsgJnkuivjCtImLJE3Yemu8x75oVEwSKLQlWt1qUu5fOcW3DXhSh603rs1vBy-8cLcgVu"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white font-headline font-bold text-xl mb-1">Neurology</h3>
+<p class="text-teal-50 text-sm opacity-0 group-hover:opacity-100 transition-opacity">Brain &amp; Nervous System Care</p>
+</div>
+</div>
+<!-- Orthopedics -->
+<div class="group relative overflow-hidden rounded-3xl editorial-shadow">
+<img class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" data-alt="X-ray view of a human knee joint with bone detail and skeletal structure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSzqR8gMiMBkS9_CTVoxknjSTJOzjOy64WoKzPULyJL5gt7trmfI-ajZ7Mwhx5kpLQDZijY9azZDQ-esWlFQ-a-QfdFr4MR0Ys8clNzg3R_IofOleA8v21rRqOECqnwBv4LcMWOZzarqZydzemocNg2V1hP31uvvk7rNmBCaQ3uY-TLBqUQ9OGDD5pS9AyNj90C8Z21U2rzFjN-piTkZgUN4pGoM20HGFOkCt-0IX1SxVmFC8P_U6Vh-4Iy7xgb2y5uImDnuP4zHFP"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white font-headline font-bold text-xl mb-1">Orthopedics</h3>
+<p class="text-teal-50 text-sm opacity-0 group-hover:opacity-100 transition-opacity">Bone &amp; Joint Rehabilitation</p>
+</div>
+</div>
+<!-- Pediatrics -->
+<div class="group relative overflow-hidden rounded-3xl editorial-shadow">
+<img class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" data-alt="gentle medical care for children with colorful toys in a pediatric clinic environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJhC52mmA4WfFNVFV71b098sVboPo0ZqOuc5V5qtrEMheqitWUAiTGSWzlVxH0sy14kQKi9E4NvAo10uoblM2qaTPoRseBGaUJnIHNzjPo-575-4ymXs1TZZyC4Eyj7i8y6maaGp_2R50Urb3fEe4LaQxlx-ua6WX2qXqXsoVFSnfBmtO7PmmNRt6KmjJhjEj_vQx5ycvIUq_BWISGwOIUp9RqR1mI6rqdwpPAn-5j48Egc2DazV9JOPAajorAOYnPyfmqgjC8itYQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white font-headline font-bold text-xl mb-1">Pediatrics</h3>
+<p class="text-teal-50 text-sm opacity-0 group-hover:opacity-100 transition-opacity">Child Health Specialists</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Health Insights/News -->
+<section class="max-w-7xl mx-auto px-8 py-12">
+<div class="text-center mb-8">
+<h2 class="font-headline text-4xl font-extrabold text-on-surface mb-4">Lumina Health Insights</h2>
+<p class="text-on-surface-variant">Stay updated with the latest in medical science and wellness tips.</p>
+</div>
+<div class="grid lg:grid-cols-3 gap-10">
+<article class="bg-surface-container-low rounded-3xl overflow-hidden group editorial-shadow">
+<img class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity" data-alt="vibrant healthy salad with avocado, leafy greens, and nuts on a bright white table representing nutrition" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8FZ0ryS8Vo2jdyJkZVzH2qDOvxpzHXdIbtraVpbiL-a_xPXhxa0KGppwj9OjcJTSOxG3ZAFzobnq4__fTY34GMCUoCk7JmVu9pNEhNF9uYkqUmseW9CojEqqaT8Z9E3fxBlTlWlWXtgVcpt_vSEz4mgXVZvj2Ttk0vDJF49PheoQXp0Oef55RNkxr9CkibL3has-4OYMIdfZbTLWxzabe5Hc76HTqdeN82cx9L6tzyyW_jedx7CL1ke1X35304oTl-p8lL90eh2te"/>
+<div class="p-8">
+<span class="text-xs font-bold text-primary uppercase tracking-widest block mb-3">Heart Health</span>
+<h3 class="font-headline font-bold text-xl mb-4 leading-tight group-hover:text-primary transition-colors underline-offset-4 group-hover:underline">Managing Cardiovascular Risks at Home</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Learn the key metrics every adult should track for a healthy heart and long-term wellness.</p>
+<a class="text-primary font-bold text-sm inline-flex items-center gap-2" href="#">Read Article <span class="material-symbols-outlined text-[18px]">open_in_new</span></a>
+</div>
+</article>
+<article class="bg-surface-container-low rounded-3xl overflow-hidden group editorial-shadow">
+<img class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity" data-alt="close up of fresh green vegetables and a measuring tape indicating a healthy diet and lifestyle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQk2_VVJz2hpelWLKAOLEWQcxrIuYp0jbnX3khpn5tBRavKYnGlfYf4rP-SUMDfhVlPiEks1gzpBfWOLzdhgLM7XJ0SxLBmgUwggAAbkNgO7I6KWcTQ0_U1SZc2E0fv4hW72nQ7KQRF8qFTwLOirUwTwgMXl0mHr1SLs_J67MNANG2L77VnhOh7cd54TzRy6cX31GzAglWWYbnll-j_n8TJghE_UURfuTkB6pK9HPUyCEJpqGcqI2QKstmNYw5FGZQ2RITJu7plQB8"/>
+<div class="p-8">
+<span class="text-xs font-bold text-primary uppercase tracking-widest block mb-3">Nutrition</span>
+<h3 class="font-headline font-bold text-xl mb-4 leading-tight group-hover:text-primary transition-colors underline-offset-4 group-hover:underline">The Power of Superfoods in Recovery</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">How your diet impacts the surgical recovery process and boosts your immune system naturally.</p>
+<a class="text-primary font-bold text-sm inline-flex items-center gap-2" href="#">Read Article <span class="material-symbols-outlined text-[18px]">open_in_new</span></a>
+</div>
+</article>
+<article class="bg-surface-container-low rounded-3xl overflow-hidden group editorial-shadow">
+<img class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity" data-alt="peaceful woman practicing yoga at sunrise in a calm outdoor environment for wellness" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7xCWs3dKAbgcv80TdYf0EtL04qlQe376iQSglSpuRzF8uNi5vsLePLOiT0MQh_fcM09syMVpPnunP7pMOxWW0SQv2JeaOsobjYuiD0BgL9GykCZW3bIwAhrfzPRHQG4bQumAp_Ggp4Q4Tpcqcqpaf77dStBqUS4QVpBMuTt8ef0KQWBB2mAoEvtTw6c3uAWglijfRW49Yan-FYwdRgs850gDh9RdOQNcV6nBFoFWNXYCi9xpUbQm7dSD_njJiCYtBn2Y89V7KL5tb"/>
+<div class="p-8">
+<span class="text-xs font-bold text-primary uppercase tracking-widest block mb-3">Wellness</span>
+<h3 class="font-headline font-bold text-xl mb-4 leading-tight group-hover:text-primary transition-colors underline-offset-4 group-hover:underline">Mindfulness and Stress Management</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Simple daily techniques to maintain mental clarity and reduce stress-related medical conditions.</p>
+<a class="text-primary font-bold text-sm inline-flex items-center gap-2" href="#">Read Article <span class="material-symbols-outlined text-[18px]">open_in_new</span></a>
+</div>
+</article>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="bg-primary-container relative overflow-hidden py-12">
+<div class="max-w-4xl mx-auto px-8 text-center relative z-10">
+<span class="material-symbols-outlined text-white/20 text-8xl block mb-6">format_quote</span>
+<div class="space-y-8">
+<p class="text-2xl lg:text-3xl font-headline font-medium text-white leading-relaxed italic">
+                    "The level of care I received at Aadityaa Hospital was truly exceptional. The doctors took the time to explain every step of my procedure, and the nurses were incredibly attentive. It didn't feel like a hospital, it felt like a healing home."
+                </p>
+<div class="flex items-center justify-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white/30">
+<img class="w-full h-full object-cover" data-alt="portrait of a middle-aged woman smiling confidently" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAngivtLWwuGPu5Cx6Wxt9OfvaNrNMMQXJu_HYCC51GrTNhunzh_OyVRb-_AspfepYNA4nO6Z7MAiEIt7FOBWTGC71CiccpqsOdgTdoTZH6FltlmFV1Ovz-y04_WJ3y0Vjry2WigVJ4P8hB-iL5wDS_mYEzmd8TT1G81d90cK-iMl-6DzeoB12nE2WTjj7KJEjeVSbLZcxyRTyL21nttbr_alcmed4in1HGHuXawvk6aymtqxFnSJFzre4HHdm62QwXJanV5MccPEOa"/>
+</div>
+<div class="text-left">
+<div class="font-headline font-bold text-white">Smt. Rajeshwari Rao</div>
+<div class="text-teal-100 text-sm">Cardiology Patient</div>
+</div>
+</div>
+<div class="flex justify-center gap-4 pt-8">
+<button class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Decorative elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-black/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+</section>
+<!-- Contact/Map Section -->
+<section class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 py-12">
+<div class="space-y-8">
+<div>
+<h2 class="font-headline text-4xl font-extrabold text-on-surface mb-4">Visit Us Today</h2>
+<p class="text-on-surface-variant leading-relaxed">Conveniently located in Hastinapuram, we are easily accessible for patients across South Hyderabad.</p>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-surface-container-high text-primary rounded-xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<div class="font-bold mb-1">Our Location</div>
+<p class="text-sm text-on-surface-variant">PI/466, 8, ZP Rd, Phase 4, Teachers Colony, Hastinapuram, Hyderabad, Telangana 500070</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-surface-container-high text-primary rounded-xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined">phone_in_talk</span>
+</div>
+<div>
+<div class="font-bold mb-1">Direct Contact</div>
+<p class="text-sm text-on-surface-variant">+91 40 1234 5678 / +91 98765 43210</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-surface-container-high text-primary rounded-xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<div class="font-bold mb-1">Support Email</div>
+<p class="text-sm text-on-surface-variant">info@aadityaahospital.com</p>
+</div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-low rounded-[2rem] border-l-4 border-primary">
+<h4 class="font-headline font-bold mb-2">Emergency?</h4>
+<p class="text-sm text-on-surface-variant mb-4">Our trauma center is open 24/7. Call our emergency hotline immediately.</p>
+<a class="text-xl font-black text-tertiary font-headline tracking-tighter" href="tel:+91409999999">+91 40 9999 9999</a>
+</div>
+</div>
+<div class="h-full min-h-[400px] rounded-[3rem] overflow-hidden editorial-shadow bg-surface-container">
+<img class="w-full h-full object-cover grayscale opacity-60" data-alt="abstract stylized aerial view map of hyderabad city streets with teal highlights" data-location="Hyderabad" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXrdlpEJZQGZh4SGTRtdbASZHfWCbv5kPLRq5yE4DX-otYYk-y7qxSjBQ9Pw2UBDpOPWZcfCm3acTrbjeOKDcKKeqZxHQzYxhaogM9EksvoT8-oo8fIyDWbwpA-N45YLQdFnay1I_z_wZrZvOASCRqHVWnHCRmoFnMFwTLi11yG_U_zwSOq9bo50UQppYDC-A-2YgkCnpIsd1PHXvXHXX7wxYBebzTFzKYoAdOaCxz7iGoI4heQtXJ8Te0mRghOTgwEeA0RPShZcmp"/>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#006D77] dark:bg-slate-950 text-white pt-12 pb-6 mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
+<div class="space-y-6">
+<div class="text-xl font-black text-white">Aadityaa Hospital</div>
+<p class="text-teal-100/80 font-['Inter'] text-sm leading-relaxed">Providing high-end editorial care and world-class medical excellence to our community for over 15 years.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Patient Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Book Appointment</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Find a Doctor</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Health Packages</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Lab Test Results</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Privacy Policy</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Terms of Service</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Patient Rights</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Careers</a></li>
+<li><a class="text-teal-100/80 hover:text-white hover:translate-x-1 transition-all duration-200 block text-sm font-['Inter'] leading-relaxed" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Newsletter</h4>
+<p class="text-teal-100/80 text-xs mb-4">Get health tips and hospital updates delivered to your inbox.</p>
+<form class="space-y-2">
+<input class="w-full bg-white/10 border-none rounded-lg p-3 text-sm text-white placeholder:text-teal-100/40 focus:ring-2 focus:ring-teal-200" placeholder="Email Address" type="email"/>
+<button class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm hover:bg-teal-50 transition-colors">Subscribe</button>
+</form>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-teal-100/60">
+<div>© 2024 Aadityaa Hospital. Editorial Excellence in Care.</div>
+<div class="flex gap-8">
+<a class="hover:text-white" href="#">Accreditations</a>
+<a class="hover:text-white" href="#">Hospital Rules</a>
+<a class="hover:text-white" href="#">Feedback</a>
+</div>
+</div>
+</footer>
+<!-- FAB (Suppressed for focused desktop experience, visible on scroll/mobile) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-tertiary text-white rounded-full flex items-center justify-center editorial-shadow z-50 md:hidden">
+<span class="material-symbols-outlined">emergency_share</span>
+</button>
+</body></html>
