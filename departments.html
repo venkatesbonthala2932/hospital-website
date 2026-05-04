@@ -149,169 +149,88 @@
                 World-class medical expertise delivered through dedicated departments. Our clinical sanctuary is designed to provide comprehensive, focused care for your specific health journey.
             </p>
 </div>
-<!-- Asymmetric Bento Grid for Specialties -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 auto-rows-min">
-<!-- Featured Card (Spans more columns) -->
-<a class="group col-span-1 md:col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col md:flex-row items-start md:items-center gap-8 transition-transform duration-300 hover:-translate-y-1 relative overflow-hidden" href="#">
-<div class="absolute -right-12 -bottom-12 w-64 h-64 bg-primary-fixed-dim/20 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
-<div class="flex-shrink-0 w-20 h-20 bg-surface-container text-primary rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-4xl" data-icon="favorite" data-weight="fill">favorite</span>
+<!-- Asymmetric Bento Grid for Specialties — populated by JS from /api/specialties -->
+<div id="specialties-grid" class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 auto-rows-min">
+<!-- Loading skeleton -->
+<div class="col-span-12 py-20 text-center text-on-surface-variant">
+  <span class="material-symbols-outlined text-5xl animate-pulse block mb-4">hourglass_top</span>
+  Loading departments…
 </div>
-<div class="flex-grow z-10">
-<h2 class="font-headline text-3xl font-bold text-primary mb-3">Cardiology</h2>
-<p class="font-body text-on-surface-variant text-lg mb-6 max-w-md">
-                        Advanced cardiovascular care, comprehensive diagnostics, and pioneering interventional procedures for optimal heart health.
-                    </p>
-<div class="flex items-center gap-2 text-secondary font-label font-semibold bg-secondary/10 w-max px-4 py-2 rounded-full">
-<span class="material-symbols-outlined text-sm">group</span>
-                        18 Specialists Available
-                    </div>
-</div>
-</a>
-<!-- Standard Cards -->
-<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
-<div>
-<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-3xl" data-icon="neurology">neurology</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-2">Neurology</h3>
-<p class="font-body text-on-surface-variant mb-8">
-                        Expert diagnosis and treatment for complex brain, spinal cord, and central nervous system disorders.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
-<span class="material-symbols-outlined text-sm">group</span>
-                    9 Specialists
-                </div>
-</a>
-<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
-<div>
-<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-3xl" data-icon="bone">skeleton</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-2">Orthopedics</h3>
-<p class="font-body text-on-surface-variant mb-8">
-                        Comprehensive musculoskeletal care, from complex sports injuries to advanced joint replacement.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
-<span class="material-symbols-outlined text-sm">group</span>
-                    14 Specialists
-                </div>
-</a>
-<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
-<div>
-<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-3xl" data-icon="child_care">child_care</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-2">Pediatrics</h3>
-<p class="font-body text-on-surface-variant mb-8">
-                        Compassionate, comprehensive healthcare specialized for infants, children, and adolescents.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
-<span class="material-symbols-outlined text-sm">group</span>
-                    22 Specialists
-                </div>
-</a>
-<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
-<div>
-<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-3xl" data-icon="pregnant_woman">pregnant_woman</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-2">Gynecology</h3>
-<p class="font-body text-on-surface-variant mb-8">
-                        Comprehensive women's health, specialized obstetrics, and advanced reproductive care.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
-<span class="material-symbols-outlined text-sm">group</span>
-                    15 Specialists
-                </div>
-</a>
-<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
-<div>
-<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-3xl" data-icon="stomach">gastroenterology</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-2">Gastroenterology</h3>
-<p class="font-body text-on-surface-variant mb-8">
-                        Specialized clinical care for complex digestive system and gastrointestinal tract disorders.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
-<span class="material-symbols-outlined text-sm">group</span>
-                    11 Specialists
-                </div>
-</a>
-<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
-<div>
-<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-3xl" data-icon="healing">healing</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-2">Dermatology</h3>
-<p class="font-body text-on-surface-variant mb-8">
-                        Advanced clinical and cosmetic skin care solutions tailored to your individual needs.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
-<span class="material-symbols-outlined text-sm">group</span>
-                    7 Specialists
-                </div>
-</a>
-<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
-<div>
-<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-3xl" data-icon="pulmonology">pulmonology</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-2">Pulmonology</h3>
-<p class="font-body text-on-surface-variant mb-8">
-                        Advanced respiratory and lung disease diagnostics, treatment, and ongoing management.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
-<span class="material-symbols-outlined text-sm">group</span>
-                    8 Specialists
-                </div>
-</a>
-<a class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" href="#">
-<div>
-<div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
-<span class="material-symbols-outlined text-3xl" data-icon="hearing">hearing</span>
-</div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-2">ENT</h3>
-<p class="font-body text-on-surface-variant mb-8">
-                        Expert ear, nose, throat, and complex head/neck surgical care by dedicated specialists.
-                    </p>
-</div>
-<div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
-<span class="material-symbols-outlined text-sm">group</span>
-                    10 Specialists
-                </div>
-</a>
-<!-- Full Width Bottom Card -->
-<a class="group col-span-1 md:col-span-12 bg-surface-container-low rounded-xl p-8 shadow-[0_12px_40px_rgba(23,29,29,0.04)] flex flex-col sm:flex-row items-center justify-between border-none transition-all hover:bg-surface-container" href="#">
-<div class="flex items-center gap-6 mb-6 sm:mb-0">
-<div class="w-16 h-16 bg-surface-container-lowest text-primary rounded-full flex items-center justify-center shadow-sm">
-<span class="material-symbols-outlined text-3xl" data-icon="medical_services">medical_services</span>
-</div>
-<div>
-<h3 class="font-headline text-2xl font-bold text-primary">General Medicine</h3>
-<p class="font-body text-on-surface-variant mt-1">Primary care, preventative medicine, and comprehensive health management.</p>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="text-right hidden sm:block">
-<p class="font-label text-sm font-semibold text-secondary">Largest Department</p>
-<p class="font-body text-xs text-on-surface-variant">30 Specialists</p>
-</div>
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">arrow_forward</span>
-</div>
-</div>
-</a>
+<!-- JS renders cards here — nothing hardcoded -->
 </div>
 </main>
+
+<script>
+// Load specialties from the API and render the bento grid
+(async () => {
+  const grid = document.getElementById('specialties-grid');
+  try {
+    const res  = await fetch('/api/specialties');
+    const data = await res.json();
+    const specialties = data.specialties || [];
+
+    if (!specialties.length) {
+      grid.innerHTML = '<p class="col-span-12 text-center text-on-surface-variant py-16">No departments found. Please run the seed data in Supabase.</p>';
+      return;
+    }
+
+    // First specialty gets the "featured" wide card, rest get standard cards
+    const [first, ...rest] = specialties;
+
+    function featuredCard(s) {
+      return `
+        <a href="/doctors.html?specialty=${s.slug}"
+           class="group col-span-1 md:col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 md:p-12
+                  shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col md:flex-row items-start md:items-center
+                  gap-8 transition-transform duration-300 hover:-translate-y-1 relative overflow-hidden">
+          <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-primary-fixed-dim/20 rounded-full blur-3xl
+                      group-hover:scale-110 transition-transform duration-700"></div>
+          <div class="flex-shrink-0 w-20 h-20 bg-surface-container text-primary rounded-full flex items-center justify-center">
+            <span class="material-symbols-outlined text-4xl">${s.icon || 'medical_services'}</span>
+          </div>
+          <div class="flex-grow z-10">
+            <h2 class="font-headline text-3xl font-bold text-primary mb-3">${s.name}</h2>
+            <p class="font-body text-on-surface-variant text-lg mb-6 max-w-md">${s.description || ''}</p>
+            <div class="flex items-center gap-2 text-secondary font-label font-semibold bg-secondary/10 w-max px-4 py-2 rounded-full">
+              <span class="material-symbols-outlined text-sm">group</span>
+              View Specialists
+            </div>
+          </div>
+        </a>`;
+    }
+
+    function standardCard(s) {
+      return `
+        <a href="/doctors.html?specialty=${s.slug}"
+           class="group col-span-1 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-8
+                  shadow-[0_12px_40px_rgba(23,29,29,0.06)] flex flex-col justify-between
+                  transition-transform duration-300 hover:-translate-y-1">
+          <div>
+            <div class="w-14 h-14 bg-surface-container text-primary rounded-full flex items-center justify-center mb-6">
+              <span class="material-symbols-outlined text-3xl">${s.icon || 'medical_services'}</span>
+            </div>
+            <h3 class="font-headline text-2xl font-bold text-primary mb-2">${s.name}</h3>
+            <p class="font-body text-on-surface-variant mb-8">${s.description || ''}</p>
+          </div>
+          <div class="flex items-center gap-2 text-secondary font-label text-sm font-semibold mt-auto">
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            View Doctors
+          </div>
+        </a>`;
+    }
+
+    grid.innerHTML = featuredCard(first) + rest.map(standardCard).join('');
+
+  } catch (err) {
+    grid.innerHTML = `
+      <div class="col-span-12 text-center py-16">
+        <span class="material-symbols-outlined text-4xl text-tertiary block mb-3">error</span>
+        <p class="text-on-surface-variant">Could not load departments. Is the Flask server running?</p>
+        <p class="text-xs text-outline mt-2">${err.message}</p>
+      </div>`;
+  }
+})();
+</script>
 <!-- Footer -->
 <footer class="w-full bg-[#006D77] dark:bg-slate-950 text-white pt-12 pb-6">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
@@ -364,4 +283,11 @@
 </div>
 </div>
 </footer>
+
+<!-- Firebase JS SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<!-- Aadityaa Hospital API client -->
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
 </body></html>

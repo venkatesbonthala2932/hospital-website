@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Book Appointment | Aadityaa Hospital</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-container-highest": "#dee3e3",
+          "primary": "#00535b",
+          "tertiary-container": "#b33338",
+          "on-secondary-container": "#286d67",
+          "on-primary-fixed": "#001f23",
+          "on-secondary-fixed": "#00201e",
+          "on-error": "#ffffff",
+          "tertiary": "#911a23",
+          "on-error-container": "#93000a",
+          "surface-bright": "#f5fafa",
+          "surface-container-high": "#e4e9e9",
+          "on-surface": "#171d1d",
+          "primary-fixed": "#9ff0fb",
+          "outline": "#6f797a",
+          "error-container": "#ffdad6",
+          "on-tertiary": "#ffffff",
+          "on-tertiary-container": "#ffd5d2",
+          "background": "#f5fafa",
+          "surface-tint": "#006972",
+          "surface-container-lowest": "#ffffff",
+          "surface-container": "#eaefef",
+          "primary-fixed-dim": "#82d3de",
+          "on-primary-container": "#9becf7",
+          "surface-container-low": "#eff5f5",
+          "error": "#ba1a1a",
+          "secondary": "#236863",
+          "inverse-on-surface": "#edf2f2",
+          "on-secondary": "#ffffff",
+          "inverse-primary": "#82d3de",
+          "on-surface-variant": "#3e494a",
+          "on-background": "#171d1d",
+          "outline-variant": "#bec8ca",
+          "surface-variant": "#dee3e3",
+          "on-primary": "#ffffff",
+          "inverse-surface": "#2c3132",
+          "secondary-fixed": "#acefe7",
+          "secondary-container": "#a9ece5",
+          "primary-container": "#006d77",
+          "surface": "#f5fafa",
+          "surface-dim": "#d6dbdb"
+        },
+        "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        "fontFamily": { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] }
+      }
+    }
+  }
+</script>
+<style>
+  .editorial-shadow { box-shadow: 0px 12px 40px rgba(23,29,29,0.06); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin 1s linear infinite; }
+  .step-num { @apply w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-black flex-shrink-0; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed-dim">
+
+<!-- Top Utility Bar -->
+<div class="bg-primary-container text-on-primary-container py-3 px-8 hidden md:block">
+  <div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-label tracking-wide">
+    <div class="flex items-center gap-6">
+      <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">location_on</span>PI/466, 8, ZP Rd, Hastinapuram, Hyderabad, 500070</span>
+      <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">schedule</span>Mon-Sat: 10:00 AM – 6:00 PM</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a class="font-bold" href="tel:+914012345678">+91 40 1234 5678</a>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<header class="w-full sticky top-0 z-50 bg-[#F5FAFA] shadow-[0px_12px_40px_rgba(23,29,29,0.06)]">
+  <nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+    <div class="flex items-center gap-2">
+      <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white"><span class="text-2xl font-black">A</span></div>
+      <span class="text-2xl font-bold text-[#00535B] tracking-tighter">Aadityaa Hospital</span>
+    </div>
+    <div class="hidden lg:flex items-center gap-8">
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">Home</a>
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">About Us</a>
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">Departments</a>
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">Doctors</a>
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">Health Packages</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">call</button>
+      <button class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-primary/20">Book Appointment</button>
+    </div>
+  </nav>
+</header>
+
+<main class="py-12 px-4 md:px-8 max-w-7xl mx-auto min-h-[70vh]">
+
+  <!-- Back link -->
+  <a href="/doctors.html" class="inline-flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-primary transition-colors mb-8">
+    <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+    Back to Doctors
+  </a>
+
+  <!-- Loading -->
+  <div id="loading-state" class="py-20 text-center text-on-surface-variant">
+    <span class="material-symbols-outlined text-5xl spin block mb-3">progress_activity</span>
+    Loading doctor information…
+  </div>
+
+  <!-- Error -->
+  <div id="error-state" class="hidden py-20 text-center">
+    <span class="material-symbols-outlined text-5xl text-tertiary block mb-4">error</span>
+    <p class="text-on-surface-variant mb-4">Doctor not found or unavailable.</p>
+    <a href="/doctors.html" class="text-primary font-semibold hover:underline">← View all doctors</a>
+  </div>
+
+  <!-- Main grid (hidden until loaded) -->
+  <div id="booking-grid" class="hidden">
+    <h1 class="font-headline text-4xl font-extrabold tracking-tighter mb-10">Book an Appointment</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+
+      <!-- Doctor card (sticky) -->
+      <div class="lg:col-span-1">
+        <div id="doctor-card" class="sticky top-28 bg-surface-container-lowest rounded-3xl overflow-hidden editorial-shadow">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Booking steps -->
+      <div class="lg:col-span-2 space-y-6">
+
+        <!-- Step 1: Date -->
+        <div id="step-date" class="bg-surface-container-lowest rounded-3xl p-8 editorial-shadow">
+          <h2 class="font-headline text-xl font-bold mb-1 flex items-center gap-3">
+            <span class="step-num">1</span>Select a Date
+          </h2>
+          <p class="text-sm text-on-surface-variant ml-11 mb-6">Choose from the available dates below.</p>
+
+          <!-- Calendar header -->
+          <div class="flex items-center justify-between mb-5">
+            <button id="cal-prev" class="w-9 h-9 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+            </button>
+            <span id="cal-month-label" class="font-headline font-bold text-on-surface text-base"></span>
+            <button id="cal-next" class="w-9 h-9 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+            </button>
+          </div>
+          <!-- Day headers -->
+          <div class="grid grid-cols-7 gap-1 text-center text-[11px] font-bold text-on-surface-variant mb-2">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+          <!-- Day cells -->
+          <div id="calendar-grid" class="grid grid-cols-7 gap-1"></div>
+
+          <!-- Legend -->
+          <div class="flex flex-wrap gap-5 mt-5 text-[11px] text-on-surface-variant">
+            <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-secondary-container inline-block"></span>Available</span>
+            <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-primary inline-block"></span>Selected</span>
+            <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-surface-container-highest inline-block"></span>Unavailable</span>
+          </div>
+        </div>
+
+        <!-- Step 2: Time slots -->
+        <div id="step-slots" class="hidden bg-surface-container-lowest rounded-3xl p-8 editorial-shadow">
+          <h2 class="font-headline text-xl font-bold mb-1 flex items-center gap-3">
+            <span class="step-num">2</span>Select a Time
+          </h2>
+          <p id="slots-date-label" class="text-sm text-on-surface-variant ml-11 mb-6"></p>
+          <div id="slots-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-3"></div>
+        </div>
+
+        <!-- Step 3: Patient details -->
+        <div id="step-details" class="hidden bg-surface-container-lowest rounded-3xl p-8 editorial-shadow">
+          <h2 class="font-headline text-xl font-bold mb-1 flex items-center gap-3">
+            <span class="step-num">3</span>Your Details
+          </h2>
+          <p class="text-sm text-on-surface-variant ml-11 mb-6">Review and confirm your information.</p>
+
+          <form id="booking-form" class="space-y-4">
+            <div>
+              <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Full Name *</label>
+              <input id="patient-name" type="text" required
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                placeholder="Your full name"/>
+            </div>
+            <div>
+              <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Phone Number *</label>
+              <input id="patient-phone" type="tel" required
+                maxlength="10" pattern="[0-9]{10}"
+                oninput="this.value=this.value.replace(/\D/g,'')"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                placeholder="10-digit mobile number"/>
+            </div>
+            <div>
+              <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Reason for Visit <span class="font-normal opacity-60">(optional)</span></label>
+              <textarea id="patient-notes" rows="3" resize="none"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
+                placeholder="Brief description of your concern"></textarea>
+            </div>
+
+            <!-- Summary box -->
+            <div class="bg-surface-container rounded-2xl p-5 text-sm space-y-2.5 border border-outline-variant">
+              <h3 class="font-semibold text-on-surface mb-3">Booking Summary</h3>
+              <div class="flex justify-between"><span class="text-on-surface-variant">Doctor</span><span id="summary-doctor" class="font-semibold text-right max-w-[60%]"></span></div>
+              <div class="flex justify-between"><span class="text-on-surface-variant">Date</span><span id="summary-date" class="font-semibold text-right"></span></div>
+              <div class="flex justify-between"><span class="text-on-surface-variant">Time</span><span id="summary-time" class="font-semibold"></span></div>
+              <div id="summary-fee-row" class="hidden flex justify-between border-t border-outline-variant pt-2.5">
+                <span class="text-on-surface-variant">Consultation Fee</span>
+                <span id="summary-fee" class="font-bold text-primary"></span>
+              </div>
+            </div>
+
+            <button id="confirm-btn" type="submit"
+              class="w-full bg-primary text-white py-4 rounded-2xl font-headline font-bold hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow flex items-center justify-center gap-2 text-sm">
+              <span class="material-symbols-outlined text-[20px]">check_circle</span>
+              Confirm Appointment
+            </button>
+          </form>
+        </div>
+
+        <!-- Step 4: Success -->
+        <div id="step-success" class="hidden bg-surface-container-lowest rounded-3xl p-10 editorial-shadow text-center">
+          <div class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="material-symbols-outlined text-5xl text-primary" style="font-variation-settings:'FILL' 1">check_circle</span>
+          </div>
+          <h2 class="font-headline text-3xl font-bold mb-3">Appointment Booked!</h2>
+          <p class="text-on-surface-variant mb-8 max-w-md mx-auto">Your appointment is confirmed and under review. You'll receive a notification once the hospital approves it.</p>
+          <div class="bg-surface-container rounded-2xl p-6 text-left text-sm space-y-3 mb-8 max-w-xs mx-auto border border-outline-variant">
+            <div class="flex justify-between gap-4"><span class="text-on-surface-variant">Doctor</span><span id="success-doctor" class="font-semibold text-right"></span></div>
+            <div class="flex justify-between gap-4"><span class="text-on-surface-variant">Date</span><span id="success-date" class="font-semibold text-right"></span></div>
+            <div class="flex justify-between gap-4"><span class="text-on-surface-variant">Time</span><span id="success-time" class="font-semibold"></span></div>
+          </div>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a href="/patient-dashboard.html"
+               class="bg-primary text-white px-8 py-3 rounded-full font-bold text-sm hover:opacity-90 transition-all editorial-shadow">
+              View My Appointments
+            </a>
+            <a href="/doctors.html"
+               class="border border-outline-variant text-on-surface px-8 py-3 rounded-full font-bold text-sm hover:bg-surface-container transition-all">
+              Book Another
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Login modal (shown inline when booking without auth) -->
+<div id="login-modal" style="display:none"
+     class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+  <div class="bg-surface-container-lowest rounded-3xl p-8 w-full max-w-md editorial-shadow">
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="font-headline text-2xl font-bold">Sign In to Continue</h2>
+      <button onclick="document.getElementById('login-modal').style.display='none'"
+              class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1">close</button>
+    </div>
+    <p class="text-sm text-on-surface-variant mb-6">Sign in to confirm your appointment. Your selected date and time are saved.</p>
+
+    <!-- Google -->
+    <button id="modal-google-btn"
+            class="w-full flex items-center justify-center gap-3 border border-outline-variant rounded-2xl py-3.5 font-semibold text-sm hover:bg-surface-container transition-colors mb-4">
+      <svg width="18" height="18" viewBox="0 0 48 48">
+        <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 33.2 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/>
+        <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.1 18.9 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.5 29.5 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/>
+        <path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.3C29.2 35.3 26.7 36 24 36c-5.2 0-9.6-2.8-11.3-7l-6.5 5C9.6 39.5 16.3 44 24 44z"/>
+        <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.3 4.1-4.2 5.4l6.2 5.3C41 35.9 44 30.4 44 24c0-1.2-.1-2.4-.4-3.5z"/>
+      </svg>
+      Continue with Google
+    </button>
+
+    <div class="flex items-center gap-3 mb-4">
+      <div class="flex-1 h-px bg-outline-variant"></div>
+      <span class="text-xs text-on-surface-variant">or sign in with email</span>
+      <div class="flex-1 h-px bg-outline-variant"></div>
+    </div>
+
+    <form id="modal-login-form" class="space-y-3">
+      <input id="modal-email" type="email" required
+        class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+        placeholder="Email address"/>
+      <input id="modal-password" type="password" required
+        class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+        placeholder="Password"/>
+      <p id="modal-error" class="text-tertiary text-xs hidden"></p>
+      <button type="submit" id="modal-login-btn"
+        class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all">
+        Sign In
+      </button>
+    </form>
+
+    <p class="text-center text-sm text-on-surface-variant mt-5">
+      No account? <a href="/login.html" class="text-primary font-semibold hover:underline">Create one here</a>
+    </p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w-full bg-[#006D77] text-white pt-12 pb-6 mt-20">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
+    <div class="space-y-4">
+      <div class="text-xl font-black">Aadityaa Hospital</div>
+      <p class="text-teal-100/80 text-sm leading-relaxed">World-class healthcare with compassion.</p>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-4 text-sm uppercase tracking-widest text-teal-200">Patient Resources</h4>
+      <ul class="space-y-3">
+        <li><a class="text-teal-100/80 hover:text-white text-sm transition-colors" href="#">Book Appointment</a></li>
+        <li><a class="text-teal-100/80 hover:text-white text-sm transition-colors" href="#">Find a Doctor</a></li>
+        <li><a class="text-teal-100/80 hover:text-white text-sm transition-colors" href="#">Health Packages</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-4 text-sm uppercase tracking-widest text-teal-200">Quick Links</h4>
+      <ul class="space-y-3">
+        <li><a class="text-teal-100/80 hover:text-white text-sm transition-colors" href="#">Privacy Policy</a></li>
+        <li><a class="text-teal-100/80 hover:text-white text-sm transition-colors" href="#">Terms of Service</a></li>
+        <li><a class="text-teal-100/80 hover:text-white text-sm transition-colors" href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-4 text-sm uppercase tracking-widest text-teal-200">Emergency</h4>
+      <p class="text-teal-100/80 text-sm mb-3">24/7 emergency care available.</p>
+      <a href="tel:+918000123" class="bg-white text-primary font-bold text-sm px-4 py-2 rounded-full hover:bg-teal-50 transition-colors inline-block">+91 8000 1234</a>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 mt-10 pt-6 border-t border-white/10 text-xs text-teal-100/60">
+    © 2024 Aadityaa Hospital. All rights reserved.
+  </div>
+</footer>
+
+<!-- Firebase + API -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+
+<script>
+(async () => {
+  const params   = new URLSearchParams(window.location.search);
+  const doctorId = params.get('doctor_id');
+
+  const loadingEl = document.getElementById('loading-state');
+  const errorEl   = document.getElementById('error-state');
+  const gridEl    = document.getElementById('booking-grid');
+
+  function showError() {
+    loadingEl.classList.add('hidden');
+    errorEl.classList.remove('hidden');
+  }
+
+  if (!doctorId) { showError(); return; }
+
+  // ── 1. Load doctor ──────────────────────────────────────────────────────────
+  let doctor = null;
+  try {
+    const res = await fetch(`/api/doctors/${doctorId}`);
+    if (!res.ok) throw new Error();
+    doctor = (await res.json()).doctor;
+  } catch(_) { showError(); return; }
+
+  const initials = doctor.full_name.split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('');
+  document.getElementById('doctor-card').innerHTML = `
+    <div class="relative h-52 overflow-hidden">
+      ${doctor.photo_url
+        ? `<img src="${doctor.photo_url}" alt="${doctor.full_name}" class="w-full h-full object-cover">`
+        : `<div class="w-full h-full bg-primary/10 flex items-center justify-center"><span class="text-7xl font-black text-primary/30">${initials}</span></div>`}
+      <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/80 to-transparent"></div>
+    </div>
+    <div class="p-6 space-y-3">
+      <h2 class="font-headline text-xl font-bold">${doctor.full_name}</h2>
+      ${doctor.specialties?.name ? `<p class="text-sm text-primary font-semibold">${doctor.specialties.name}</p>` : ''}
+      ${doctor.qualifications ? `<p class="text-xs text-on-surface-variant leading-relaxed">${doctor.qualifications}</p>` : ''}
+      <div class="space-y-1.5 text-sm pt-1">
+        ${doctor.experience_years ? `<div class="flex items-center gap-2 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span>${doctor.experience_years}+ years experience</div>` : ''}
+        ${doctor.consultation_fee ? `<div class="flex items-center gap-2 text-primary font-semibold"><span class="material-symbols-outlined text-[16px]">payments</span>₹${doctor.consultation_fee} consultation fee</div>` : ''}
+      </div>
+    </div>`;
+
+  loadingEl.classList.add('hidden');
+  gridEl.classList.remove('hidden');
+
+  document.getElementById('summary-doctor').textContent = doctor.full_name;
+  if (doctor.consultation_fee) {
+    document.getElementById('summary-fee').textContent = `₹${doctor.consultation_fee}`;
+    document.getElementById('summary-fee-row').classList.remove('hidden');
+  }
+
+  // ── 2. Calendar ─────────────────────────────────────────────────────────────
+  // Fetch server date to prevent spoofed client clock from showing past slots
+  let _serverToday = null;
+  try {
+    const st = await fetch('/api/server-time');
+    const sd = await st.json();
+    _serverToday = new Date(sd.today + 'T00:00:00');
+  } catch(_) {
+    _serverToday = new Date(); _serverToday.setHours(0,0,0,0);
+  }
+
+  let availableDates = new Set();
+  let calMonth = new Date(_serverToday); calMonth.setDate(1);
+  let selectedDate = null;
+  let selectedSlot = null;
+
+  try {
+    const r  = await fetch(`/api/doctors/${doctorId}/available-dates`);
+    const d  = await r.json();
+    availableDates = new Set(d.available_dates || []);
+    if (availableDates.size > 0) {
+      const first = new Date([...availableDates].sort()[0] + 'T00:00:00');
+      if (first.getFullYear() > calMonth.getFullYear() ||
+         (first.getFullYear() === calMonth.getFullYear() && first.getMonth() > calMonth.getMonth())) {
+        calMonth = new Date(first.getFullYear(), first.getMonth(), 1);
+      }
+    }
+  } catch(_) {}
+
+  renderCalendar();
+
+  document.getElementById('cal-prev').addEventListener('click', () => {
+    calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() - 1, 1);
+    renderCalendar();
+  });
+  document.getElementById('cal-next').addEventListener('click', () => {
+    calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 1);
+    renderCalendar();
+  });
+
+  function renderCalendar() {
+    const y = calMonth.getFullYear(), m = calMonth.getMonth();
+    document.getElementById('cal-month-label').textContent =
+      calMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    const today = _serverToday || (new Date(), new Date().setHours(0,0,0,0), new Date());
+    const firstDay    = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+    let html = '';
+    for (let i = 0; i < firstDay; i++) html += '<div></div>';
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const ds   = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const date = new Date(y, m, d);
+      const past  = date < today;
+      const avail = availableDates.has(ds);
+      const sel   = ds === selectedDate;
+
+      let cls = 'rounded-full w-9 h-9 flex items-center justify-center mx-auto text-sm transition-all ';
+      if (sel)        cls += 'bg-primary text-white font-bold shadow-md';
+      else if (past || !avail) cls += 'text-on-surface-variant/30 text-xs cursor-default';
+      else            cls += 'bg-secondary-container text-secondary font-semibold cursor-pointer hover:bg-primary hover:text-white';
+
+      const attrs = (!past && avail) ? `data-date="${ds}" class="cal-day ${cls}"` : `class="${cls}"`;
+      html += `<div ${attrs}>${d}</div>`;
+    }
+
+    document.getElementById('calendar-grid').innerHTML = html;
+    document.querySelectorAll('.cal-day').forEach(el =>
+      el.addEventListener('click', () => selectDate(el.dataset.date)));
+  }
+
+  // ── 3. Select date → fetch slots ────────────────────────────────────────────
+  async function selectDate(ds) {
+    selectedDate = ds;
+    selectedSlot = null;
+    renderCalendar();
+
+    const slotsEl = document.getElementById('step-slots');
+    slotsEl.classList.remove('hidden');
+    slotsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    const label = new Date(ds + 'T00:00:00').toLocaleDateString('en-IN',
+      { weekday: 'long', month: 'long', day: 'numeric' });
+    document.getElementById('slots-date-label').textContent = `Available slots for ${label}`;
+    document.getElementById('summary-date').textContent = label;
+
+    const slotsGrid = document.getElementById('slots-grid');
+    slotsGrid.innerHTML = '<p class="col-span-4 text-sm text-on-surface-variant text-center py-6">Loading slots…</p>';
+    document.getElementById('step-details').classList.add('hidden');
+
+    try {
+      const r = await fetch(`/api/doctors/${doctorId}/slots?date=${ds}`);
+      const d = await r.json();
+      const slots = d.slots || [];
+
+      if (!slots.length) {
+        slotsGrid.innerHTML = '<p class="col-span-4 text-sm text-on-surface-variant text-center py-6">No available slots for this date. Please choose another day.</p>';
+        return;
+      }
+
+      slotsGrid.innerHTML = slots.map(s => {
+        const time = typeof s === 'string' ? s : s.time;
+        const available = typeof s === 'string' ? true : s.available !== false;
+        return `<button class="slot-btn py-3 text-sm font-semibold rounded-xl border-2 transition-all
+          ${available
+            ? 'border-outline-variant hover:border-primary hover:text-primary hover:bg-primary/5 cursor-pointer'
+            : 'border-surface-container-highest text-on-surface-variant/40 cursor-not-allowed line-through'}"
+          data-time="${time}" ${!available ? 'disabled' : ''}>
+          ${time}
+        </button>`;
+      }).join('');
+
+      document.querySelectorAll('.slot-btn:not([disabled])').forEach(btn =>
+        btn.addEventListener('click', () => selectSlot(btn.dataset.time, btn)));
+
+    } catch(_) {
+      slotsGrid.innerHTML = '<p class="col-span-4 text-sm text-tertiary text-center py-4">Failed to load slots.</p>';
+    }
+  }
+
+  // ── 4. Select slot ───────────────────────────────────────────────────────────
+  function selectSlot(time, btn) {
+    selectedSlot = time;
+    document.querySelectorAll('.slot-btn').forEach(b =>
+      b.classList.remove('!border-primary', '!bg-primary', '!text-white'));
+    btn.classList.add('!border-primary', '!bg-primary', '!text-white');
+    document.getElementById('summary-time').textContent = time;
+
+    const detailsEl = document.getElementById('step-details');
+    detailsEl.classList.remove('hidden');
+    detailsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    const auth = _initFirebase();
+    if (auth?.currentUser?.displayName && !document.getElementById('patient-name').value)
+      document.getElementById('patient-name').value = auth.currentUser.displayName;
+  }
+
+  // ── 5. Confirm booking ───────────────────────────────────────────────────────
+  let pendingBook = false;
+
+  document.getElementById('booking-form').addEventListener('submit', e => {
+    e.preventDefault(); attemptBooking();
+  });
+
+  async function attemptBooking() {
+    if (!selectedDate || !selectedSlot) {
+      showToast('Please select a date and time slot first.', 'error'); return;
+    }
+
+    const btn = document.getElementById('confirm-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[20px] spin">progress_activity</span> Booking…';
+
+    const token = await Auth.getToken();
+    if (!token) {
+      pendingBook = true;
+      btn.disabled = false;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span> Confirm Appointment';
+      document.getElementById('login-modal').style.display = 'flex';
+      return;
+    }
+
+    try {
+      const payload = {
+        doctor_id:        doctorId,
+        appointment_date: selectedDate,
+        appointment_time: selectedSlot,
+        patient_name:     document.getElementById('patient-name').value.trim(),
+        patient_phone:    document.getElementById('patient-phone').value.trim(),
+        notes:            document.getElementById('patient-notes').value.trim(),
+      };
+
+      const res  = await fetch('/api/appointments', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body:    JSON.stringify(payload),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Booking failed.');
+
+      // Show success
+      ['step-date','step-slots','step-details'].forEach(id =>
+        document.getElementById(id).style.display = 'none');
+      document.getElementById('doctor-card').style.display = 'none';
+
+      const fmtDate = new Date(selectedDate + 'T00:00:00').toLocaleDateString('en-IN',
+        { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('success-doctor').textContent = doctor.full_name;
+      document.getElementById('success-date').textContent   = fmtDate;
+      document.getElementById('success-time').textContent   = selectedSlot;
+
+      const successEl = document.getElementById('step-success');
+      successEl.classList.remove('hidden');
+      successEl.scrollIntoView({ behavior: 'smooth' });
+
+    } catch(err) {
+      showToast(err.message, 'error');
+      btn.disabled = false;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span> Confirm Appointment';
+    }
+  }
+
+  // ── 6. Modal: Google sign-in ─────────────────────────────────────────────────
+  document.getElementById('modal-google-btn').addEventListener('click', async () => {
+    const errEl = document.getElementById('modal-error');
+    errEl.classList.add('hidden');
+    try {
+      await Auth.loginWithGoogle();
+      document.getElementById('login-modal').style.display = 'none';
+      if (pendingBook) { pendingBook = false; attemptBooking(); }
+    } catch(e) { errEl.textContent = e.message; errEl.classList.remove('hidden'); }
+  });
+
+  // ── 7. Modal: email sign-in ──────────────────────────────────────────────────
+  document.getElementById('modal-login-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const errEl = document.getElementById('modal-error');
+    const btn   = document.getElementById('modal-login-btn');
+    errEl.classList.add('hidden');
+    btn.disabled = true; btn.textContent = 'Signing in…';
+    try {
+      await Auth.login(
+        document.getElementById('modal-email').value.trim(),
+        document.getElementById('modal-password').value,
+      );
+      document.getElementById('login-modal').style.display = 'none';
+      if (pendingBook) { pendingBook = false; attemptBooking(); }
+    } catch(e) {
+      errEl.textContent = e.message; errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Sign In';
+    }
+  });
+})();
+</script>
+</body>
+</html>

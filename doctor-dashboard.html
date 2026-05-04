@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Doctor Dashboard | Aadityaa Hospital</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "primary":"#00535b","on-primary":"#ffffff","primary-container":"#006d77","on-primary-container":"#9becf7",
+        "primary-fixed-dim":"#82d3de","secondary":"#236863","secondary-container":"#a9ece5",
+        "tertiary":"#911a23","on-tertiary":"#ffffff","surface":"#f5fafa","surface-container-lowest":"#ffffff",
+        "surface-container":"#eaefef","surface-container-low":"#eff5f5","surface-container-high":"#e4e9e9",
+        "surface-container-highest":"#dee3e3","on-surface":"#171d1d","on-surface-variant":"#3e494a",
+        "outline":"#6f797a","outline-variant":"#bec8ca","background":"#f5fafa"
+      },
+      fontFamily: { "headline":["Manrope"], "body":["Inter"] }
+    }}
+  }
+</script>
+<style>
+  .editorial-shadow { box-shadow: 0px 8px 30px rgba(23,29,29,0.07); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin 1s linear infinite; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen">
+
+<header class="w-full sticky top-0 z-50 bg-surface-container-lowest border-b border-outline-variant">
+  <nav class="flex justify-between items-center max-w-6xl mx-auto px-6 h-16">
+    <a href="/" class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white"><span class="font-black">A</span></div>
+      <span class="font-bold text-primary tracking-tighter">Aadityaa Hospital</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-on-surface-variant hidden md:block">Doctor Portal</span>
+      <button id="logout-btn" class="text-sm font-semibold text-on-surface-variant hover:text-tertiary flex items-center gap-1">
+        <span class="material-symbols-outlined text-[16px]">logout</span>Logout
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="max-w-6xl mx-auto py-10 px-6">
+
+  <div id="loading-state" class="py-20 text-center text-on-surface-variant">
+    <span class="material-symbols-outlined text-5xl spin block mb-3">progress_activity</span>
+    Loading dashboard…
+  </div>
+  <div id="auth-error" class="hidden py-20 text-center">
+    <span class="material-symbols-outlined text-5xl text-tertiary block mb-4">lock</span>
+    <p class="text-on-surface-variant mb-4">Doctor access required.</p>
+    <a href="/login.html?next=/doctor-dashboard.html" class="bg-primary text-white px-6 py-3 rounded-full font-bold text-sm hover:opacity-90 inline-block">Sign In</a>
+  </div>
+
+  <div id="dashboard" class="hidden">
+
+    <!-- Doctor header -->
+    <div class="flex flex-wrap items-center gap-4 mb-10">
+      <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+        <span class="text-2xl font-black text-primary" id="doc-initials">?</span>
+      </div>
+      <div class="flex-1">
+        <h1 class="font-headline text-2xl font-bold" id="doc-name">—</h1>
+        <p class="text-sm text-on-surface-variant" id="doc-specialty">—</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline text-primary" id="stat-today">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Today</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline text-secondary" id="stat-total">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Total</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline text-on-surface-variant" id="stat-patients">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Patients</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline text-amber-600" id="stat-leaves">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Leaves</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex flex-wrap gap-1 bg-surface-container p-1 rounded-2xl mb-8 w-fit">
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold bg-surface-container-lowest text-primary shadow-sm" data-tab="today">Today</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="all">All Appointments</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="surgeries">Surgeries</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="leaves">Leave Management</button>
+    </div>
+
+    <!-- Today tab -->
+    <div id="tab-today" class="tab-panel">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-headline text-lg font-bold">Today's Appointments</h2>
+        <span class="text-sm text-on-surface-variant" id="today-date"></span>
+      </div>
+      <div id="today-list" class="space-y-3"></div>
+    </div>
+
+    <!-- All appointments tab -->
+    <div id="tab-all" class="tab-panel hidden">
+      <div class="flex flex-wrap gap-3 items-center mb-6">
+        <h2 class="font-headline text-lg font-bold mr-2">Appointments</h2>
+        <input id="date-filter" type="date"
+          class="bg-surface-container border border-outline-variant rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all"/>
+        <button id="clear-date" class="text-xs text-on-surface-variant hover:text-primary transition-colors">Clear</button>
+      </div>
+      <div id="all-list" class="space-y-3"></div>
+    </div>
+
+    <!-- Surgeries tab -->
+    <div id="tab-surgeries" class="tab-panel hidden">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-headline text-lg font-bold">My Surgery Schedule</h2>
+        <select id="surgery-status-filter" class="bg-surface-container border border-outline-variant rounded-xl px-3 py-2 text-sm">
+          <option value="">All</option>
+          <option value="scheduled">Scheduled</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+          <option value="postponed">Postponed</option>
+        </select>
+      </div>
+      <div id="surgeries-list" class="space-y-3"></div>
+    </div>
+
+    <!-- Leaves tab -->
+    <div id="tab-leaves" class="tab-panel hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Submit leave form -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow">
+          <h2 class="font-headline text-lg font-bold mb-4">Request a Leave</h2>
+          <form id="leave-form" class="space-y-4">
+            <div>
+              <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Date *</label>
+              <input id="leave-date" type="date" required data-server-min="tomorrow"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all"/>
+            </div>
+
+            <!-- Leave type toggle -->
+            <div>
+              <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Leave Type</label>
+              <div class="bg-surface-container p-1 rounded-xl flex gap-1">
+                <button type="button" id="leave-type-full"
+                  class="flex-1 py-2 rounded-lg text-sm font-bold bg-surface-container-lowest text-primary shadow-sm transition-all"
+                  onclick="setLeaveType('full')">Full Day</button>
+                <button type="button" id="leave-type-partial"
+                  class="flex-1 py-2 rounded-lg text-sm font-bold text-on-surface-variant transition-all"
+                  onclick="setLeaveType('partial')">Partial / Half Day</button>
+              </div>
+            </div>
+
+            <!-- Partial time pickers (hidden by default) -->
+            <div id="partial-time-row" class="hidden grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">From *</label>
+                <input id="leave-start" type="time"
+                  class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all"/>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">To *</label>
+                <input id="leave-end" type="time"
+                  class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all"/>
+              </div>
+            </div>
+
+            <div>
+              <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Reason</label>
+              <textarea id="leave-reason" rows="2"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all resize-none"
+                placeholder="e.g. Visiting another hospital, conference, personal"></textarea>
+            </div>
+            <button type="submit" id="leave-btn"
+              class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all">
+              Submit Leave Request
+            </button>
+          </form>
+        </div>
+
+        <!-- Leave history -->
+        <div>
+          <h2 class="font-headline text-lg font-bold mb-4">My Leaves</h2>
+          <div id="leaves-list" class="space-y-3"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/server-time.js"></script>
+
+<script>
+(async () => {
+  const STATUS_STYLE = {
+    pending:   'bg-amber-100 text-amber-700',
+    confirmed: 'bg-secondary-container text-secondary',
+    completed: 'bg-surface-container-high text-on-surface-variant',
+    cancelled: 'bg-red-50 text-tertiary',
+    no_show:   'bg-surface-container-highest text-on-surface-variant',
+  };
+  const LEAVE_STYLE = {
+    pending:  'bg-amber-100 text-amber-700',
+    approved: 'bg-secondary-container text-secondary',
+    rejected: 'bg-red-50 text-tertiary',
+  };
+
+  const auth = _initFirebase();
+  if (!auth) { showAuthError(); return; }
+
+  auth.onAuthStateChanged(async user => {
+    if (!user) {
+      window.location.href = '/login.html?next=/doctor-dashboard.html';
+      return;
+    }
+
+    // Verify role
+    let role = 'patient';
+    try {
+      const token = await user.getIdToken();
+      const res   = await fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } });
+      const json  = await res.json();
+      role        = json.user?.role || 'patient';
+    } catch(_) {}
+
+    if (role !== 'doctor') {
+      // Redirect to appropriate dashboard instead of patient dashboard
+      const dash = role === 'admin' ? '/admin-dashboard.html' : '/patient-dashboard.html';
+      window.location.href = dash;
+      return;
+    }
+
+    // Doctor info
+    const name     = user.displayName || user.email.split('@')[0];
+    const initials = name.split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('').toUpperCase();
+    document.getElementById('doc-name').textContent     = name;
+    document.getElementById('doc-initials').textContent = initials;
+
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-IN',
+      { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    document.getElementById('loading-state').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+
+    const token = await user.getIdToken();
+
+    // Load data concurrently
+    const [todayApts, allApts, patients, leaves, surgeriesRes] = await Promise.allSettled([
+      apiFetchAuth(`/api/doctor/appointments?date=${today}`, token),
+      apiFetchAuth('/api/doctor/appointments', token),
+      apiFetchAuth('/api/doctor/patients', token),
+      apiFetchAuth('/api/doctor/leaves', token),
+      apiFetchAuth('/api/doctor/surgeries', token),
+    ]).then(r => r.map(p => p.value || {}));
+
+    const todayList = todayApts?.appointments || [];
+    const allList   = allApts?.appointments || [];
+    const pts       = patients?.patients || [];
+    const lvs       = leaves?.leaves || [];
+    let   surgs     = surgeriesRes?.surgeries || [];
+
+    // Stats
+    document.getElementById('stat-today').textContent    = todayList.length;
+    document.getElementById('stat-total').textContent    = allList.length;
+    document.getElementById('stat-patients').textContent = pts.length;
+    document.getElementById('stat-leaves').textContent   = lvs.filter(l => l.status === 'pending').length;
+
+    // Render today
+    renderAptList('today-list', todayList, token);
+    // Render all
+    renderAptList('all-list', allList, token);
+    // Render surgeries
+    renderSurgeries(surgs);
+    // Render leaves
+    renderLeavesList(lvs);
+
+    // Surgery status filter
+    document.getElementById('surgery-status-filter').addEventListener('change', e => {
+      const s = e.target.value;
+      renderSurgeries(s ? surgs.filter(x => x.status === s) : surgs);
+    });
+
+    function renderSurgeries(list) {
+      const el = document.getElementById('surgeries-list');
+      if (!list.length) {
+        el.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">No surgeries scheduled for you.</p>';
+        return;
+      }
+      const SURG_STYLE = {
+        scheduled: 'bg-amber-100 text-amber-700',
+        completed: 'bg-secondary-container text-secondary',
+        cancelled: 'bg-red-50 text-tertiary',
+        postponed: 'bg-surface-container-high text-on-surface-variant',
+      };
+      el.innerHTML = list.map(s => {
+        const dateStr = new Date(s.surgery_date + 'T00:00:00').toLocaleDateString('en-IN',
+          { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+        const badge   = SURG_STYLE[s.status] || 'bg-surface-container text-on-surface-variant';
+        return `<div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h3 class="font-bold text-on-surface">${s.operation_type}</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${badge}">${s.status}</span>
+              </div>
+              <div class="flex flex-wrap gap-3 text-xs text-on-surface-variant">
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">person</span> ${s.patient_name}</span>
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">calendar_today</span> ${dateStr}</span>
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">schedule</span> ${(s.surgery_time||'').slice(0,5)}</span>
+                ${s.theater ? `<span><span class="material-symbols-outlined text-[13px] align-text-top">door_open</span> ${s.theater}</span>` : ''}
+                ${s.duration_minutes ? `<span><span class="material-symbols-outlined text-[13px] align-text-top">timer</span> ${s.duration_minutes} min</span>` : ''}
+                ${s.patient_phone ? `<span><span class="material-symbols-outlined text-[13px] align-text-top">call</span> ${s.patient_phone}</span>` : ''}
+              </div>
+              ${s.notes ? `<p class="text-xs text-on-surface-variant mt-1 italic">"${s.notes}"</p>` : ''}
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // Date filter for all tab
+    document.getElementById('date-filter').addEventListener('change', async e => {
+      const d   = e.target.value;
+      const res = await apiFetchAuth(`/api/doctor/appointments?date=${d}`, token);
+      renderAptList('all-list', res?.appointments || [], token);
+    });
+    document.getElementById('clear-date').addEventListener('click', async () => {
+      document.getElementById('date-filter').value = '';
+      renderAptList('all-list', allList, token);
+    });
+
+    // Leave form
+    document.getElementById('leave-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn       = document.getElementById('leave-btn');
+      const isPartial = document.getElementById('partial-time-row').classList.contains('hidden') === false;
+      const startT    = document.getElementById('leave-start').value;
+      const endT      = document.getElementById('leave-end').value;
+      if (isPartial && (!startT || !endT)) {
+        showToast('Please set both From and To times for a partial leave.', 'error'); return;
+      }
+      btn.disabled = true; btn.textContent = 'Submitting…';
+      try {
+        const body = {
+          date:   document.getElementById('leave-date').value,
+          reason: document.getElementById('leave-reason').value.trim(),
+        };
+        if (isPartial) { body.start_time = startT; body.end_time = endT; }
+        const res = await fetch('/api/doctor/leaves', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+          body: JSON.stringify(body),
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Failed.');
+        showToast('Leave request submitted.', 'success');
+        document.getElementById('leave-form').reset();
+        setLeaveType('full');
+        const updated = await apiFetchAuth('/api/doctor/leaves', token);
+        renderLeavesList(updated?.leaves || []);
+      } catch(err) { showToast(err.message, 'error'); }
+      finally { btn.disabled = false; btn.textContent = 'Submit Leave Request'; }
+    });
+  });
+
+  async function apiFetchAuth(url, token) {
+    const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    return res.json();
+  }
+
+  function renderAptList(containerId, apts, token) {
+    const el = document.getElementById(containerId);
+    if (!apts.length) {
+      el.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">No appointments found.</p>';
+      return;
+    }
+    el.innerHTML = apts.map(a => {
+      const dateStr = new Date(a.appointment_date + 'T00:00:00').toLocaleDateString('en-IN',
+        { weekday: 'short', month: 'short', day: 'numeric' });
+      const badgeCls = STATUS_STYLE[a.status] || 'bg-surface-container text-on-surface-variant';
+      const canUpdate = a.status === 'confirmed';
+      return `
+        <div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow flex flex-wrap justify-between items-start gap-4">
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-3 mb-1">
+              <h3 class="font-bold text-on-surface">${a.patient_name || 'Patient'}</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${badgeCls}">${a.status.replace('_',' ')}</span>
+            </div>
+            <div class="flex flex-wrap gap-3 text-xs text-on-surface-variant">
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">calendar_today</span>${dateStr}</span>
+              <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">schedule</span>${a.appointment_time}</span>
+              ${a.patient_phone ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">call</span>${a.patient_phone}</span>` : ''}
+            </div>
+            ${a.notes ? `<p class="text-xs text-on-surface-variant mt-1 italic">"${a.notes}"</p>` : ''}
+          </div>
+          ${canUpdate ? `
+            <div class="flex gap-2 flex-shrink-0">
+              <button class="mark-btn text-xs font-semibold bg-secondary-container text-secondary px-3 py-1.5 rounded-full hover:opacity-80 transition-all"
+                data-id="${a.id}" data-status="completed">Done</button>
+              <button class="mark-btn text-xs font-semibold bg-surface-container-high text-on-surface-variant px-3 py-1.5 rounded-full hover:opacity-80 transition-all"
+                data-id="${a.id}" data-status="no_show">No-show</button>
+            </div>` : ''}
+        </div>`;
+    }).join('');
+
+    el.querySelectorAll('.mark-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        try {
+          const res = await fetch(`/api/doctor/appointments/${btn.dataset.id}/status`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            body: JSON.stringify({ status: btn.dataset.status }),
+          });
+          if (!res.ok) throw new Error((await res.json()).error);
+          const apt = apts.find(a => a.id === btn.dataset.id);
+          if (apt) apt.status = btn.dataset.status;
+          renderAptList(containerId, apts, token);
+          showToast('Status updated.', 'success');
+        } catch(e) { showToast(e.message, 'error'); btn.disabled = false; }
+      });
+    });
+  }
+
+  function renderLeavesList(leaves) {
+    const el = document.getElementById('leaves-list');
+    if (!leaves.length) {
+      el.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-6">No leave requests yet.</p>';
+      return;
+    }
+    el.innerHTML = leaves.map(l => {
+      const badgeCls = LEAVE_STYLE[l.status] || 'bg-surface-container text-on-surface-variant';
+      const dateStr  = new Date((l.leave_date || l.date) + 'T00:00:00').toLocaleDateString('en-IN',
+        { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+      const timeInfo = (l.leave_type === 'partial' && l.start_time && l.end_time)
+        ? `<span class="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full font-semibold">
+             ${(l.start_time||'').slice(0,5)} – ${(l.end_time||'').slice(0,5)}
+           </span>`
+        : `<span class="text-xs text-on-surface-variant">Full Day</span>`;
+      return `
+        <div class="bg-surface-container-lowest rounded-xl p-4 editorial-shadow flex justify-between items-center gap-4">
+          <div>
+            <p class="font-semibold text-sm">${dateStr}</p>
+            <div class="flex flex-wrap gap-2 mt-1">${timeInfo}</div>
+            ${l.reason ? `<p class="text-xs text-on-surface-variant mt-0.5 italic">${l.reason}</p>` : ''}
+            ${l.admin_note ? `<p class="text-xs text-secondary mt-0.5">Admin: ${l.admin_note}</p>` : ''}
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-bold capitalize ${badgeCls}">${l.status}</span>
+        </div>`;
+    }).join('');
+  }
+
+
+  // ── Tab switching ─────────────────────────────────────────────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.className = b.dataset.tab === btn.dataset.tab
+          ? 'tab-btn px-5 py-2.5 rounded-xl text-sm font-bold bg-surface-container-lowest text-primary shadow-sm'
+          : 'tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant';
+      });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById(`tab-${btn.dataset.tab}`).classList.remove('hidden');
+    });
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', () => Auth.logout());
+
+  function showAuthError() {
+    document.getElementById('loading-state').classList.add('hidden');
+    document.getElementById('auth-error').classList.remove('hidden');
+  }
+
+  function showToast(msg, type = 'info') {
+    const colors = { success:'bg-primary text-white', error:'bg-tertiary text-white', info:'bg-surface-container text-on-surface' };
+    const el = document.createElement('div');
+    el.className = `fixed bottom-6 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-sm font-semibold shadow-xl z-[9999] ${colors[type]||colors.info}`;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+  }
+})();
+
+function setLeaveType(type) {
+  const fullBtn    = document.getElementById('leave-type-full');
+  const partialBtn = document.getElementById('leave-type-partial');
+  const timeRow    = document.getElementById('partial-time-row');
+  const active   = 'flex-1 py-2 rounded-lg text-sm font-bold bg-surface-container-lowest text-primary shadow-sm transition-all';
+  const inactive = 'flex-1 py-2 rounded-lg text-sm font-bold text-on-surface-variant transition-all';
+  if (type === 'full') {
+    fullBtn.className    = active;
+    partialBtn.className = inactive;
+    timeRow.classList.add('hidden');
+    document.getElementById('leave-start').removeAttribute('required');
+    document.getElementById('leave-end').removeAttribute('required');
+  } else {
+    partialBtn.className = active;
+    fullBtn.className    = inactive;
+    timeRow.classList.remove('hidden');
+    document.getElementById('leave-start').setAttribute('required', '');
+    document.getElementById('leave-end').setAttribute('required', '');
+  }
+}
+</script>
+</body>
+</html>

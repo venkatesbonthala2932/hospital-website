@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Health Packages | Aadityaa Hospital</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-container-highest": "#dee3e3",
+          "primary": "#00535b",
+          "tertiary-container": "#b33338",
+          "on-secondary-container": "#286d67",
+          "on-primary-fixed": "#001f23",
+          "on-error": "#ffffff",
+          "tertiary": "#911a23",
+          "surface-container-high": "#e4e9e9",
+          "on-surface": "#171d1d",
+          "primary-fixed": "#9ff0fb",
+          "outline": "#6f797a",
+          "on-tertiary": "#ffffff",
+          "background": "#f5fafa",
+          "surface-tint": "#006972",
+          "surface-container-lowest": "#ffffff",
+          "surface-container": "#eaefef",
+          "primary-fixed-dim": "#82d3de",
+          "on-primary-container": "#9becf7",
+          "surface-container-low": "#eff5f5",
+          "secondary": "#236863",
+          "on-secondary": "#ffffff",
+          "on-surface-variant": "#3e494a",
+          "on-background": "#171d1d",
+          "outline-variant": "#bec8ca",
+          "surface-variant": "#dee3e3",
+          "on-primary": "#ffffff",
+          "secondary-container": "#a9ece5",
+          "primary-container": "#006d77",
+          "surface": "#f5fafa",
+          "surface-dim": "#d6dbdb"
+        },
+        "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        "fontFamily": { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] }
+      }
+    }
+  }
+</script>
+<style>
+  .editorial-shadow { box-shadow: 0px 12px 40px rgba(23,29,29,0.06); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin 1s linear infinite; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed-dim">
+
+<!-- Top Utility Bar -->
+<div class="bg-primary-container text-on-primary-container py-3 px-8 hidden md:block">
+  <div class="max-w-7xl mx-auto flex justify-between items-center text-xs font-label tracking-wide">
+    <div class="flex items-center gap-6">
+      <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">location_on</span>PI/466, 8, ZP Rd, Hastinapuram, Hyderabad, 500070</span>
+      <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">schedule</span>Mon-Sat: 10:00 AM – 6:00 PM</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a class="hover:underline" href="#">Emergency Services</a>
+      <span class="h-3 w-[1px] bg-white/20"></span>
+      <a class="font-bold" href="tel:+914012345678">+91 40 1234 5678</a>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<header class="w-full sticky top-0 z-50 bg-[#F5FAFA] shadow-[0px_12px_40px_rgba(23,29,29,0.06)]">
+  <nav class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+    <div class="flex items-center gap-2">
+      <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white"><span class="text-2xl font-black">A</span></div>
+      <span class="text-2xl font-bold text-[#00535B] tracking-tighter">Aadityaa Hospital</span>
+    </div>
+    <div class="hidden lg:flex items-center gap-8">
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">Home</a>
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">About Us</a>
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">Departments</a>
+      <a class="text-slate-600 hover:text-[#00535B] transition-colors font-['Manrope'] font-semibold text-sm" href="#">Doctors</a>
+      <a class="text-[#00535B] font-bold border-b-2 border-[#00535B] pb-1 font-['Manrope'] font-semibold text-sm" href="#">Health Packages</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">call</button>
+      <button class="material-symbols-outlined text-primary p-2 hover:bg-slate-100 rounded-full transition-colors">schedule</button>
+      <button class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-primary/20">Book Appointment</button>
+    </div>
+  </nav>
+</header>
+
+<main class="py-12 px-8 max-w-7xl mx-auto">
+
+  <!-- Header -->
+  <section class="mb-12">
+    <span class="text-xs font-bold text-primary uppercase tracking-widest block mb-3">Preventive Care</span>
+    <div class="flex flex-col md:flex-row justify-between items-end gap-6">
+      <div>
+        <h1 class="font-headline text-5xl md:text-6xl font-extrabold text-on-surface leading-tight mb-4 tracking-tighter">Health Packages</h1>
+        <p class="text-lg text-on-surface-variant leading-relaxed max-w-xl">
+          Comprehensive checkup packages designed for every stage of life. Early detection, expert consultation, and complete peace of mind.
+        </p>
+      </div>
+      <div class="text-right flex-shrink-0 bg-secondary-container text-secondary px-6 py-4 rounded-2xl">
+        <div class="text-3xl font-black font-headline">₹999</div>
+        <div class="text-sm font-semibold">packages starting from</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter pills -->
+  <section class="mb-10">
+    <div id="filter-pills" class="flex flex-wrap gap-3">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- Packages grid -->
+  <div id="packages-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+    <div class="col-span-full py-16 text-center text-on-surface-variant">
+      <span class="material-symbols-outlined text-4xl spin block mb-2">progress_activity</span>
+      Loading packages…
+    </div>
+  </div>
+
+  <!-- CTA Banner -->
+  <section class="mt-20 bg-primary-container rounded-[2.5rem] p-10 md:p-14 text-on-primary relative overflow-hidden editorial-shadow">
+    <div class="absolute top-0 right-0 w-72 h-72 bg-white/5 rounded-full -mr-20 -mt-20 blur-3xl pointer-events-none"></div>
+    <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+      <div>
+        <h2 class="font-headline text-3xl md:text-4xl font-extrabold mb-3">Not sure which package is right for you?</h2>
+        <p class="text-lg opacity-80 max-w-lg leading-relaxed">Our health counsellors are available to help you choose the right package based on your age, lifestyle, and medical history.</p>
+      </div>
+      <div class="flex flex-wrap gap-4 flex-shrink-0">
+        <a href="tel:+914012345678"
+           class="bg-on-primary-container text-primary-container px-8 py-4 rounded-2xl font-headline font-bold text-sm hover:bg-white transition-colors editorial-shadow inline-flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">call</span>
+          Call Us
+        </a>
+        <a href="/departments.html"
+           class="border border-white/20 text-white px-8 py-4 rounded-2xl font-headline font-bold text-sm hover:bg-white/10 transition-colors inline-flex items-center gap-2">
+          Book Appointment
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full bg-[#006D77] text-white pt-12 pb-6 mt-20">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-8">
+    <div class="space-y-6">
+      <div class="text-xl font-black">Aadityaa Hospital</div>
+      <p class="text-teal-100/80 text-sm leading-relaxed">Providing world-class care to our community for over 15 years.</p>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Patient Resources</h4>
+      <ul class="space-y-4">
+        <li><a class="text-teal-100/80 hover:text-white text-sm block transition-colors" href="#">Book Appointment</a></li>
+        <li><a class="text-teal-100/80 hover:text-white text-sm block transition-colors" href="#">Find a Doctor</a></li>
+        <li><a class="text-teal-100/80 hover:text-white text-sm block transition-colors" href="#">Health Packages</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Quick Links</h4>
+      <ul class="space-y-4">
+        <li><a class="text-teal-100/80 hover:text-white text-sm block transition-colors" href="#">Privacy Policy</a></li>
+        <li><a class="text-teal-100/80 hover:text-white text-sm block transition-colors" href="#">Terms of Service</a></li>
+        <li><a class="text-teal-100/80 hover:text-white text-sm block transition-colors" href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-6 text-sm uppercase tracking-widest text-teal-200">Newsletter</h4>
+      <p class="text-teal-100/80 text-xs mb-4">Health tips delivered to your inbox.</p>
+      <form class="space-y-2">
+        <input class="w-full bg-white/10 border-none rounded-lg p-3 text-sm text-white placeholder:text-teal-100/40 focus:ring-2 focus:ring-teal-200" placeholder="Email Address" type="email"/>
+        <button class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm hover:bg-teal-50 transition-colors">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/10 text-xs text-teal-100/60">
+    © 2024 Aadityaa Hospital. Editorial Excellence in Care.
+  </div>
+</footer>
+
+<!-- Firebase + API + nav -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+
+<script>
+(async () => {
+  const GROUPS = ['All', 'General', 'Women', 'Men', 'Senior', 'Children'];
+  const GROUP_ICON = {
+    All: 'apps', General: 'health_and_safety', Women: 'pregnant_woman',
+    Men: 'fitness_center', Senior: 'elderly', Children: 'child_care',
+  };
+
+  let activeGroup = 'All';
+  const pillsEl  = document.getElementById('filter-pills');
+  const gridEl   = document.getElementById('packages-grid');
+
+  renderPills();
+  await loadPackages();
+
+  function renderPills() {
+    const active = 'px-5 py-2.5 bg-primary text-white rounded-full font-semibold text-sm flex items-center gap-2 editorial-shadow';
+    const idle   = 'px-5 py-2.5 bg-surface-container-highest text-secondary rounded-full font-semibold text-sm hover:bg-secondary-container transition-all flex items-center gap-2';
+
+    pillsEl.innerHTML = GROUPS.map(g => `
+      <button class="${g === activeGroup ? active : idle}" data-group="${g}">
+        <span class="material-symbols-outlined text-[16px]">${GROUP_ICON[g]}</span>
+        ${g === 'All' ? 'All Packages' : g}
+      </button>`).join('');
+
+    pillsEl.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeGroup = btn.dataset.group;
+        renderPills();
+        loadPackages();
+      });
+    });
+  }
+
+  async function loadPackages() {
+    gridEl.innerHTML = `
+      <div class="col-span-full py-16 text-center text-on-surface-variant">
+        <span class="material-symbols-outlined text-4xl spin block mb-2">progress_activity</span>
+        Loading packages…
+      </div>`;
+
+    try {
+      const url = activeGroup === 'All'
+        ? '/api/packages'
+        : `/api/packages?target=${encodeURIComponent(activeGroup)}`;
+      const data = await (await fetch(url)).json();
+      const pkgs = data.packages || [];
+
+      if (!pkgs.length) {
+        gridEl.innerHTML = `
+          <div class="col-span-full py-16 text-center text-on-surface-variant">
+            <span class="material-symbols-outlined text-4xl block mb-3">sentiment_dissatisfied</span>
+            No packages found.
+          </div>`;
+        return;
+      }
+
+      gridEl.innerHTML = pkgs.map(packageCard).join('');
+    } catch(_) {
+      gridEl.innerHTML = `
+        <div class="col-span-full py-12 text-center text-tertiary font-semibold">
+          Unable to load packages. Please try again later.
+        </div>`;
+    }
+  }
+
+  function packageCard(p) {
+    const discount = p.original_price
+      ? Math.round((1 - p.price / p.original_price) * 100)
+      : 0;
+    const tests = (p.tests || []).slice(0, 6);
+    const moreCount = (p.tests || []).length - tests.length;
+    const durationIcon = p.duration?.includes('2 Day') ? 'calendar_month'
+      : p.duration?.includes('Half') ? 'schedule' : 'today';
+
+    return `
+      <div class="bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-1 transition-all duration-300">
+        <!-- Card header -->
+        <div class="bg-primary-container p-6 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 blur-2xl pointer-events-none"></div>
+          <div class="flex justify-between items-start mb-4 relative z-10">
+            <span class="material-symbols-outlined text-4xl text-on-primary-container">${p.icon || 'health_and_safety'}</span>
+            ${discount > 0 ? `<span class="bg-secondary-container text-secondary text-xs font-black px-3 py-1 rounded-full">${discount}% OFF</span>` : ''}
+          </div>
+          <h3 class="font-headline text-xl font-bold text-on-primary relative z-10">${p.name}</h3>
+          <p class="text-on-primary/70 text-sm mt-1 relative z-10">${p.tagline || ''}</p>
+        </div>
+
+        <!-- Pricing -->
+        <div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+          <div>
+            <span class="font-headline text-3xl font-black text-primary">₹${Math.round(p.price).toLocaleString('en-IN')}</span>
+            ${p.original_price ? `<span class="text-on-surface-variant line-through text-sm ml-2">₹${Math.round(p.original_price).toLocaleString('en-IN')}</span>` : ''}
+          </div>
+          <div class="flex items-center gap-1.5 text-xs text-on-surface-variant bg-surface-container px-3 py-1.5 rounded-full">
+            <span class="material-symbols-outlined text-[14px]">${durationIcon}</span>
+            ${p.duration}
+          </div>
+        </div>
+
+        <!-- Tests list -->
+        <div class="px-6 py-5 flex-1">
+          <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">What's included</p>
+          <ul class="space-y-2">
+            ${tests.map(t => `
+              <li class="flex items-start gap-2 text-sm text-on-surface">
+                <span class="material-symbols-outlined text-[14px] text-primary mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1">check_circle</span>
+                ${t}
+              </li>`).join('')}
+            ${moreCount > 0 ? `
+              <li class="text-xs text-primary font-semibold pt-1">+${moreCount} more tests included</li>` : ''}
+          </ul>
+        </div>
+
+        <!-- CTA -->
+        <div class="px-6 pb-6">
+          <a href="/departments.html"
+             class="w-full bg-primary text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">calendar_add_on</span>
+            Book This Package
+          </a>
+        </div>
+      </div>`;
+  }
+})();
+</script>
+</body>
+</html>

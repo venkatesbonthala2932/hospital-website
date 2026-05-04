@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign In | Aadityaa Hospital</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#00535b",
+          "on-primary": "#ffffff",
+          "primary-container": "#006d77",
+          "on-primary-container": "#9becf7",
+          "primary-fixed": "#9ff0fb",
+          "primary-fixed-dim": "#82d3de",
+          "secondary": "#236863",
+          "secondary-container": "#a9ece5",
+          "on-secondary-container": "#286d67",
+          "tertiary": "#911a23",
+          "on-tertiary": "#ffffff",
+          "surface": "#f5fafa",
+          "surface-container-lowest": "#ffffff",
+          "surface-container": "#eaefef",
+          "surface-container-low": "#eff5f5",
+          "surface-container-high": "#e4e9e9",
+          "surface-container-highest": "#dee3e3",
+          "on-surface": "#171d1d",
+          "on-surface-variant": "#3e494a",
+          "outline": "#6f797a",
+          "outline-variant": "#bec8ca",
+          "background": "#f5fafa",
+          "on-background": "#171d1d",
+          "error": "#ba1a1a"
+        },
+        "fontFamily": { "headline": ["Manrope"], "body": ["Inter"] }
+      }
+    }
+  }
+</script>
+<style>
+  .editorial-shadow { box-shadow: 0px 12px 40px rgba(23,29,29,0.06); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin 1s linear infinite; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen flex flex-col">
+
+<!-- Minimal nav -->
+<header class="w-full bg-surface-container-lowest border-b border-outline-variant py-4 px-8">
+  <a href="/" class="inline-flex items-center gap-2">
+    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white"><span class="text-lg font-black">A</span></div>
+    <span class="text-lg font-bold text-primary tracking-tighter">Aadityaa Hospital</span>
+  </a>
+</header>
+
+<main class="flex-1 flex items-center justify-center p-4 py-12">
+  <div class="w-full max-w-md">
+
+    <!-- Card -->
+    <div class="bg-surface-container-lowest rounded-3xl p-8 editorial-shadow">
+
+      <!-- Tab toggle -->
+      <div class="bg-surface-container p-1 rounded-2xl flex gap-1 mb-8">
+        <button id="tab-login"    class="flex-1 py-2.5 rounded-xl text-sm font-bold transition-all bg-surface-container-lowest text-primary shadow-sm">Sign In</button>
+        <button id="tab-register" class="flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-on-surface-variant hover:text-on-surface">Register</button>
+      </div>
+
+      <!-- Login panel -->
+      <div id="panel-login">
+        <h1 class="font-headline text-2xl font-extrabold mb-1">Welcome back</h1>
+        <p class="text-sm text-on-surface-variant mb-6">Sign in to manage your appointments.</p>
+
+        <!-- Google -->
+        <button id="login-google"
+                class="w-full flex items-center justify-center gap-3 border border-outline-variant rounded-2xl py-3.5 font-semibold text-sm hover:bg-surface-container transition-colors mb-4">
+          <svg width="18" height="18" viewBox="0 0 48 48">
+            <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 33.2 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/>
+            <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.1 18.9 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.5 29.5 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/>
+            <path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.3C29.2 35.3 26.7 36 24 36c-5.2 0-9.6-2.8-11.3-7l-6.5 5C9.6 39.5 16.3 44 24 44z"/>
+            <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.3 4.1-4.2 5.4l6.2 5.3C41 35.9 44 30.4 44 24c0-1.2-.1-2.4-.4-3.5z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex-1 h-px bg-outline-variant"></div>
+          <span class="text-xs text-on-surface-variant">or</span>
+          <div class="flex-1 h-px bg-outline-variant"></div>
+        </div>
+
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Email</label>
+            <input id="login-email" type="email" required
+              class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              placeholder="you@example.com"/>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Password</label>
+            <div class="relative">
+              <input id="login-password" type="password" required
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 pr-11 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                placeholder="Your password"/>
+              <button type="button" onclick="togglePw('login-password',this)"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors">
+                <span class="material-symbols-outlined text-[20px] select-none">visibility</span>
+              </button>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button type="button" id="forgot-pw-btn"
+              class="text-xs text-primary font-semibold hover:underline">Forgot password?</button>
+          </div>
+          <p id="login-error" class="text-tertiary text-xs hidden"></p>
+          <button type="submit" id="login-btn"
+            class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all">
+            Sign In
+          </button>
+        </form>
+
+        <!-- Forgot password panel (hidden by default) -->
+        <div id="forgot-panel" class="hidden mt-4">
+          <div class="bg-surface-container rounded-2xl p-5">
+            <p class="text-sm font-semibold mb-3">Reset your password</p>
+            <p class="text-xs text-on-surface-variant mb-3">Enter your email and we'll send you a reset link.</p>
+            <input id="reset-email" type="email" placeholder="you@example.com"
+              class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-4 py-2.5 text-sm mb-2 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"/>
+            <p id="reset-msg" class="text-xs mb-2 hidden"></p>
+            <button id="reset-btn"
+              class="w-full bg-primary text-white py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all">
+              Send Reset Link
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Register panel (hidden by default) -->
+      <div id="panel-register" class="hidden">
+        <h1 class="font-headline text-2xl font-extrabold mb-1">Create an account</h1>
+        <p class="text-sm text-on-surface-variant mb-6">Join Aadityaa Hospital for easy appointment booking.</p>
+
+        <!-- Google -->
+        <button id="register-google"
+                class="w-full flex items-center justify-center gap-3 border border-outline-variant rounded-2xl py-3.5 font-semibold text-sm hover:bg-surface-container transition-colors mb-4">
+          <svg width="18" height="18" viewBox="0 0 48 48">
+            <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.6 33.2 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.5 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/>
+            <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.1 18.9 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.5 29.5 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/>
+            <path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.3C29.2 35.3 26.7 36 24 36c-5.2 0-9.6-2.8-11.3-7l-6.5 5C9.6 39.5 16.3 44 24 44z"/>
+            <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.3 4.1-4.2 5.4l6.2 5.3C41 35.9 44 30.4 44 24c0-1.2-.1-2.4-.4-3.5z"/>
+          </svg>
+          Sign up with Google
+        </button>
+
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex-1 h-px bg-outline-variant"></div>
+          <span class="text-xs text-on-surface-variant">or</span>
+          <div class="flex-1 h-px bg-outline-variant"></div>
+        </div>
+
+        <form id="register-form" class="space-y-4">
+          <div>
+            <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Full Name</label>
+            <input id="register-name" type="text" required
+              class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              placeholder="Your full name"/>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Email</label>
+            <input id="register-email" type="email" required
+              class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              placeholder="you@example.com"/>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Phone <span class="font-normal opacity-60">(optional)</span></label>
+            <input id="register-phone" type="tel"
+              class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              placeholder="+91 98765 43210"/>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Password</label>
+            <div class="relative">
+              <input id="register-password" type="password" required minlength="8"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 pr-11 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                placeholder="Minimum 8 characters"/>
+              <button type="button" onclick="togglePw('register-password',this)"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors">
+                <span class="material-symbols-outlined text-[20px] select-none">visibility</span>
+              </button>
+            </div>
+          </div>
+          <p id="register-error" class="text-tertiary text-xs hidden"></p>
+          <button type="submit" id="register-btn"
+            class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all">
+            Create Account
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Footer note -->
+    <p class="text-center text-xs text-on-surface-variant mt-6">
+      By signing in you agree to our <a href="#" class="hover:underline text-primary">Terms of Service</a> and <a href="#" class="hover:underline text-primary">Privacy Policy</a>.
+    </p>
+  </div>
+</main>
+
+<!-- Firebase + API -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="/static/js/api.js"></script>
+<script>
+function togglePw(inputId, btn) {
+  const inp = document.getElementById(inputId);
+  const icon = btn.querySelector('.material-symbols-outlined');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    icon.textContent = 'visibility_off';
+  } else {
+    inp.type = 'password';
+    icon.textContent = 'visibility';
+  }
+}
+
+// ── Forgot password ──────────────────────────────────────────────────────────
+document.getElementById('forgot-pw-btn').addEventListener('click', () => {
+  const panel = document.getElementById('forgot-panel');
+  const emailVal = document.getElementById('login-email').value.trim();
+  if (emailVal) document.getElementById('reset-email').value = emailVal;
+  panel.classList.toggle('hidden');
+});
+
+document.getElementById('reset-btn').addEventListener('click', async () => {
+  const btn   = document.getElementById('reset-btn');
+  const email = document.getElementById('reset-email').value.trim();
+  const msgEl = document.getElementById('reset-msg');
+  if (!email) { msgEl.textContent = 'Please enter your email.'; msgEl.className = 'text-xs text-tertiary mb-2'; msgEl.classList.remove('hidden'); return; }
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const auth = _initFirebase();
+    if (!auth) throw new Error('Firebase not loaded.');
+    await auth.sendPasswordResetEmail(email);
+    msgEl.textContent = `Reset link sent to ${email}. Check your inbox (and spam).`;
+    msgEl.className = 'text-xs text-secondary font-semibold mb-2';
+    msgEl.classList.remove('hidden');
+    btn.textContent = 'Sent ✓';
+  } catch(e) {
+    const msg = _FB_ERRORS[e?.code] || e?.message || 'Failed to send reset email.';
+    msgEl.textContent = msg;
+    msgEl.className = 'text-xs text-tertiary mb-2';
+    msgEl.classList.remove('hidden');
+    btn.disabled = false; btn.textContent = 'Send Reset Link';
+  }
+});
+</script>
+
+<script>
+(function() {
+  const params  = new URLSearchParams(window.location.search);
+  const nextURL = params.get('next') || null;
+
+  function redirectAfterAuth(role) {
+    if (nextURL) { window.location.href = nextURL; return; }
+    const DASH = { admin: '/admin-dashboard.html', doctor: '/doctor-dashboard.html', patient: '/patient-dashboard.html' };
+    window.location.href = DASH[role] || '/patient-dashboard.html';
+  }
+
+  // If already logged in, redirect immediately
+  const auth = _initFirebase();
+  if (auth) {
+    auth.onAuthStateChanged(async user => {
+      if (!user) return;
+      try {
+        const token = await user.getIdToken();
+        const res   = await fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } });
+        const json  = await res.json();
+        redirectAfterAuth(json.user?.role || 'patient');
+      } catch(_) { redirectAfterAuth('patient'); }
+    });
+  }
+
+  // ── Tab switching ──────────────────────────────────────────────────────────
+  const activeTab = 'bg-surface-container-lowest text-primary shadow-sm';
+  const idleTab   = 'text-on-surface-variant hover:text-on-surface';
+
+  document.getElementById('tab-login').addEventListener('click', () => {
+    document.getElementById('panel-login').classList.remove('hidden');
+    document.getElementById('panel-register').classList.add('hidden');
+    document.getElementById('tab-login').className    = `flex-1 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab}`;
+    document.getElementById('tab-register').className = `flex-1 py-2.5 rounded-xl text-sm font-bold transition-all ${idleTab}`;
+  });
+  document.getElementById('tab-register').addEventListener('click', () => {
+    document.getElementById('panel-register').classList.remove('hidden');
+    document.getElementById('panel-login').classList.add('hidden');
+    document.getElementById('tab-register').className = `flex-1 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab}`;
+    document.getElementById('tab-login').className    = `flex-1 py-2.5 rounded-xl text-sm font-bold transition-all ${idleTab}`;
+  });
+
+  // ── Google sign-in (shared for login + register) ──────────────────────────
+  async function handleGoogle() {
+    try {
+      const result = await Auth.loginWithGoogle();
+      redirectAfterAuth(result.user?.role || 'patient');
+    } catch(e) { alert(e.message); }
+  }
+  document.getElementById('login-google').addEventListener('click', handleGoogle);
+  document.getElementById('register-google').addEventListener('click', handleGoogle);
+
+  // ── Email login ───────────────────────────────────────────────────────────
+  document.getElementById('login-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const errEl = document.getElementById('login-error');
+    const btn   = document.getElementById('login-btn');
+    errEl.classList.add('hidden');
+    btn.disabled = true; btn.textContent = 'Signing in…';
+    try {
+      const result = await Auth.login(
+        document.getElementById('login-email').value.trim(),
+        document.getElementById('login-password').value,
+      );
+      redirectAfterAuth(result.user?.role || 'patient');
+    } catch(e) {
+      errEl.textContent = e.message; errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Sign In';
+    }
+  });
+
+  // ── Email register ────────────────────────────────────────────────────────
+  document.getElementById('register-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const errEl = document.getElementById('register-error');
+    const btn   = document.getElementById('register-btn');
+    errEl.classList.add('hidden');
+    btn.disabled = true; btn.textContent = 'Creating account…';
+    try {
+      const result = await Auth.register(
+        document.getElementById('register-email').value.trim(),
+        document.getElementById('register-password').value,
+        document.getElementById('register-name').value.trim(),
+        document.getElementById('register-phone').value.trim(),
+      );
+      redirectAfterAuth(result.user?.role || 'patient');
+    } catch(e) {
+      errEl.textContent = e.message; errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Create Account';
+    }
+  });
+})();
+</script>
+</body>
+</html>

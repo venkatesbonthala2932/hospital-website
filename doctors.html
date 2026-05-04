@@ -148,167 +148,15 @@
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
 <input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border-none rounded-2xl focus:ring-2 focus:ring-primary/20 font-body transition-all editorial-shadow" placeholder="Search by name or keyword..." type="text"/>
 </div>
-<div class="lg:col-span-8 flex flex-wrap gap-3">
-<button class="px-6 py-3 bg-primary text-white rounded-full font-headline font-bold text-sm transition-all editorial-shadow">All Specialists</button>
-<button class="px-6 py-3 bg-surface-container-highest text-secondary font-headline font-bold text-sm rounded-full hover:bg-secondary-container transition-all">Cardiology</button>
-<button class="px-6 py-3 bg-surface-container-highest text-secondary font-headline font-bold text-sm rounded-full hover:bg-secondary-container transition-all">Neurology</button>
-<button class="px-6 py-3 bg-surface-container-highest text-secondary font-headline font-bold text-sm rounded-full hover:bg-secondary-container transition-all">Orthopedics</button>
-<button class="px-6 py-3 bg-surface-container-highest text-secondary font-headline font-bold text-sm rounded-full hover:bg-secondary-container transition-all">Pediatrics</button>
-<button class="px-6 py-3 bg-surface-container-highest text-secondary font-headline font-bold text-sm rounded-full hover:bg-secondary-container transition-all">Gynecology</button>
-<button class="px-6 py-3 bg-surface-container-highest text-secondary font-headline font-bold text-sm rounded-full hover:bg-secondary-container transition-all">Dermatology</button>
+<div id="specialty-filters" class="lg:col-span-8 flex flex-wrap gap-3">
+<!-- Loaded dynamically by doctors-page.js -->
 </div>
 </div>
 </section>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Card 1 -->
-<div class="doctor-card group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-2 transition-all duration-300">
-<div class="relative h-72 overflow-hidden">
-<img alt="Dr. Aaditya Varma" class="doctor-image w-full h-full object-cover transition-transform duration-700" data-alt="Professional studio portrait of a confident male doctor in his 40s wearing a white coat and stethoscope, warm soft lighting, modern clinic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNoHYg_QS7mVzPOzpClaCcftwz0dhyCSNEnPiv5OFmusIKQVJO_OPacZrYvevBCazrcbX5shYEiTVo9-7LEPrJL5NyXjbgbenbyKnXEeZZ5RLu3OTkOjyNEv8R_t3nxcDBM47Gst8yMLfQeTOw1Flk5MRhBlZjDIzhOP4KYOT6ZTn8Ub_hYx_a7ivMcgC3bkUeRuMwlMgSxGaqAQ82gt4ptytwkG-Ohz8pCu6IzjzleA26ctVsT8DWyZWOsXsnvXSpPtZE4mq2nZl2"/>
-<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary/90 to-transparent">
-<span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Chief Medical Officer</span>
-</div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-4 gap-4">
-<h3 class="font-headline text-2xl font-bold text-on-surface">Dr. Aaditya Varma</h3>
-<div class="text-right flex-shrink-0">
-<span class="inline-block px-3 py-1 bg-secondary-container text-secondary text-[11px] font-bold uppercase tracking-tight rounded-lg">Senior Cardiologist</span>
-</div>
-</div>
-<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8">
-                    MBBS, MD (Medicine), DM (Cardiology) from AIIMS, New Delhi. With over 18 years of clinical experience, Dr. Varma is a pioneer in minimally invasive heart surgeries and complex robotic cardiac interventions.
-                </p>
-<div class="mt-auto">
-<button class="w-full bg-primary-container text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow">
-                        Book Now
-                    </button>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="doctor-card group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-2 transition-all duration-300">
-<div class="relative h-72 overflow-hidden">
-<img alt="Dr. Meera Reddy" class="doctor-image w-full h-full object-cover transition-transform duration-700" data-alt="Professional female doctor with a kind smile, wearing a white coat and glasses, soft window lighting, blurred medical environment background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsNcB0MOYYiXrfhMWN8tqSOclb9OOZ4FwDPbiQy2xslViHXnJsYDy_aoWx6aR9Eucx1Vi9nO3m11lWhCfkACni56YiQFcq9dTQRc44pIhFgp08lWWA8CLkQHidYdUSWcMGACfItu3Af5M53KbSBYu5cmEJc87cy06MLw6A3dsOE4B_iwCRnM9vdhzUTtsZw0XC4YewOvpM1rikdjs4PkK3wudE_oqqX8reHhz0WGT1izgumqkVWYP8S79tzBc7nCC5LKuS22CuOwZY"/>
-<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary/90 to-transparent">
-<span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Director of Surgical Excellence</span>
-</div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-4 gap-4">
-<h3 class="font-headline text-2xl font-bold text-on-surface">Dr. Meera Reddy</h3>
-<div class="text-right flex-shrink-0">
-<span class="inline-block px-3 py-1 bg-secondary-container text-secondary text-[11px] font-bold uppercase tracking-tight rounded-lg">Chief Neurosurgeon</span>
-</div>
-</div>
-<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8">
-                    MBBS (CMC Vellore), MCh (Neurosurgery), Fellowship in Micro-Neurosurgery (Germany). A veteran with 22+ years of experience and over 2,000 successful brain and spine procedures.
-                </p>
-<div class="mt-auto">
-<button class="w-full bg-primary-container text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow">
-                        Book Now
-                    </button>
-</div>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="doctor-card group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-2 transition-all duration-300">
-<div class="relative h-72 overflow-hidden">
-<img alt="Dr. Rohan Das" class="doctor-image w-full h-full object-cover transition-transform duration-700" data-alt="Young male physician with professional attire, clean light-filled medical office, smiling warmly, high-end editorial photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCLnb2cQ4hMqd_PG0JgmcAOBe_HT8uu7S6EeZBY_faBALqnZCd6PyVTx4X2GL8MtcjRM_t9oarg3Y6k6Mw_bHJxSI6x4_m0btyF8D5gGIYSclXuWYGh2ausZsawcn10WRVyMK2S1xV4aDHFbBnTSP7YymTekWwlbgNjKd1j5BMmVKiMTHw7k3_3SoxIYzZA7--sqzpxxwDqcxLaX4lSI_c5R9HNUqFl31r_rSsbBc0at5Z_YfTp6kTWViW-jte-uLbN3-tdhmbb89M"/>
-<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary/90 to-transparent">
-<span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Senior Consultant</span>
-</div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-4 gap-4">
-<h3 class="font-headline text-2xl font-bold text-on-surface">Dr. Rohan Das</h3>
-<div class="text-right flex-shrink-0">
-<span class="inline-block px-3 py-1 bg-secondary-container text-secondary text-[11px] font-bold uppercase tracking-tight rounded-lg">Orthopedic Specialist</span>
-</div>
-</div>
-<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8">
-                    MBBS, MS (Orthopedics), MCh from University of Liverpool. 12+ years expertise in sports medicine and arthroplasty, focusing on advanced rehabilitative joint replacement techniques.
-                </p>
-<div class="mt-auto">
-<button class="w-full bg-primary-container text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow">
-                        Book Now
-                    </button>
-</div>
-</div>
-</div>
-<!-- Card 4 -->
-<div class="doctor-card group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-2 transition-all duration-300">
-<div class="relative h-72 overflow-hidden">
-<img alt="Dr. Ananya Iyer" class="doctor-image w-full h-full object-cover transition-transform duration-700" data-alt="Mature female pediatrician in a colorful doctor's coat, friendly and approachable expression, soft pastel clinic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsouJ83LJP0GfdMLrXEpnA3iQMY-tLlqPnIHotWnSeOAntWsGq0MqxuSJ-KP6Lm89ZNUyawPpXQ_DWR961kwhaReXIuTb00za2rN_dhQu4AUqkY6IIp07y4dQNWK9gphB1jArgbtmMo_I3YNCxkoi4NAjMBWAs2z3iHu2hkwaaWKb6Fry-uVv5CO1T09kvdTRxIUPKtPVRK0RFmzL1Ovzd_z_LCExqq5O3Y26iDeZfsVSzK6TQ_PDfZ3OGjjJbMPhEl9eQpvJoTdFP"/>
-<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary/90 to-transparent">
-<span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Head of Pediatrics</span>
-</div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-4 gap-4">
-<h3 class="font-headline text-2xl font-bold text-on-surface">Dr. Ananya Iyer</h3>
-<div class="text-right flex-shrink-0">
-<span class="inline-block px-3 py-1 bg-secondary-container text-secondary text-[11px] font-bold uppercase tracking-tight rounded-lg">Senior Pediatrician</span>
-</div>
-</div>
-<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8">
-                    MBBS, MD (Pediatrics) from AIIMS. 20+ years of clinical practice specializing in neonatal intensive care and behavioral pediatrics with several international research publications.
-                </p>
-<div class="mt-auto">
-<button class="w-full bg-primary-container text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow">
-                        Book Now
-                    </button>
-</div>
-</div>
-</div>
-<!-- Card 5 -->
-<div class="doctor-card group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-2 transition-all duration-300">
-<div class="relative h-72 overflow-hidden">
-<img alt="Dr. Vikram Malhotra" class="doctor-image w-full h-full object-cover transition-transform duration-700" data-alt="Experienced male dermatologist with a sharp professional look, standing in a sleek minimalist clinic setting, bright airy atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwaGtEbdAPn02lF532lgiSLmAiOdBjyMf94s0_ZWawDDnmg34Q2PulntAlVYAownaJbh3Gcl7nQqsTQdbw2SxZ4c2z9KNfsAxHQY5b_abWhHueR8Kl1UjSPpkbao8Tw1Vmm8E-QiIEnQRN87bcp1MMPCF0Fqr_qAgbE0TLhsEwC77uIUWKLcmeFPiWq8Gp486yRtElz-dNgMbaLjHbvsWRDCq2aau_A7g0UWjoPk-xi8Cx4hf-QG_ThONzYys44idhqk3GoVyonyQJ"/>
-<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary/90 to-transparent">
-<span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Senior Dermatologist</span>
-</div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-4 gap-4">
-<h3 class="font-headline text-2xl font-bold text-on-surface">Dr. Vikram Malhotra</h3>
-<div class="text-right flex-shrink-0">
-<span class="inline-block px-3 py-1 bg-secondary-container text-secondary text-[11px] font-bold uppercase tracking-tight rounded-lg">Consultant Dermatologist</span>
-</div>
-</div>
-<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8">
-                    MBBS, MD (Dermatology), Fellow of the American Academy of Dermatology. 15+ years career focusing on clinical and aesthetic medicine, laser therapies, and complex skin conditions.
-                </p>
-<div class="mt-auto">
-<button class="w-full bg-primary-container text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow">
-                        Book Now
-                    </button>
-</div>
-</div>
-</div>
-<!-- Card 6 -->
-<div class="doctor-card group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-2 transition-all duration-300">
-<div class="relative h-72 overflow-hidden">
-<img alt="Dr. Shalini Gupta" class="doctor-image w-full h-full object-cover transition-transform duration-700" data-alt="Professional female gynecologist smiling reassuringly, high-key lighting, modern medical facility background, warm aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYNyB7JA5b6CiPl3b03tJM5wAabV2vf21iOnIv17O44HgUYntSW_psTtXgblwZ5X1A1d_F2epB4HS2p8v6tKM5_opnrIIFgNqL8wxBeg3jBolTiqE37k-Z36kOPpf9GtZaB6Gbdi-h6obdqr0NIyAfMHOKDDSCoJGgoeZp1jQi592zcD9Ne-8ilv9BAeIFBTCCcQlssfe3JboMKRpN69QEKTR2UTJXg8kfeznafuH9KdQ-KCDC7dRa20hiLOR3ZCE8Dzsf4xoM9j9v"/>
-<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary/90 to-transparent">
-<span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Chief Gynecologist</span>
-</div>
-</div>
-<div class="p-8 flex flex-col flex-grow">
-<div class="flex justify-between items-start mb-4 gap-4">
-<h3 class="font-headline text-2xl font-bold text-on-surface">Dr. Shalini Gupta</h3>
-<div class="text-right flex-shrink-0">
-<span class="inline-block px-3 py-1 bg-secondary-container text-secondary text-[11px] font-bold uppercase tracking-tight rounded-lg">Senior OB/GYN</span>
-</div>
-</div>
-<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8">
-                    MBBS, MD (OBGYN), Fellow in Reproductive Medicine (UK). Over 17 years experience in high-risk pregnancy management and holisitic women's wellness programs.
-                </p>
-<div class="mt-auto">
-<button class="w-full bg-primary-container text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow">
-                        Book Now
-                    </button>
-</div>
-</div>
+<div id="doctors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="col-span-full py-16 text-center text-on-surface-variant">
+  <span class="material-symbols-outlined text-4xl animate-spin block mb-2">progress_activity</span>
+  Loading doctors...
 </div>
 </div>
 <section class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -383,4 +231,149 @@
 </div>
 </div>
 </footer>
+
+<!-- Firebase JS SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<!-- Aadityaa Hospital API client -->
+<script src="/static/js/api.js"></script>
+<script src="/static/js/nav.js"></script>
+<script>
+(async () => {
+  const params      = new URLSearchParams(window.location.search);
+  let   activeSlug  = params.get('specialty') || '';
+  let   allDoctors  = [];
+
+  const filtersEl   = document.getElementById('specialty-filters');
+  const gridEl      = document.getElementById('doctors-grid');
+  const searchInput = document.querySelector('input[type="text"]');
+
+  // ── Load specialties for filter pills ──────────────────────────────────────
+  let specialties = [];
+  try {
+    const r = await fetch('/api/specialties');
+    specialties = (await r.json()).specialties || [];
+  } catch (_) {}
+
+  renderFilters();
+
+  // ── Initial doctor load ────────────────────────────────────────────────────
+  await loadDoctors(activeSlug);
+
+  // ── Search ─────────────────────────────────────────────────────────────────
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      gridEl.querySelectorAll('.doctor-card').forEach(card => {
+        card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    });
+  }
+
+  // ── Render filter pills ─────────────────────────────────────────────────────
+  function renderFilters() {
+    const active = 'px-6 py-3 bg-primary text-white rounded-full font-headline font-bold text-sm transition-all editorial-shadow';
+    const idle   = 'px-6 py-3 bg-surface-container-highest text-secondary font-headline font-bold text-sm rounded-full hover:bg-secondary-container transition-all';
+
+    filtersEl.innerHTML = [
+      { slug: '', name: 'All Specialists' },
+      ...specialties,
+    ].map(s => `<button class="${s.slug === activeSlug ? active : idle}" data-slug="${s.slug}">${s.name}</button>`).join('');
+
+    filtersEl.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeSlug = btn.dataset.slug;
+        renderFilters();
+        loadDoctors(activeSlug);
+        const url = new URL(window.location);
+        activeSlug ? url.searchParams.set('specialty', activeSlug) : url.searchParams.delete('specialty');
+        history.pushState({}, '', url);
+        if (searchInput) searchInput.value = '';
+      });
+    });
+  }
+
+  // ── Fetch + render doctors ──────────────────────────────────────────────────
+  async function loadDoctors(slug) {
+    gridEl.innerHTML = `
+      <div class="col-span-full py-16 text-center text-on-surface-variant">
+        <span class="material-symbols-outlined text-4xl block mb-2" style="animation:spin 1s linear infinite">progress_activity</span>
+        Loading doctors…
+      </div>`;
+
+    try {
+      const url = '/api/doctors' + (slug ? `?specialty=${encodeURIComponent(slug)}` : '');
+      const data = await (await fetch(url)).json();
+      allDoctors = data.doctors || [];
+
+      if (!allDoctors.length) {
+        gridEl.innerHTML = `
+          <div class="col-span-full py-16 text-center text-on-surface-variant">
+            <span class="material-symbols-outlined text-4xl block mb-4">sentiment_dissatisfied</span>
+            No doctors found${slug ? ' for this specialty' : ''}.
+          </div>`;
+        return;
+      }
+
+      gridEl.innerHTML = allDoctors.map(doctorCard).join('');
+    } catch (_) {
+      gridEl.innerHTML = `
+        <div class="col-span-full py-12 text-center text-tertiary font-semibold">
+          Unable to load doctors. Please try again later.
+        </div>`;
+    }
+  }
+
+  // ── Card template ───────────────────────────────────────────────────────────
+  function doctorCard(d) {
+    const initials   = d.full_name.split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('');
+    const photo      = d.photo_url
+      ? `<img src="${d.photo_url}" alt="${d.full_name}" class="doctor-image w-full h-full object-cover transition-transform duration-700">`
+      : `<div class="doctor-image w-full h-full bg-primary/10 flex items-center justify-center">
+           <span class="text-6xl font-black text-primary/40">${initials}</span>
+         </div>`;
+    const specialty  = d.specialties?.name || '';
+    const badge      = d.title || specialty;
+    const expText    = d.experience_years ? `${d.experience_years}+ yrs experience` : '';
+    const feeText    = d.consultation_fee ? `₹${d.consultation_fee} consultation` : '';
+
+    return `
+      <div class="doctor-card group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-2 transition-all duration-300">
+        <div class="relative h-72 overflow-hidden">
+          ${photo}
+          <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary/90 to-transparent">
+            <span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">${badge}</span>
+          </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+          <div class="flex justify-between items-start mb-3 gap-4">
+            <h3 class="font-headline text-2xl font-bold text-on-surface">${d.full_name}</h3>
+            <div class="text-right flex-shrink-0">
+              <span class="inline-block px-3 py-1 bg-secondary-container text-secondary text-[11px] font-bold uppercase tracking-tight rounded-lg">${specialty}</span>
+            </div>
+          </div>
+          ${d.qualifications ? `<p class="text-xs font-bold text-on-surface-variant mb-2">${d.qualifications}</p>` : ''}
+          <p class="text-on-surface-variant font-body text-sm leading-relaxed mb-4 line-clamp-3">${d.bio || ''}</p>
+          <div class="flex flex-wrap gap-4 text-xs text-on-surface-variant mb-6">
+            ${expText ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span>${expText}</span>` : ''}
+            ${feeText ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">payments</span>${feeText}</span>` : ''}
+          </div>
+          <div class="mt-auto flex flex-col gap-3">
+            <a href="/book-appointment.html?doctor_id=${d.id}"
+               class="w-full bg-primary-container text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">calendar_add_on</span>
+              Book Now
+            </a>
+            <a href="/doctor.html?id=${d.id}"
+               class="w-full border border-outline-variant text-on-surface py-3 rounded-2xl font-semibold text-sm hover:bg-surface-container transition-colors flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">person</span>
+              View Profile
+            </a>
+          </div>
+        </div>
+      </div>`;
+  }
+})();
+</script>
+<style>@keyframes spin { to { transform: rotate(360deg); } }</style>
 </body></html>

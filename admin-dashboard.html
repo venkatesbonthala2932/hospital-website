@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard | Aadityaa Hospital</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "primary":"#00535b","on-primary":"#ffffff","primary-container":"#006d77","on-primary-container":"#9becf7",
+        "primary-fixed-dim":"#82d3de","secondary":"#236863","secondary-container":"#a9ece5","on-secondary-container":"#286d67",
+        "tertiary":"#911a23","on-tertiary":"#ffffff","surface":"#f5fafa","surface-container-lowest":"#ffffff",
+        "surface-container":"#eaefef","surface-container-low":"#eff5f5","surface-container-high":"#e4e9e9",
+        "surface-container-highest":"#dee3e3","on-surface":"#171d1d","on-surface-variant":"#3e494a",
+        "outline":"#6f797a","outline-variant":"#bec8ca","background":"#f5fafa"
+      },
+      fontFamily: { "headline":["Manrope"], "body":["Inter"] }
+    }}
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .editorial-shadow { box-shadow: 0 8px 30px rgba(23,29,29,0.07); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin { animation: spin 1s linear infinite; }
+  .modal-backdrop { background: rgba(23,29,29,0.5); backdrop-filter: blur(4px); }
+  .modal-box { max-height: 90vh; overflow-y: auto; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen">
+
+<!-- Toast -->
+<div id="toast" class="fixed top-5 right-5 z-[100] hidden">
+  <div id="toast-inner" class="px-4 py-3 rounded-xl text-sm font-semibold shadow-lg flex items-center gap-2 max-w-sm"></div>
+</div>
+
+<!-- Nav -->
+<header class="w-full sticky top-0 z-50 bg-surface-container-lowest border-b border-outline-variant">
+  <nav class="flex justify-between items-center max-w-7xl mx-auto px-6 h-16">
+    <a href="/" class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white"><span class="font-black">A</span></div>
+      <span class="font-bold text-primary tracking-tighter">Aadityaa Hospital</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full hidden md:block">Admin</span>
+      <button id="logout-btn" class="text-sm font-semibold text-on-surface-variant hover:text-tertiary flex items-center gap-1">
+        <span class="material-symbols-outlined text-[16px]">logout</span>Logout
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="max-w-7xl mx-auto py-10 px-6">
+
+  <div id="loading-state" class="py-20 text-center text-on-surface-variant">
+    <span class="material-symbols-outlined text-5xl spin block mb-3">progress_activity</span>
+    Loading admin dashboard…
+  </div>
+  <div id="auth-error" class="hidden py-20 text-center">
+    <span class="material-symbols-outlined text-5xl text-tertiary block mb-4">lock</span>
+    <p class="text-on-surface-variant mb-4">Admin access required.</p>
+    <a href="/login.html?next=/admin-dashboard.html" class="bg-primary text-white px-6 py-3 rounded-full font-bold text-sm hover:opacity-90 inline-block">Sign In</a>
+  </div>
+
+  <div id="dashboard" class="hidden">
+
+    <!-- Header -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white flex-shrink-0">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+        </div>
+        <div>
+          <h1 class="font-headline text-2xl font-bold">Admin Dashboard</h1>
+          <p class="text-sm text-on-surface-variant">Aadityaa Hospital — Manage appointments, surgeries &amp; doctors</p>
+        </div>
+      </div>
+      <button id="refresh-btn" class="flex items-center gap-2 text-sm font-semibold text-primary border border-primary px-4 py-2 rounded-full hover:bg-primary/5 transition-colors">
+        <span class="material-symbols-outlined text-[18px]">refresh</span> Refresh
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline text-primary" id="stat-apts">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Appointments</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline text-amber-600" id="stat-pending">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Pending</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline text-secondary" id="stat-doctors">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Doctors</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline" id="stat-surgeries">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Surgeries</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
+        <div class="text-3xl font-black font-headline text-on-surface-variant" id="stat-patients">—</div>
+        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Patients</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex flex-wrap gap-1 bg-surface-container p-1 rounded-2xl mb-8 w-fit">
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold bg-surface-container-lowest text-primary shadow-sm" data-tab="appointments">Appointments</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="surgeries">Surgeries</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="leaves">Leave Requests</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="doctors">Doctors</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="patients">Patients</button>
+    </div>
+
+    <!-- ── Appointments tab ───────────────────────────────────────────── -->
+    <div id="tab-appointments" class="tab-panel">
+      <div class="flex flex-wrap gap-3 items-center mb-4">
+        <h2 class="font-headline text-lg font-bold mr-2">All Appointments</h2>
+        <select id="apt-status-filter" class="bg-surface-container border border-outline-variant rounded-xl px-3 py-2 text-sm">
+          <option value="">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+      <div id="apts-list" class="space-y-3"></div>
+    </div>
+
+    <!-- ── Surgeries tab ─────────────────────────────────────────────── -->
+    <div id="tab-surgeries" class="tab-panel hidden">
+      <div class="flex flex-wrap gap-3 items-center justify-between mb-4">
+        <div class="flex flex-wrap gap-3 items-center">
+          <h2 class="font-headline text-lg font-bold mr-2">Surgery Schedule</h2>
+          <select id="surgery-status-filter" class="bg-surface-container border border-outline-variant rounded-xl px-3 py-2 text-sm">
+            <option value="">All</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="postponed">Postponed</option>
+          </select>
+        </div>
+        <button id="open-surgery-modal" class="bg-primary text-white px-5 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all">
+          <span class="material-symbols-outlined text-[18px]">add</span> Schedule Surgery
+        </button>
+      </div>
+      <div id="surgeries-list" class="space-y-3"></div>
+    </div>
+
+    <!-- ── Leaves tab ────────────────────────────────────────────────── -->
+    <div id="tab-leaves" class="tab-panel hidden">
+      <div class="flex flex-wrap gap-3 items-center mb-4">
+        <h2 class="font-headline text-lg font-bold mr-2">Leave Requests</h2>
+        <select id="leave-status-filter" class="bg-surface-container border border-outline-variant rounded-xl px-3 py-2 text-sm">
+          <option value="">All</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+      <div id="leaves-list" class="space-y-3"></div>
+    </div>
+
+    <!-- ── Doctors tab ───────────────────────────────────────────────── -->
+    <div id="tab-doctors" class="tab-panel hidden">
+
+      <!-- Today's Presence Board -->
+      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow mb-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-primary">today</span>
+          <h2 class="font-headline text-base font-bold">Today's Presence</h2>
+          <span id="presence-date" class="text-xs text-on-surface-variant ml-auto"></span>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="flex items-center gap-1.5 text-xs text-on-surface-variant">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>Present & Available
+          </span>
+          <span class="flex items-center gap-1.5 text-xs text-on-surface-variant">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>Has Appointments
+          </span>
+          <span class="flex items-center gap-1.5 text-xs text-on-surface-variant">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-400 inline-block"></span>On Leave
+          </span>
+          <span class="flex items-center gap-1.5 text-xs text-on-surface-variant">
+            <span class="w-2.5 h-2.5 rounded-full bg-outline-variant inline-block"></span>Inactive
+          </span>
+        </div>
+        <div id="presence-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
+      </div>
+
+      <!-- Full doctor list -->
+      <div class="flex flex-wrap gap-3 items-center justify-between mb-4">
+        <h2 class="font-headline text-lg font-bold">All Doctors</h2>
+        <button id="open-add-doctor-modal" class="bg-primary text-white px-5 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all">
+          <span class="material-symbols-outlined text-[18px]">person_add</span> Add New Doctor
+        </button>
+      </div>
+      <div id="doctors-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+
+    <!-- ── Patients tab ──────────────────────────────────────────────── -->
+    <div id="tab-patients" class="tab-panel hidden">
+      <h2 class="font-headline text-lg font-bold mb-4">All Patients</h2>
+      <div id="patients-list" class="space-y-3"></div>
+    </div>
+
+  </div><!-- /dashboard -->
+</main>
+
+<!-- ── Add Doctor Modal ───────────────────────────────────────────────── -->
+<div id="add-doctor-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+  <div class="bg-white rounded-3xl w-full max-w-lg modal-box p-8 relative">
+    <button id="close-add-doctor-modal" class="absolute top-5 right-5 text-on-surface-variant hover:text-on-surface">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <h2 class="font-headline text-xl font-bold mb-6 flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">person_add</span> Add New Doctor
+    </h2>
+    <div id="add-doctor-success" class="hidden text-center py-6">
+      <span class="material-symbols-outlined text-5xl text-secondary block mb-3">check_circle</span>
+      <p class="font-bold text-lg mb-2">Doctor account created!</p>
+      <p class="text-sm text-on-surface-variant mb-4">Share these credentials with the doctor:</p>
+      <div class="bg-surface-container rounded-2xl p-4 text-left text-sm space-y-2 mb-5">
+        <div><span class="text-on-surface-variant">Email: </span><strong id="new-doc-email"></strong></div>
+        <div><span class="text-on-surface-variant">Temp Password: </span><strong id="new-doc-pw" class="text-primary font-mono"></strong></div>
+      </div>
+      <p class="text-xs text-on-surface-variant mb-4">The doctor should log in and change their password.</p>
+      <button id="add-another-doctor" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm">Add Another</button>
+    </div>
+    <form id="add-doctor-form" class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Full Name *</label>
+          <input name="full_name" required placeholder="Dr. Firstname Lastname"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Email Address *</label>
+          <input name="email" type="email" required placeholder="doctor@aadityaa.com"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Specialty *</label>
+          <select name="specialty_id" required
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary">
+            <option value="">Select specialty…</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Title</label>
+          <input name="title" placeholder="Senior Cardiologist"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Experience (years)</label>
+          <input name="experience_years" type="number" min="0" placeholder="10"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Consultation Fee (₹)</label>
+          <input name="consultation_fee" type="number" min="0" placeholder="800"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Qualifications</label>
+          <input name="qualifications" placeholder="MBBS, MD — AIIMS"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Bio</label>
+          <textarea name="bio" rows="3" placeholder="Brief professional bio…"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+        </div>
+      </div>
+      <p id="add-doctor-error" class="text-xs text-tertiary hidden"></p>
+      <button type="submit" id="add-doctor-submit"
+        class="w-full bg-primary text-white py-3 rounded-full font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">person_add</span> Create Doctor Account
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ── Edit Doctor Modal ──────────────────────────────────────────────── -->
+<div id="edit-doctor-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+  <div class="bg-white rounded-3xl w-full max-w-xl modal-box p-8 relative">
+    <button id="close-edit-doctor-modal" class="absolute top-5 right-5 text-on-surface-variant hover:text-on-surface">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <h2 class="font-headline text-xl font-bold mb-6 flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">edit</span> Edit Doctor Profile
+    </h2>
+    <form id="edit-doctor-form" class="space-y-4">
+      <input type="hidden" id="edit-doctor-id"/>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Full Name *</label>
+          <input id="edit-full_name" name="full_name" required
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Email Address</label>
+          <input id="edit-email" name="email" type="email"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"
+            placeholder="doctor@email.com"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Specialty</label>
+          <select id="edit-specialty_id" name="specialty_id"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20">
+            <option value="">— Keep current —</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Title</label>
+          <input id="edit-title" name="title"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Experience (years)</label>
+          <input id="edit-experience_years" name="experience_years" type="number" min="0"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Consultation Fee (₹)</label>
+          <input id="edit-consultation_fee" name="consultation_fee" type="number" min="0"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Qualifications</label>
+          <input id="edit-qualifications" name="qualifications"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Bio</label>
+          <textarea id="edit-bio" name="bio" rows="3"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Profile Photo</label>
+          <div class="flex items-center gap-3">
+            <div id="edit-photo-preview" class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden flex-shrink-0">
+              <span class="material-symbols-outlined text-primary/40">person</span>
+            </div>
+            <div class="flex-1">
+              <label class="block text-xs text-on-surface-variant mb-1">Upload photo</label>
+              <input id="edit-photo-file" type="file" accept="image/*"
+                class="w-full text-sm text-on-surface-variant file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"/>
+              <p class="text-xs text-on-surface-variant mt-1">or paste a URL below</p>
+              <input id="edit-photo_url" name="photo_url" type="url" placeholder="https://example.com/photo.jpg"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-3 py-2 text-xs mt-1 focus:ring-2 focus:ring-primary/20"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="edit-doctor-error" class="text-xs text-tertiary hidden"></p>
+      <button type="submit" id="edit-doctor-submit"
+        class="w-full bg-primary text-white py-3 rounded-full font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">save</span> Save Changes
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ── Schedule Surgery Modal ─────────────────────────────────────────── -->
+<div id="surgery-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+  <div class="bg-white rounded-3xl w-full max-w-lg modal-box p-8 relative">
+    <button id="close-surgery-modal" class="absolute top-5 right-5 text-on-surface-variant hover:text-on-surface">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <h2 class="font-headline text-xl font-bold mb-6 flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">medical_services</span> Schedule Surgery
+    </h2>
+    <form id="surgery-form" class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Doctor *</label>
+          <select name="doctor_id" required
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20">
+            <option value="">Select doctor…</option>
+          </select>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Operation Type *</label>
+          <input name="operation_type" required placeholder="e.g. Appendectomy, CABG, Knee Replacement"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Patient Name *</label>
+          <input name="patient_name" required placeholder="Full name"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Patient Phone</label>
+          <input name="patient_phone" type="tel" maxlength="10" placeholder="10-digit number"
+            oninput="this.value=this.value.replace(/\D/g,'')"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Surgery Date *</label>
+          <input name="surgery_date" type="date" required data-server-min="tomorrow"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Surgery Time *</label>
+          <input name="surgery_time" type="time" required
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Duration (mins)</label>
+          <input name="duration_minutes" type="number" min="30" value="120" placeholder="120"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Operation Theater</label>
+          <input name="theater" placeholder="OT-1"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Notes</label>
+          <textarea name="notes" rows="2" placeholder="Pre-op instructions, special requirements…"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+        </div>
+      </div>
+      <p id="surgery-error" class="text-xs text-tertiary hidden"></p>
+      <button type="submit" id="surgery-submit"
+        class="w-full bg-primary text-white py-3 rounded-full font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">calendar_add_on</span> Schedule Surgery
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ── Appointment Review Modal ───────────────────────────────────────────── -->
+<div id="apt-review-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+  <div class="bg-white rounded-3xl w-full max-w-lg modal-box p-8 relative">
+    <button id="close-apt-review-modal" class="absolute top-5 right-5 text-on-surface-variant hover:text-on-surface">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <h2 class="font-headline text-xl font-bold mb-1 flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">fact_check</span> Review Appointment
+    </h2>
+    <p class="text-sm text-on-surface-variant mb-5">Check doctor's availability before confirming.</p>
+
+    <!-- Appointment summary -->
+    <div id="apt-review-summary" class="bg-surface-container rounded-2xl p-4 mb-5 text-sm space-y-1.5"></div>
+
+    <!-- Doctor's schedule that day -->
+    <div class="mb-5">
+      <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Doctor's other bookings that day</p>
+      <div id="apt-review-schedule" class="space-y-1.5 text-sm max-h-40 overflow-y-auto"></div>
+    </div>
+
+    <p id="apt-review-error" class="text-xs text-tertiary mb-3 hidden"></p>
+    <div class="flex gap-3">
+      <button id="apt-review-confirm"
+        class="flex-1 bg-secondary-container text-secondary font-bold py-2.5 rounded-full text-sm hover:opacity-80 transition-all flex items-center justify-center gap-1">
+        <span class="material-symbols-outlined text-[16px]">check_circle</span> Confirm
+      </button>
+      <button id="apt-review-reject"
+        class="flex-1 bg-red-50 text-tertiary font-bold py-2.5 rounded-full text-sm hover:opacity-80 transition-all flex items-center justify-center gap-1">
+        <span class="material-symbols-outlined text-[16px]">cancel</span> Reject
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/server-time.js"></script>
+<!-- Firebase + api.js -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="/static/js/api.js"></script>
+
+<script>
+(async () => {
+  // ── Utilities ──────────────────────────────────────────────────────────────
+  const $ = id => document.getElementById(id);
+
+  function showToast(msg, type = 'success') {
+    const t  = $('toast'), ti = $('toast-inner');
+    ti.className = `px-4 py-3 rounded-xl text-sm font-semibold shadow-lg flex items-center gap-2 max-w-sm ${
+      type === 'success' ? 'bg-secondary-container text-secondary'
+      : type === 'error' ? 'bg-red-50 text-tertiary'
+      : 'bg-surface-container text-on-surface'}`;
+    ti.innerHTML = `<span class="material-symbols-outlined text-[18px]">${type==='success'?'check_circle':type==='error'?'error':'info'}</span>${msg}`;
+    t.classList.remove('hidden');
+    setTimeout(() => t.classList.add('hidden'), 3500);
+  }
+
+  function showAuthError() {
+    $('loading-state').classList.add('hidden');
+    $('auth-error').classList.remove('hidden');
+  }
+
+  const STATUS_STYLE = {
+    pending:   'bg-amber-100 text-amber-700',
+    confirmed: 'bg-secondary-container text-secondary',
+    completed: 'bg-surface-container-high text-on-surface-variant',
+    cancelled: 'bg-red-50 text-tertiary',
+    rejected:  'bg-red-50 text-tertiary',
+  };
+  const LEAVE_STYLE = {
+    pending:  'bg-amber-100 text-amber-700',
+    approved: 'bg-secondary-container text-secondary',
+    rejected: 'bg-red-50 text-tertiary',
+  };
+  const SURGERY_STYLE = {
+    scheduled:  'bg-amber-100 text-amber-700',
+    completed:  'bg-secondary-container text-secondary',
+    cancelled:  'bg-red-50 text-tertiary',
+    postponed:  'bg-surface-container-high text-on-surface-variant',
+  };
+
+  // ── Auth ───────────────────────────────────────────────────────────────────
+  const auth = _initFirebase();
+  if (!auth) { showAuthError(); return; }
+
+  auth.onAuthStateChanged(async user => {
+    if (!user) { showAuthError(); return; }
+
+    let token = await user.getIdToken();
+    let role  = 'patient';
+    try {
+      const res  = await fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } });
+      const json = await res.json();
+      role = json.user?.role || 'patient';
+    } catch(_) {}
+
+    if (role !== 'admin') { window.location.href = '/login.html?next=/admin-dashboard.html'; return; }
+
+    $('loading-state').classList.add('hidden');
+    $('dashboard').classList.remove('hidden');
+
+    async function authFetch(url, opts = {}) {
+      token = await user.getIdToken();
+      return fetch(url, {
+        ...opts,
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}`, ...opts.headers }
+      });
+    }
+
+    $('logout-btn').addEventListener('click', () => Auth.logout());
+
+    // ── Data state ─────────────────────────────────────────────────────────
+    let allApts = [], allLeaves = [], allDoctors = [], allPatients = [];
+    let allSurgeries = [], specialties = [];
+    let _editPhotoDataUrl = null;
+
+    async function loadAll() {
+      $('refresh-btn').querySelector('.material-symbols-outlined').classList.add('spin');
+      try {
+        const [a, l, d, p, s, sp] = await Promise.all([
+          authFetch('/api/admin/appointments').then(r => r.json()).catch(() => ({})),
+          authFetch('/api/admin/leaves').then(r => r.json()).catch(() => ({})),
+          authFetch('/api/admin/doctors').then(r => r.json()).catch(() => ({})),
+          authFetch('/api/admin/patients').then(r => r.json()).catch(() => ({})),
+          authFetch('/api/admin/surgeries').then(r => r.json()).catch(() => ({})),
+          fetch('/api/specialties').then(r => r.json()).catch(() => ({})),
+        ]);
+
+        allApts      = a?.appointments  || [];
+        allLeaves    = l?.leaves        || [];
+        allDoctors   = d?.doctors       || [];
+        allPatients  = p?.patients      || [];
+        allSurgeries = s?.surgeries     || [];
+        specialties  = sp?.specialties  || [];
+
+        // Stats
+        $('stat-apts').textContent      = allApts.length;
+        $('stat-pending').textContent   = allApts.filter(x => x.status === 'pending').length;
+        $('stat-doctors').textContent   = allDoctors.filter(x => x.is_active !== false).length;
+        $('stat-surgeries').textContent = allSurgeries.filter(x => x.status === 'scheduled').length;
+        $('stat-patients').textContent  = allPatients.length;
+
+        // Populate doctor dropdowns
+        populateDoctorDropdowns();
+        populateSpecialtyDropdown();
+
+        renderApts(allApts);
+        renderSurgeries(allSurgeries);
+        renderLeaves(allLeaves);
+        renderDoctors(allDoctors);
+        renderPatients(allPatients);
+      } finally {
+        $('refresh-btn').querySelector('.material-symbols-outlined').classList.remove('spin');
+      }
+    }
+
+    await loadAll();
+    $('refresh-btn').addEventListener('click', loadAll);
+
+    // ── Tab switching ──────────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.className = 'tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant';
+        });
+        btn.className = 'tab-btn px-5 py-2.5 rounded-xl text-sm font-bold bg-surface-container-lowest text-primary shadow-sm';
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+        $(`tab-${btn.dataset.tab}`)?.classList.remove('hidden');
+      });
+    });
+
+    // ── Filters ────────────────────────────────────────────────────────────
+    $('apt-status-filter').addEventListener('change', e => {
+      const s = e.target.value;
+      renderApts(s ? allApts.filter(a => a.status === s) : allApts);
+    });
+    $('leave-status-filter').addEventListener('change', e => {
+      const s = e.target.value;
+      renderLeaves(s ? allLeaves.filter(l => l.status === s) : allLeaves);
+    });
+    $('surgery-status-filter').addEventListener('change', e => {
+      const s = e.target.value;
+      renderSurgeries(s ? allSurgeries.filter(x => x.status === s) : allSurgeries);
+    });
+
+    // ── RENDER: Appointments ───────────────────────────────────────────────
+    let _reviewAptId = null;
+
+    $('close-apt-review-modal').addEventListener('click', () => $('apt-review-modal').classList.add('hidden'));
+
+    async function openReviewModal(aptId) {
+      const apt = allApts.find(a => a.id === aptId);
+      if (!apt) return;
+      _reviewAptId = aptId;
+      const errEl = $('apt-review-error');
+      errEl.classList.add('hidden');
+
+      // Summary
+      const dateStr = new Date(apt.appointment_date + 'T00:00:00').toLocaleDateString('en-IN',
+        { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      const doctorN = apt.doctors?.full_name || '—';
+      const spec    = apt.doctors?.specialties?.name || '';
+      $('apt-review-summary').innerHTML = `
+        <div class="flex justify-between"><span class="text-on-surface-variant">Patient</span><strong>${apt.patient_name||'—'}</strong></div>
+        ${apt.patient_phone ? `<div class="flex justify-between"><span class="text-on-surface-variant">Phone</span><span>${apt.patient_phone}</span></div>` : ''}
+        ${apt.patient_email ? `<div class="flex justify-between"><span class="text-on-surface-variant">Email</span><span>${apt.patient_email}</span></div>` : ''}
+        <div class="flex justify-between"><span class="text-on-surface-variant">Doctor</span><strong>${doctorN}${spec?' · '+spec:''}</strong></div>
+        <div class="flex justify-between"><span class="text-on-surface-variant">Date</span><strong class="text-primary">${dateStr}</strong></div>
+        <div class="flex justify-between"><span class="text-on-surface-variant">Time</span><strong class="text-primary">${(apt.appointment_time||'').slice(0,5)}</strong></div>
+        ${apt.notes ? `<div class="flex justify-between"><span class="text-on-surface-variant">Notes</span><span class="italic">"${apt.notes}"</span></div>` : ''}`;
+
+      // Doctor's other bookings that day
+      const schedEl = $('apt-review-schedule');
+      schedEl.innerHTML = '<p class="text-xs text-on-surface-variant italic">Loading schedule…</p>';
+      $('apt-review-modal').classList.remove('hidden');
+
+      try {
+        const doctor = apt.doctors;
+        if (doctor?.id || apt.doctor_id) {
+          const did = doctor?.id || apt.doctor_id;
+          const res = await authFetch(
+            `/api/admin/appointments?doctor_id=${did}&date_from=${apt.appointment_date}&date_to=${apt.appointment_date}`
+          );
+          const data = await res.json();
+          const others = (data.appointments || []).filter(x => x.id !== aptId && x.status !== 'cancelled' && x.status !== 'rejected');
+          if (!others.length) {
+            schedEl.innerHTML = '<p class="text-xs text-on-surface-variant italic">No other bookings on this day — doctor is free.</p>';
+          } else {
+            schedEl.innerHTML = others.map(o => {
+              const b = STATUS_STYLE[o.status] || 'bg-surface-container text-on-surface-variant';
+              return `<div class="flex justify-between items-center bg-surface-container rounded-xl px-3 py-2">
+                <span class="font-semibold text-on-surface">${(o.appointment_time||'').slice(0,5)}</span>
+                <span class="text-on-surface-variant truncate mx-3">${o.patient_name||'Patient'}</span>
+                <span class="px-2 py-0.5 rounded-full text-xs font-bold capitalize ${b}">${o.status}</span>
+              </div>`;
+            }).join('');
+          }
+        } else {
+          schedEl.innerHTML = '<p class="text-xs text-on-surface-variant italic">Doctor info unavailable.</p>';
+        }
+      } catch(_) {
+        schedEl.innerHTML = '<p class="text-xs text-tertiary italic">Could not load doctor schedule.</p>';
+      }
+    }
+
+    async function doAptAction(aptId, action) {
+      const confirmBtn = $('apt-review-confirm');
+      const rejectBtn  = $('apt-review-reject');
+      const errEl      = $('apt-review-error');
+      confirmBtn.disabled = rejectBtn.disabled = true;
+      errEl.classList.add('hidden');
+      try {
+        const res = await authFetch(`/api/admin/appointments/${aptId}/${action}`, { method: 'POST' });
+        if (!res.ok) throw new Error((await res.json()).error);
+        const apt = allApts.find(a => a.id === aptId);
+        if (apt) apt.status = action === 'confirm' ? 'confirmed' : 'rejected';
+        $('stat-pending').textContent = allApts.filter(a => a.status === 'pending').length;
+        $('apt-review-modal').classList.add('hidden');
+        showToast(`Appointment ${action === 'confirm' ? 'confirmed' : 'rejected'}.`);
+        const filterVal = document.getElementById('apt-status-filter').value;
+        renderApts(filterVal ? allApts.filter(a => a.status === filterVal) : allApts);
+      } catch(e) {
+        errEl.textContent = e.message;
+        errEl.classList.remove('hidden');
+      } finally {
+        confirmBtn.disabled = rejectBtn.disabled = false;
+      }
+    }
+
+    $('apt-review-confirm').addEventListener('click', () => _reviewAptId && doAptAction(_reviewAptId, 'confirm'));
+    $('apt-review-reject').addEventListener('click',  () => _reviewAptId && doAptAction(_reviewAptId, 'reject'));
+
+    function renderApts(apts) {
+      const el = $('apts-list');
+      if (!apts.length) {
+        el.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">No appointments found.</p>';
+        return;
+      }
+      el.innerHTML = apts.map(a => {
+        const dateStr = new Date(a.appointment_date + 'T00:00:00').toLocaleDateString('en-IN',
+          { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+        const badge   = STATUS_STYLE[a.status] || 'bg-surface-container text-on-surface-variant';
+        const canAct  = a.status === 'pending';
+        const doctorN = a.doctors?.full_name || '—';
+        return `<div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow">
+          <div class="flex flex-wrap justify-between items-start gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h3 class="font-bold text-on-surface">${a.patient_name || 'Patient'}</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${badge}">${a.status}</span>
+              </div>
+              <div class="flex flex-wrap gap-3 text-xs text-on-surface-variant">
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">stethoscope</span> ${doctorN}</span>
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">calendar_today</span> ${dateStr}</span>
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">schedule</span> ${(a.appointment_time||'').slice(0,5)}</span>
+                ${a.patient_phone ? `<span><span class="material-symbols-outlined text-[13px] align-text-top">call</span> ${a.patient_phone}</span>` : ''}
+              </div>
+              ${a.notes ? `<p class="text-xs text-on-surface-variant mt-1 italic">"${a.notes}"</p>` : ''}
+            </div>
+            ${canAct ? `<div class="flex gap-2 flex-shrink-0">
+              <button class="apt-review-btn text-xs font-bold bg-secondary-container text-secondary px-3 py-1.5 rounded-full hover:opacity-80 flex items-center gap-1"
+                data-id="${a.id}">
+                <span class="material-symbols-outlined text-[13px]">fact_check</span> Review
+              </button>
+            </div>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+
+      el.querySelectorAll('.apt-review-btn').forEach(btn => {
+        btn.addEventListener('click', () => openReviewModal(btn.dataset.id));
+      });
+    }
+
+    // ── RENDER: Surgeries ──────────────────────────────────────────────────
+    function renderSurgeries(surg) {
+      const el = $('surgeries-list');
+      if (!surg.length) {
+        el.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">No surgeries scheduled. Click "Schedule Surgery" to add one.</p>';
+        return;
+      }
+      el.innerHTML = surg.map(s => {
+        const dateStr = new Date(s.surgery_date + 'T00:00:00').toLocaleDateString('en-IN',
+          { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+        const badge   = SURGERY_STYLE[s.status] || 'bg-surface-container text-on-surface-variant';
+        const docName = s.doctors?.full_name || '—';
+        return `<div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow">
+          <div class="flex flex-wrap justify-between items-start gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-3 mb-1">
+                <h3 class="font-bold text-on-surface">${s.operation_type}</h3>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${badge}">${s.status}</span>
+              </div>
+              <div class="flex flex-wrap gap-3 text-xs text-on-surface-variant">
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">person</span> ${s.patient_name}</span>
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">stethoscope</span> ${docName}</span>
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">calendar_today</span> ${dateStr}</span>
+                <span><span class="material-symbols-outlined text-[13px] align-text-top">schedule</span> ${(s.surgery_time||'').slice(0,5)}</span>
+                ${s.theater ? `<span><span class="material-symbols-outlined text-[13px] align-text-top">door_open</span> ${s.theater}</span>` : ''}
+                ${s.duration_minutes ? `<span><span class="material-symbols-outlined text-[13px] align-text-top">timer</span> ${s.duration_minutes} min</span>` : ''}
+              </div>
+              ${s.notes ? `<p class="text-xs text-on-surface-variant mt-1 italic">"${s.notes}"</p>` : ''}
+            </div>
+            ${s.status === 'scheduled' ? `<div class="flex gap-2 flex-shrink-0 flex-wrap">
+              <button class="surg-action text-xs font-bold bg-secondary-container text-secondary px-3 py-1.5 rounded-full hover:opacity-80"
+                data-id="${s.id}" data-status="completed">Mark Done</button>
+              <button class="surg-action text-xs font-bold bg-surface-container-high text-on-surface-variant px-3 py-1.5 rounded-full hover:opacity-80"
+                data-id="${s.id}" data-status="postponed">Postpone</button>
+              <button class="surg-action text-xs font-bold bg-red-50 text-tertiary px-3 py-1.5 rounded-full hover:opacity-80"
+                data-id="${s.id}" data-status="cancelled">Cancel</button>
+            </div>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+
+      el.querySelectorAll('.surg-action').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          btn.disabled = true;
+          const { id, status } = btn.dataset;
+          try {
+            const res = await authFetch(`/api/admin/surgeries/${id}/status`, {
+              method: 'PUT', body: JSON.stringify({ status })
+            });
+            if (!res.ok) throw new Error((await res.json()).error);
+            const sg = allSurgeries.find(x => x.id === id);
+            if (sg) sg.status = status;
+            $('stat-surgeries').textContent = allSurgeries.filter(x => x.status === 'scheduled').length;
+            showToast('Surgery status updated.');
+            renderSurgeries(allSurgeries);
+          } catch(e) { showToast(e.message, 'error'); btn.disabled = false; }
+        });
+      });
+    }
+
+    // ── RENDER: Leaves ─────────────────────────────────────────────────────
+    function renderLeaves(leaves) {
+      const el = $('leaves-list');
+      if (!leaves.length) {
+        el.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">No leave requests.</p>';
+        return;
+      }
+      el.innerHTML = leaves.map(l => {
+        const badge   = LEAVE_STYLE[l.status] || 'bg-surface-container text-on-surface-variant';
+        const canAct  = l.status === 'pending';
+        const dateStr = new Date((l.leave_date || l.date) + 'T00:00:00').toLocaleDateString('en-IN',
+          { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+        const docName = l.doctors?.full_name || '—';
+        return `<div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow flex flex-wrap justify-between items-center gap-3">
+          <div>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="font-bold">${docName}</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${badge}">${l.status}</span>
+            </div>
+            <div class="flex flex-wrap gap-3 text-xs text-on-surface-variant">
+              <span><span class="material-symbols-outlined text-[13px] align-text-top">calendar_today</span> ${dateStr}</span>
+              ${l.leave_type === 'partial' && l.start_time && l.end_time
+                ? `<span class="bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full font-semibold">
+                    <span class="material-symbols-outlined text-[12px] align-text-top">schedule</span>
+                    Partial: ${(l.start_time||'').slice(0,5)} – ${(l.end_time||'').slice(0,5)}
+                   </span>`
+                : `<span class="bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded-full font-semibold">Full Day</span>`}
+              ${l.reason ? `<span class="italic">"${l.reason}"</span>` : ''}
+            </div>
+          </div>
+          ${canAct ? `<div class="flex gap-2">
+            <button class="leave-action text-xs font-bold bg-secondary-container text-secondary px-3 py-1.5 rounded-full hover:opacity-80"
+              data-id="${l.id}" data-action="approve">Approve</button>
+            <button class="leave-action text-xs font-bold bg-red-50 text-tertiary px-3 py-1.5 rounded-full hover:opacity-80"
+              data-id="${l.id}" data-action="reject">Reject</button>
+          </div>` : ''}
+        </div>`;
+      }).join('');
+
+      el.querySelectorAll('.leave-action').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          btn.disabled = true;
+          const { id, action } = btn.dataset;
+          try {
+            const res = await authFetch(`/api/admin/leaves/${id}/${action}`, { method: 'POST' });
+            if (!res.ok) throw new Error((await res.json()).error);
+            const lv = allLeaves.find(l => l.id === id);
+            if (lv) lv.status = action === 'approve' ? 'approved' : 'rejected';
+            showToast(`Leave ${action}d.`);
+            renderLeaves(allLeaves);
+          } catch(e) { showToast(e.message, 'error'); btn.disabled = false; }
+        });
+      });
+    }
+
+    // ── RENDER: Doctors ────────────────────────────────────────────────────
+    function renderDoctors(doctors) {
+      // ── Presence Board ──────────────────────────────────────────────────
+      const todayStr  = new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' });
+      const todayISO  = new Date().toISOString().slice(0, 10);
+      const jsDay     = new Date().getDay(); // 0=Sun
+      $('presence-date').textContent = todayStr;
+
+      // Approved leaves for today
+      const onLeaveToday = new Set(
+        allLeaves
+          .filter(l => l.status === 'approved' && (l.leave_date || l.date) === todayISO && l.leave_type !== 'partial')
+          .map(l => l.doctor_id)
+      );
+
+      // Doctors with appointments today
+      const hasAptsToday = new Set(
+        allApts
+          .filter(a => a.appointment_date === todayISO && a.status !== 'cancelled' && a.status !== 'rejected')
+          .map(a => a.doctor_id || a.doctors?.id)
+          .filter(Boolean)
+      );
+
+      const presenceEl = $('presence-board');
+      if (!doctors.length) {
+        presenceEl.innerHTML = '<p class="col-span-full text-xs text-on-surface-variant">No doctors.</p>';
+      } else {
+        // Sunday = no doctors working
+        const isSunday = jsDay === 0;
+        presenceEl.innerHTML = doctors.map(d => {
+          const initials = d.full_name.split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('');
+          const active   = d.is_active !== false;
+          let dotCls, statusLabel, cardBorder;
+          if (!active) {
+            dotCls = 'bg-outline-variant'; statusLabel = 'Inactive'; cardBorder = 'border border-outline-variant/30';
+          } else if (onLeaveToday.has(d.id)) {
+            dotCls = 'bg-red-400'; statusLabel = 'On Leave'; cardBorder = 'border border-red-200 bg-red-50/50';
+          } else if (isSunday) {
+            dotCls = 'bg-outline-variant'; statusLabel = 'Day Off'; cardBorder = 'border border-outline-variant/30';
+          } else if (hasAptsToday.has(d.id)) {
+            dotCls = 'bg-amber-400'; statusLabel = 'Busy'; cardBorder = 'border border-amber-200 bg-amber-50/30';
+          } else {
+            dotCls = 'bg-emerald-500'; statusLabel = 'Available'; cardBorder = 'border border-emerald-200 bg-emerald-50/30';
+          }
+          const todayAptCount = allApts.filter(a =>
+            a.appointment_date === todayISO &&
+            a.status !== 'cancelled' && a.status !== 'rejected' &&
+            (a.doctor_id === d.id || a.doctors?.id === d.id)
+          ).length;
+
+          return `<div class="rounded-2xl p-3 ${cardBorder} flex flex-col items-center text-center gap-1.5">
+            <div class="relative">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                ${d.photo_url
+                  ? `<img src="${d.photo_url}" class="w-full h-full object-cover">`
+                  : `<span class="font-black text-primary/60 text-sm">${initials}</span>`}
+              </div>
+              <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 ${dotCls} rounded-full border-2 border-white"></span>
+            </div>
+            <p class="text-xs font-bold leading-tight">${d.full_name.replace(/^Dr\.?\s*/i,'')}</p>
+            <p class="text-[10px] text-on-surface-variant leading-tight">${d.specialties?.name || ''}</p>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full
+              ${dotCls === 'bg-emerald-500' ? 'bg-emerald-100 text-emerald-700'
+              : dotCls === 'bg-amber-400'   ? 'bg-amber-100 text-amber-700'
+              : dotCls === 'bg-red-400'     ? 'bg-red-100 text-red-700'
+              : 'bg-surface-container text-on-surface-variant'}">${statusLabel}</span>
+            ${todayAptCount > 0
+              ? `<span class="text-[10px] text-on-surface-variant">${todayAptCount} appt${todayAptCount>1?'s':''} today</span>`
+              : ''}
+          </div>`;
+        }).join('');
+      }
+
+      // ── Full Doctor List ───────────────────────────────────────────────
+      const el = $('doctors-list');
+      if (!doctors.length) {
+        el.innerHTML = '<p class="col-span-full text-sm text-on-surface-variant text-center py-8">No doctors found.</p>';
+        return;
+      }
+      el.innerHTML = doctors.map(d => {
+        const initials = d.full_name.split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('');
+        const active   = d.is_active !== false;
+        const onLeave  = onLeaveToday.has(d.id);
+        return `<div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow flex gap-3 items-start">
+          <div class="relative w-10 h-10 flex-shrink-0">
+            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+              ${d.photo_url
+                ? `<img src="${d.photo_url}" class="w-full h-full object-cover">`
+                : `<span class="font-black text-primary/60 text-xs">${initials}</span>`}
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white
+              ${!active ? 'bg-outline-variant' : onLeave ? 'bg-red-400' : 'bg-emerald-500'}"></span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-sm truncate">${d.full_name}</p>
+            <p class="text-xs text-on-surface-variant">${d.specialties?.name || '—'}${d.title ? ' · ' + d.title : ''}</p>
+            <div class="flex flex-wrap items-center gap-2 mt-1">
+              <span class="text-xs ${active ? (onLeave ? 'text-red-600' : 'text-secondary') : 'text-tertiary'} font-semibold">
+                ${!active ? 'Inactive' : onLeave ? 'On Leave Today' : 'Active'}
+              </span>
+              ${d.experience_years ? `<span class="text-xs text-on-surface-variant">· ${d.experience_years} yrs</span>` : ''}
+              ${d.consultation_fee ? `<span class="text-xs text-on-surface-variant">· ₹${d.consultation_fee}</span>` : ''}
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 flex-shrink-0">
+            <a href="/doctor.html?id=${d.id}" target="_blank"
+              class="text-xs text-primary font-semibold hover:underline flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>Profile
+            </a>
+            <button class="doc-edit text-xs font-semibold text-primary hover:text-primary/80"
+              data-doc='${JSON.stringify({id:d.id,full_name:d.full_name,email:(d.profiles?.email||""),title:d.title||"",qualifications:d.qualifications||"",experience_years:d.experience_years||"",consultation_fee:d.consultation_fee||"",bio:d.bio||"",photo_url:d.photo_url||"",specialty_id:d.specialty_id||""})}'>Edit</button>
+            <button class="doc-toggle text-xs font-semibold ${active ? 'text-amber-600 hover:text-amber-800' : 'text-secondary'}"
+              data-id="${d.id}" data-active="${active}">${active ? 'Deactivate' : 'Activate'}</button>
+            <button class="doc-delete text-xs font-semibold text-tertiary hover:text-red-800"
+              data-id="${d.id}" data-name="${d.full_name}">Delete</button>
+          </div>
+        </div>`;
+      }).join('');
+
+      el.querySelectorAll('.doc-edit').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const d = JSON.parse(btn.dataset.doc);
+          $('edit-doctor-id').value           = d.id;
+          $('edit-full_name').value           = d.full_name || '';
+          $('edit-email').value               = d.email || '';
+          $('edit-title').value               = d.title || '';
+          $('edit-qualifications').value      = d.qualifications || '';
+          $('edit-experience_years').value    = d.experience_years || '';
+          $('edit-consultation_fee').value    = d.consultation_fee || '';
+          $('edit-bio').value                 = d.bio || '';
+          $('edit-photo_url').value           = d.photo_url || '';
+          $('edit-doctor-error').classList.add('hidden');
+          $('edit-photo-file').value = '';
+          _editPhotoDataUrl = null;
+          // Preview existing photo
+          const prev = $('edit-photo-preview');
+          if (d.photo_url) {
+            prev.innerHTML = `<img src="${d.photo_url}" class="w-full h-full object-cover">`;
+          } else {
+            const initials = d.full_name.split(' ').filter(Boolean).map(n=>n[0]).slice(0,2).join('');
+            prev.innerHTML = `<span class="font-black text-primary/60 text-sm">${initials}</span>`;
+          }
+          // Set specialty dropdown
+          const sel = $('edit-specialty_id');
+          sel.innerHTML = '<option value="">— Keep current —</option>';
+          specialties.forEach(sp => {
+            const opt = document.createElement('option');
+            opt.value = sp.id; opt.textContent = sp.name;
+            if (sp.id === d.specialty_id) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          $('edit-doctor-modal').classList.remove('hidden');
+        });
+      });
+
+      el.querySelectorAll('.doc-toggle').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const { id, active } = btn.dataset;
+          const newActive = active === 'true' ? false : true;
+          try {
+            const res = await authFetch(`/api/admin/doctors/${id}`, {
+              method: 'PUT', body: JSON.stringify({ is_active: newActive })
+            });
+            if (!res.ok) throw new Error((await res.json()).error);
+            const doc = allDoctors.find(d => d.id === id);
+            if (doc) doc.is_active = newActive;
+            $('stat-doctors').textContent = allDoctors.filter(x => x.is_active !== false).length;
+            showToast(`Doctor ${newActive ? 'activated' : 'deactivated'}.`);
+            renderDoctors(allDoctors);
+          } catch(e) { showToast(e.message, 'error'); }
+        });
+      });
+
+      el.querySelectorAll('.doc-delete').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const { id, name } = btn.dataset;
+          if (!confirm(`Permanently delete ${name}? This cannot be undone.`)) return;
+          try {
+            const res = await authFetch(`/api/admin/doctors/${id}?hard=true`, { method: 'DELETE' });
+            if (!res.ok) throw new Error((await res.json()).error);
+            allDoctors = allDoctors.filter(d => d.id !== id);
+            $('stat-doctors').textContent = allDoctors.filter(x => x.is_active !== false).length;
+            showToast(`${name} deleted.`);
+            renderDoctors(allDoctors);
+          } catch(e) { showToast(e.message, 'error'); }
+        });
+      });
+    }
+
+    // ── RENDER: Patients ───────────────────────────────────────────────────
+    function renderPatients(patients) {
+      const el = $('patients-list');
+      if (!patients.length) {
+        el.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">No patients found.</p>';
+        return;
+      }
+      el.innerHTML = patients.map(p => `
+        <div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow flex flex-wrap justify-between items-center gap-2">
+          <div>
+            <p class="font-bold text-sm">${p.patient_name || '—'}</p>
+            <p class="text-xs text-on-surface-variant">${p.patient_email || ''}</p>
+          </div>
+          ${p.patient_phone ? `<p class="text-xs text-on-surface-variant">${p.patient_phone}</p>` : ''}
+        </div>`).join('');
+    }
+
+    // ── Dropdown helpers ───────────────────────────────────────────────────
+    function populateDoctorDropdowns() {
+      const selects = document.querySelectorAll('select[name="doctor_id"]');
+      const options = allDoctors.filter(d => d.is_active !== false)
+        .map(d => `<option value="${d.id}">${d.full_name} — ${d.specialties?.name || ''}</option>`).join('');
+      selects.forEach(s => {
+        const first = s.options[0];
+        s.innerHTML = '';
+        s.appendChild(first.cloneNode(true));
+        s.insertAdjacentHTML('beforeend', options);
+      });
+    }
+
+    function populateSpecialtyDropdown() {
+      const sel = document.querySelector('#add-doctor-form select[name="specialty_id"]');
+      if (!sel) return;
+      const first = sel.options[0];
+      sel.innerHTML = '';
+      sel.appendChild(first.cloneNode(true));
+      specialties.forEach(sp => {
+        sel.insertAdjacentHTML('beforeend', `<option value="${sp.id}">${sp.name}</option>`);
+      });
+    }
+
+    // ── Add Doctor Modal ───────────────────────────────────────────────────
+    $('open-add-doctor-modal').addEventListener('click', () => {
+      $('add-doctor-form').classList.remove('hidden');
+      $('add-doctor-success').classList.add('hidden');
+      $('add-doctor-error').classList.add('hidden');
+      $('add-doctor-form').reset();
+      $('add-doctor-modal').classList.remove('hidden');
+    });
+    $('close-add-doctor-modal').addEventListener('click', () => $('add-doctor-modal').classList.add('hidden'));
+    $('add-another-doctor').addEventListener('click', () => {
+      $('add-doctor-success').classList.add('hidden');
+      $('add-doctor-form').classList.remove('hidden');
+      $('add-doctor-form').reset();
+    });
+
+    $('add-doctor-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = $('add-doctor-submit');
+      const err = $('add-doctor-error');
+      err.classList.add('hidden');
+      btn.disabled = true;
+      btn.textContent = 'Creating…';
+      const fd = new FormData(e.target);
+      const body = Object.fromEntries(fd.entries());
+      try {
+        const res  = await authFetch('/api/admin/doctors', { method: 'POST', body: JSON.stringify(body) });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error);
+        // Show credentials
+        $('new-doc-email').textContent = json.login_email;
+        $('new-doc-pw').textContent    = json.temp_password;
+        $('add-doctor-form').classList.add('hidden');
+        $('add-doctor-success').classList.remove('hidden');
+        // Add to list
+        allDoctors.unshift(json.doctor);
+        $('stat-doctors').textContent = allDoctors.filter(x => x.is_active !== false).length;
+        renderDoctors(allDoctors);
+        populateDoctorDropdowns();
+      } catch(ex) {
+        err.textContent = ex.message;
+        err.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">person_add</span> Create Doctor Account';
+      }
+    });
+
+    // ── Schedule Surgery Modal ─────────────────────────────────────────────
+    $('open-surgery-modal').addEventListener('click', () => {
+      $('surgery-error').classList.add('hidden');
+      $('surgery-form').reset();
+      // default date = tomorrow
+      const tom = new Date(); tom.setDate(tom.getDate() + 1);
+      $('surgery-form').querySelector('[name="surgery_date"]').value =
+        tom.toISOString().split('T')[0];
+      $('surgery-modal').classList.remove('hidden');
+    });
+    $('close-surgery-modal').addEventListener('click', () => $('surgery-modal').classList.add('hidden'));
+
+    $('surgery-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = $('surgery-submit');
+      const err = $('surgery-error');
+      err.classList.add('hidden');
+      btn.disabled = true;
+      btn.textContent = 'Scheduling…';
+      const fd   = new FormData(e.target);
+      const body = Object.fromEntries(fd.entries());
+      try {
+        const res  = await authFetch('/api/admin/surgeries', { method: 'POST', body: JSON.stringify(body) });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error);
+        $('surgery-modal').classList.add('hidden');
+        allSurgeries.unshift(json.surgery);
+        $('stat-surgeries').textContent = allSurgeries.filter(x => x.status === 'scheduled').length;
+        showToast('Surgery scheduled successfully!');
+        // Switch to surgeries tab
+        document.querySelector('[data-tab="surgeries"]').click();
+        renderSurgeries(allSurgeries);
+      } catch(ex) {
+        err.textContent = ex.message;
+        err.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">calendar_add_on</span> Schedule Surgery';
+      }
+    });
+
+    // ── EDIT DOCTOR MODAL ──────────────────────────────────────────────────
+    $('close-edit-doctor-modal').addEventListener('click', () => {
+      $('edit-doctor-modal').classList.add('hidden');
+    });
+    $('edit-doctor-modal').addEventListener('click', e => {
+      if (e.target === $('edit-doctor-modal')) $('edit-doctor-modal').classList.add('hidden');
+    });
+
+    // Photo file → base64 preview & store for upload
+    $('edit-photo-file').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        _editPhotoDataUrl = ev.target.result;
+        const prev = $('edit-photo-preview');
+        prev.innerHTML = `<img src="${_editPhotoDataUrl}" class="w-full h-full object-cover"/>`;
+        $('edit-photo_url').value = '';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    $('edit-doctor-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = $('edit-doctor-id').value;
+      const errEl = $('edit-doctor-error');
+      const submitBtn = $('edit-doctor-submit');
+      errEl.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Saving…';
+
+      try {
+        // Determine photo_url: file upload takes priority, then URL field
+        let photo_url = $('edit-photo_url').value.trim() || undefined;
+        if (_editPhotoDataUrl) photo_url = _editPhotoDataUrl;
+
+        const body = {
+          full_name:        $('edit-full_name').value.trim(),
+          title:            $('edit-title').value.trim(),
+          qualifications:   $('edit-qualifications').value.trim(),
+          experience_years: parseInt($('edit-experience_years').value) || 0,
+          consultation_fee: parseFloat($('edit-consultation_fee').value) || 0,
+          bio:              $('edit-bio').value.trim(),
+        };
+        const emailVal = $('edit-email').value.trim().toLowerCase();
+        if (emailVal) body.email = emailVal;
+        const specVal = $('edit-specialty_id').value;
+        if (specVal) body.specialty_id = specVal;
+        if (photo_url) body.photo_url = photo_url;
+
+        const res = await authFetch(`/api/admin/doctors/${id}`, {
+          method: 'PUT',
+          body: JSON.stringify(body)
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Update failed.');
+
+        // Update local cache
+        const idx = allDoctors.findIndex(d => d.id === id);
+        if (idx !== -1) allDoctors[idx] = { ...allDoctors[idx], ...(json.doctor || json) };
+
+        _editPhotoDataUrl = null;
+        $('edit-photo-file').value = '';
+        $('edit-doctor-modal').classList.add('hidden');
+        renderDoctors(allDoctors);
+        showToast('Doctor profile updated.');
+      } catch(err) {
+        errEl.textContent = err.message;
+        errEl.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Save Changes';
+      }
+    });
+
+    // Close modals on backdrop click
+    [$('add-doctor-modal'), $('surgery-modal')].forEach(modal => {
+      modal.addEventListener('click', e => { if (e.target === modal) modal.classList.add('hidden'); });
+    });
+
+  }); // end onAuthStateChanged
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insurance Policies | Aadityaa Hospital</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        "primary":"#00535b","on-primary":"#ffffff","primary-container":"#006d77",
+        "secondary":"#236863","secondary-container":"#a9ece5","on-secondary-container":"#286d67",
+        "tertiary":"#911a23","on-tertiary":"#ffffff",
+        "surface":"#f5fafa","surface-container-lowest":"#ffffff","surface-container":"#eaefef",
+        "surface-container-low":"#eff5f5","surface-container-high":"#e4e9e9",
+        "on-surface":"#171d1d","on-surface-variant":"#3e494a",
+        "outline":"#6f797a","outline-variant":"#bec8ca","background":"#f5fafa"
+      },
+      fontFamily: { "headline":["Manrope"], "body":["Inter"] }
+    }}
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .editorial-shadow { box-shadow: 0 8px 30px rgba(23,29,29,0.07); }
+  .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(23,29,29,0.12); }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen">
+
+<!-- Nav -->
+<header class="w-full sticky top-0 z-50 bg-surface-container-lowest border-b border-outline-variant">
+  <nav class="flex justify-between items-center max-w-7xl mx-auto px-6 h-16">
+    <a href="/" class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white"><span class="font-black">A</span></div>
+      <span class="font-bold text-primary tracking-tighter">Aadityaa Hospital</span>
+    </a>
+    <a href="/" class="flex items-center gap-1 text-sm text-on-surface-variant hover:text-primary font-semibold transition-colors">
+      <span class="material-symbols-outlined text-[18px]">arrow_back</span> Back to Home
+    </a>
+  </nav>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 py-12">
+
+  <!-- Page header -->
+  <div class="mb-12">
+    <div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+      <span class="material-symbols-outlined text-[16px]">health_metrics</span>
+      Insurance &amp; Cashless Claims
+    </div>
+    <h1 class="font-headline text-4xl lg:text-5xl font-extrabold text-on-surface mb-4">Accepted Insurance Plans</h1>
+    <p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+      Aadityaa Hospital is empanelled with leading Indian insurance providers. Enjoy cashless hospitalisation — no upfront payment needed for covered procedures.
+    </p>
+  </div>
+
+  <!-- How cashless works -->
+  <section class="bg-primary rounded-3xl p-8 lg:p-10 mb-12 text-white">
+    <h2 class="font-headline text-2xl font-bold mb-6 flex items-center gap-2">
+      <span class="material-symbols-outlined">info</span> How Cashless Claims Work
+    </h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="flex flex-col gap-2">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-black text-lg">1</div>
+        <p class="font-semibold text-sm">Book Appointment &amp; Inform TPA</p>
+        <p class="text-white/70 text-xs leading-relaxed">Notify your insurance TPA at least 48 hours before a planned admission.</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-black text-lg">2</div>
+        <p class="font-semibold text-sm">Pre-authorisation Letter</p>
+        <p class="text-white/70 text-xs leading-relaxed">Hospital's insurance desk submits pre-auth to your insurer for approval.</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-black text-lg">3</div>
+        <p class="font-semibold text-sm">Cashless Admission</p>
+        <p class="text-white/70 text-xs leading-relaxed">Get admitted without paying the covered amount. Show your health card at the insurance desk.</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center font-black text-lg">4</div>
+        <p class="font-semibold text-sm">Discharge &amp; Final Settlement</p>
+        <p class="text-white/70 text-xs leading-relaxed">Insurer pays the hospital directly. You pay only any non-covered or co-pay amounts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insurance companies grid -->
+  <section class="mb-12">
+    <h2 class="font-headline text-2xl font-bold mb-2">Empanelled Insurance Companies</h2>
+    <p class="text-on-surface-variant text-sm mb-8">We are a network hospital for all the insurers listed below. Contact our insurance desk for policy-specific coverage details.</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Star Health -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#e31837]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#e31837]">star</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">Star Health &amp; Allied Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Comprehensive health plans — Medi Classic, Family Health Optima, Senior Citizens Red Carpet.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-red-50 text-[#e31837] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Star TPA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HDFC ERGO -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#004c8f]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#004c8f]">shield</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">HDFC ERGO Health Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">my:health Suraksha, Optima Restore, Energy — covers OPD &amp; pre-existing diseases.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-blue-50 text-[#004c8f] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: HDFC ERGO TPA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Niva Bupa -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#e95f10]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#e95f10]">favorite</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">Niva Bupa Health Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Health Companion, ReAssure 2.0, GoActive plans with no claim bonus up to 100%.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-orange-50 text-[#e95f10] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Medi Assist</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Care Health -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#00a651]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#00a651]">medical_services</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">Care Health Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Care, Care Freedom, Enhance plans — covers day-care procedures, AYUSH treatment.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-green-50 text-[#00a651] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Care TPA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New India Assurance -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#1a237e]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#1a237e]">account_balance</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">New India Assurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Mediclaim Policy 2012, Floater Mediclaim — government-backed PSU insurer.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-indigo-50 text-[#1a237e] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Paramount / Medi Assist</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- United India Insurance -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#0070c0]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#0070c0]">corporate_fare</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">United India Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Individual &amp; Family Mediclaim, Senior Citizen Health Insurance from a trusted PSU.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-sky-50 text-[#0070c0] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Vipul Medcorp</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Oriental Insurance -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#7b3f00]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#7b3f00]">assured_workload</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">Oriental Insurance Company</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Happy Family Floater, Individual Mediclaim — PSU with India-wide hospital network.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-amber-50 text-[#7b3f00] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Medi Assist</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bajaj Allianz -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#003087]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#003087]">verified_user</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">Bajaj Allianz Health Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Health Guard, Global Health Care, Critical Illness plans — covers 5,000+ network hospitals.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-blue-50 text-[#003087] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Bajaj Allianz TPA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ICICI Lombard -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#f58220]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#f58220]">security</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">ICICI Lombard Health Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Health Advantage Plus, Complete Health Insurance — instant cashless approvals via app.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-orange-50 text-[#f58220] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: ICICI Lombard TPA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aditya Birla -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#e02020]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#e02020]">workspace_premium</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">Aditya Birla Health Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Activ Health Platinum, Activ Care — rewards healthy behaviour with premium discounts.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-red-50 text-[#e02020] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Medi Assist</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manipal Cigna -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow card-hover border-l-4 border-[#00838f]">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-[#00838f]">ecg_heart</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-on-surface">ManipalCigna Health Insurance</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">ProHealth Plus, Lifestyle Protection, LifetimeHealth — broad OPD &amp; IPD coverage.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-teal-50 text-[#00838f] text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-surface-container text-on-surface-variant text-[10px] font-semibold px-2 py-0.5 rounded-full">TPA: Cigna TPA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ayushman Bharat / PMJAY -->
+      <div class="bg-primary/5 rounded-2xl p-6 editorial-shadow card-hover border-2 border-primary/30">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-primary">national_flag</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-headline font-bold text-primary">Ayushman Bharat – PM-JAY</h3>
+            <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Government scheme providing ₹5 lakh/year health cover to eligible families. Show your Ayushman card at admission.</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full">Cashless</span>
+              <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full">Government Scheme</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Important notes banner -->
+  <section class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-12">
+    <div class="flex gap-4">
+      <span class="material-symbols-outlined text-amber-600 flex-shrink-0">warning</span>
+      <div>
+        <h3 class="font-bold mb-2 text-amber-900">Important Notes</h3>
+        <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside leading-relaxed">
+          <li>Cashless facility is available only for procedures covered under your specific policy.</li>
+          <li>Pre-existing conditions may have a waiting period as per your policy terms.</li>
+          <li>Reimbursement claim is available for insurers not listed above — collect all bills and discharge summary.</li>
+          <li>For corporate group health policies, please carry your employee health card and company ID.</li>
+          <li>Contact our insurance desk at least 48 hours before planned admission for faster pre-authorisation.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insurance desk CTA -->
+  <section class="bg-primary rounded-3xl p-8 lg:p-10 text-white flex flex-col lg:flex-row items-center justify-between gap-6">
+    <div>
+      <h2 class="font-headline text-2xl font-bold mb-2">Need Help with Your Claim?</h2>
+      <p class="text-white/80 max-w-lg leading-relaxed">Our dedicated insurance desk is available Monday – Saturday, 9 AM to 6 PM. We assist with pre-authorisation, claim forms, and TPA coordination.</p>
+    </div>
+    <div class="flex flex-col gap-3 flex-shrink-0">
+      <a href="tel:+914012345678" class="flex items-center gap-2 bg-white text-primary font-bold px-6 py-3 rounded-full hover:opacity-90 transition-opacity whitespace-nowrap">
+        <span class="material-symbols-outlined text-[18px]">phone_in_talk</span> +91 40 1234 5678
+      </a>
+      <a href="mailto:insurance@aadityaahospital.com" class="flex items-center gap-2 bg-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/30 transition-colors whitespace-nowrap text-sm">
+        <span class="material-symbols-outlined text-[18px]">mail</span> insurance@aadityaahospital.com
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full bg-[#006D77] text-white pt-10 pb-6 mt-16">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="font-bold">Aadityaa Hospital — Hastinapuram, Hyderabad</div>
+    <p class="text-teal-100/70 text-sm">© 2025 Aadityaa Hospital. All rights reserved.</p>
+    <a href="/" class="text-teal-100/80 hover:text-white text-sm font-semibold">← Back to Home</a>
+  </div>
+</footer>
+
+</body>
+</html>
