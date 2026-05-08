@@ -36,6 +36,16 @@ def server_time():
     })
 
 
+# ── GET /api/site-settings ────────────────────────────────────────────────────
+@bp.route("/site-settings", methods=["GET"])
+def get_site_settings():
+    """Return all site settings as a flat key→value dict. Public, no auth."""
+    db = get_admin_supabase()
+    result = db.table("site_settings").select("key, value").execute()
+    settings = {row["key"]: row["value"] for row in (result.data or [])}
+    return jsonify({"settings": settings})
+
+
 # ── GET /api/specialties ──────────────────────────────────────────────────────
 @bp.route("/specialties", methods=["GET"])
 def list_specialties():

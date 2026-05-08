@@ -38,6 +38,25 @@
   <div id="toast-inner" class="px-4 py-3 rounded-xl text-sm font-semibold shadow-lg flex items-center gap-2 max-w-sm"></div>
 </div>
 
+<!-- Custom Confirm Modal -->
+<div id="confirm-modal" class="hidden fixed inset-0 z-[200] flex items-center justify-center p-4 modal-backdrop">
+  <div class="bg-white rounded-3xl w-full max-w-md p-7 relative editorial-shadow">
+    <div class="flex items-start gap-4">
+      <div id="confirm-icon-wrap" class="w-12 h-12 bg-tertiary/10 rounded-full flex items-center justify-center flex-shrink-0">
+        <span id="confirm-icon" class="material-symbols-outlined text-tertiary">warning</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 id="confirm-title" class="font-headline text-lg font-bold mb-1">Are you sure?</h3>
+        <p id="confirm-message" class="text-sm text-on-surface-variant leading-relaxed">This action cannot be undone.</p>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2 mt-6">
+      <button id="confirm-cancel" class="px-5 py-2.5 rounded-full text-sm font-bold text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+      <button id="confirm-ok" class="px-5 py-2.5 rounded-full text-sm font-bold bg-tertiary text-white hover:opacity-90 transition-opacity">Confirm</button>
+    </div>
+  </div>
+</div>
+
 <!-- Nav -->
 <header class="w-full sticky top-0 z-50 bg-surface-container-lowest border-b border-outline-variant">
   <nav class="flex justify-between items-center max-w-7xl mx-auto px-6 h-16">
@@ -115,6 +134,9 @@
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="leaves">Leave Requests</button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="doctors">Doctors</button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="patients">Patients</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant flex items-center gap-1.5" data-tab="site">
+        <span class="material-symbols-outlined text-[16px]">edit_note</span> Site Content
+      </button>
     </div>
 
     <!-- ── Appointments tab ───────────────────────────────────────────── -->
@@ -208,6 +230,32 @@
     <div id="tab-patients" class="tab-panel hidden">
       <h2 class="font-headline text-lg font-bold mb-4">All Patients</h2>
       <div id="patients-list" class="space-y-3"></div>
+    </div>
+
+    <!-- ── Site Content tab ──────────────────────────────────────────── -->
+    <div id="tab-site" class="tab-panel hidden">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="font-headline text-lg font-bold">Site Content Editor</h2>
+          <p class="text-sm text-on-surface-variant mt-0.5">Changes go live on the website immediately after saving.</p>
+        </div>
+        <div id="cms-save-status" class="hidden text-sm font-semibold text-secondary flex items-center gap-1">
+          <span class="material-symbols-outlined text-[16px]">check_circle</span> Saved
+        </div>
+      </div>
+
+      <!-- SQL migration reminder -->
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 flex gap-3 text-sm">
+        <span class="material-symbols-outlined text-amber-600 flex-shrink-0">info</span>
+        <span class="text-amber-800">First time? Run <strong>backend/site_settings_schema.sql</strong> in your Supabase SQL Editor to create the settings table.</span>
+      </div>
+
+      <div id="cms-editor" class="space-y-6">
+        <div class="text-center py-10 text-on-surface-variant">
+          <span class="material-symbols-outlined text-4xl spin block mb-2">progress_activity</span>
+          Loading settings…
+        </div>
+      </div>
     </div>
 
   </div><!-- /dashboard -->
@@ -472,6 +520,7 @@
 </div>
 
 <script src="/static/js/server-time.js"></script>
+<script src="/static/js/site-settings.js"></script>
 <!-- Firebase + api.js -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -496,6 +545,41 @@
   function showAuthError() {
     $('loading-state').classList.add('hidden');
     $('auth-error').classList.remove('hidden');
+  }
+
+  // Custom confirm dialog — replaces the ugly browser confirm()
+  function customConfirm({ title = 'Are you sure?', message = '', confirmText = 'Confirm', cancelText = 'Cancel', danger = true } = {}) {
+    return new Promise(resolve => {
+      const modal = $('confirm-modal');
+      $('confirm-title').textContent   = title;
+      $('confirm-message').textContent = message;
+      $('confirm-ok').textContent      = confirmText;
+      $('confirm-cancel').textContent  = cancelText;
+      const okBtn   = $('confirm-ok');
+      const iconWrap= $('confirm-icon-wrap');
+      const icon    = $('confirm-icon');
+      if (danger) {
+        okBtn.className   = 'px-5 py-2.5 rounded-full text-sm font-bold bg-tertiary text-white hover:opacity-90 transition-opacity';
+        iconWrap.className= 'w-12 h-12 bg-tertiary/10 rounded-full flex items-center justify-center flex-shrink-0';
+        icon.className    = 'material-symbols-outlined text-tertiary';
+        icon.textContent  = 'warning';
+      } else {
+        okBtn.className   = 'px-5 py-2.5 rounded-full text-sm font-bold bg-primary text-white hover:opacity-90 transition-opacity';
+        iconWrap.className= 'w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0';
+        icon.className    = 'material-symbols-outlined text-primary';
+        icon.textContent  = 'help';
+      }
+      modal.classList.remove('hidden');
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        $('confirm-ok').onclick     = null;
+        $('confirm-cancel').onclick = null;
+        modal.onclick = null;
+      };
+      $('confirm-ok').onclick     = () => { cleanup(); resolve(true); };
+      $('confirm-cancel').onclick = () => { cleanup(); resolve(false); };
+      modal.onclick = e => { if (e.target === modal) { cleanup(); resolve(false); } };
+    });
   }
 
   const STATUS_STYLE = {
@@ -596,6 +680,7 @@
     $('refresh-btn').addEventListener('click', loadAll);
 
     // ── Tab switching ──────────────────────────────────────────────────────
+    let _cmsLoaded = false;
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => {
@@ -604,8 +689,144 @@
         btn.className = 'tab-btn px-5 py-2.5 rounded-xl text-sm font-bold bg-surface-container-lowest text-primary shadow-sm';
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
         $(`tab-${btn.dataset.tab}`)?.classList.remove('hidden');
+        if (btn.dataset.tab === 'site' && !_cmsLoaded) { _cmsLoaded = true; loadCmsEditor(); }
       });
     });
+
+    // ── CMS EDITOR ────────────────────────────────────────────────────────────
+    const CMS_GROUPS = {
+      branding: { label: 'Branding & Name', icon: 'business' },
+      hero:     { label: 'Hero Section',    icon: 'slideshow' },
+      about:    { label: 'About Section',   icon: 'info' },
+      contact:  { label: 'Contact & Location', icon: 'location_on' },
+      footer:   { label: 'Footer',          icon: 'footer' },
+    };
+
+    async function loadCmsEditor() {
+      const editorEl = $('cms-editor');
+      try {
+        const res  = await authFetch('/api/admin/site-settings');
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Could not load settings.');
+        renderCmsEditor(json.settings || []);
+      } catch(e) {
+        editorEl.innerHTML = `<p class="text-tertiary text-sm">${e.message}</p>`;
+      }
+    }
+
+    function renderCmsEditor(settings) {
+      // Group settings by group_name
+      const groups = {};
+      settings.forEach(s => {
+        if (!groups[s.group_name]) groups[s.group_name] = [];
+        groups[s.group_name].push(s);
+      });
+
+      const editorEl = $('cms-editor');
+      const orderedGroups = ['branding','hero','about','contact','footer'];
+      const allGroups = [...orderedGroups, ...Object.keys(groups).filter(g => !orderedGroups.includes(g))];
+
+      editorEl.innerHTML = allGroups.filter(g => groups[g]).map(groupKey => {
+        const meta   = CMS_GROUPS[groupKey] || { label: groupKey, icon: 'settings' };
+        const fields = groups[groupKey];
+        return `
+        <div class="bg-surface-container-lowest rounded-2xl editorial-shadow overflow-hidden">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">${meta.icon}</span>
+              <h3 class="font-headline font-bold">${meta.label}</h3>
+            </div>
+            <button class="cms-save-group bg-primary text-white text-xs font-bold px-4 py-2 rounded-full hover:opacity-90 transition-opacity flex items-center gap-1"
+              data-group="${groupKey}">
+              <span class="material-symbols-outlined text-[14px]">save</span> Save
+            </button>
+          </div>
+          <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${fields.map(f => {
+              const inputClass = 'w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20';
+              const escaped = f.value.replace(/"/g, '&quot;');
+              if (f.input_type === 'textarea') {
+                return `<div class="md:col-span-2">
+                  <label class="block text-xs font-semibold text-on-surface-variant mb-1">${f.label}</label>
+                  <textarea class="${inputClass} resize-none" rows="3" data-cms-key="${f.key}">${f.value}</textarea>
+                </div>`;
+              }
+              const typeAttr = f.input_type === 'tel' ? 'tel' : f.input_type === 'email' ? 'email' : f.input_type === 'url' ? 'url' : 'text';
+              const isPhoto  = f.input_type === 'url' && f.key.includes('photo');
+              return `<div class="${isPhoto ? 'md:col-span-2' : ''}">
+                <label class="block text-xs font-semibold text-on-surface-variant mb-1">${f.label}</label>
+                ${isPhoto ? `<div class="flex items-center gap-3 mb-2">
+                  <img src="${escaped}" class="w-16 h-16 rounded-xl object-cover bg-surface-container border border-outline-variant cms-photo-preview" data-preview-for="${f.key}" onerror="this.style.display='none'"/>
+                  <div class="flex-1">
+                    <input type="${typeAttr}" value="${escaped}" class="${inputClass}" data-cms-key="${f.key}" placeholder="https://…"/>
+                    <label class="block mt-1.5">
+                      <span class="text-xs text-on-surface-variant">or upload a file: </span>
+                      <input type="file" accept="image/*" class="text-xs cursor-pointer" data-upload-for="${f.key}"/>
+                    </label>
+                  </div>
+                </div>` : `<input type="${typeAttr}" value="${escaped}" class="${inputClass}" data-cms-key="${f.key}"/>`}
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+      }).join('');
+
+      // Save group buttons
+      editorEl.querySelectorAll('.cms-save-group').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const group = btn.dataset.group;
+          const settingsPayload = {};
+          editorEl.querySelectorAll(`[data-cms-key]`).forEach(inp => {
+            // Only collect fields in this group's section
+            const section = btn.closest('.bg-surface-container-lowest');
+            if (section.contains(inp)) settingsPayload[inp.dataset.cmsKey] = inp.value;
+          });
+          const origText = btn.innerHTML;
+          btn.disabled = true; btn.textContent = 'Saving…';
+          try {
+            const res  = await authFetch('/api/admin/site-settings', {
+              method: 'PUT', body: JSON.stringify({ settings: settingsPayload })
+            });
+            const json = await res.json();
+            if (!res.ok) throw new Error(json.error || 'Save failed.');
+            btn.innerHTML = '<span class="material-symbols-outlined text-[14px]">check</span> Saved!';
+            // Bust the site-settings client cache so next page load picks up changes
+            if (window.SiteSettings) SiteSettings.reload();
+            setTimeout(() => { btn.disabled = false; btn.innerHTML = origText; }, 2000);
+          } catch(e) {
+            showToast(e.message, 'error');
+            btn.disabled = false; btn.innerHTML = origText;
+          }
+        });
+      });
+
+      // File upload → base64 preview + fill URL input
+      editorEl.querySelectorAll('[data-upload-for]').forEach(fileInput => {
+        fileInput.addEventListener('change', e => {
+          const file = e.target.files[0]; if (!file) return;
+          const key  = fileInput.dataset.uploadFor;
+          const reader = new FileReader();
+          reader.onload = ev => {
+            const dataUrl = ev.target.result;
+            const urlInput  = editorEl.querySelector(`[data-cms-key="${key}"]`);
+            const imgPreview = editorEl.querySelector(`[data-preview-for="${key}"]`);
+            if (urlInput)   { urlInput.value = dataUrl; urlInput.style.display = ''; }
+            if (imgPreview) { imgPreview.src = dataUrl; imgPreview.style.display = ''; }
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      // Live preview: update img preview when URL input changes
+      editorEl.querySelectorAll('[data-cms-key]').forEach(inp => {
+        if (inp.type === 'url') {
+          inp.addEventListener('input', () => {
+            const prev = editorEl.querySelector(`[data-preview-for="${inp.dataset.cmsKey}"]`);
+            if (prev) { prev.src = inp.value; prev.style.display = ''; }
+          });
+        }
+      });
+    }
 
     // ── Filters ────────────────────────────────────────────────────────────
     $('apt-status-filter').addEventListener('change', e => {
@@ -1041,7 +1262,13 @@
       el.querySelectorAll('.doc-delete').forEach(btn => {
         btn.addEventListener('click', async () => {
           const { id, name } = btn.dataset;
-          if (!confirm(`Permanently delete ${name}? This cannot be undone.`)) return;
+          const ok = await customConfirm({
+            title: 'Delete doctor?',
+            message: `Permanently delete ${name}? This will remove their account and cannot be undone.`,
+            confirmText: 'Delete',
+            danger: true,
+          });
+          if (!ok) return;
           try {
             const res = await authFetch(`/api/admin/doctors/${id}?hard=true`, { method: 'DELETE' });
             if (!res.ok) throw new Error((await res.json()).error);

@@ -523,3 +523,33 @@ def update_surgery_status(surgery_id: str, current_user, current_role):
     if not result.data:
         return jsonify({"error": "Surgery not found."}), 404
     return jsonify({"message": "Status updated.", "surgery": result.data[0]})
+
+
+# ── GET /api/admin/site-settings ─────────────────────────────────────────────
+@bp.route("/site-settings", methods=["GET"])
+@require_role("admin")
+def admin_get_site_settings(current_user, current_role):
+    """Return all site settings with full metadata for the admin CMS editor."""
+    db = get_admin_supabase()
+    result = db.table("site_settings") \
+        .select("key, value, label, group_name, input_type") \
+        .order("group_name").execute()
+    return jsonify({"settings": result.data or []})
+
+
+# ── PUT /api/admin/site-settings ─────────────────────────────────────────────
+@bp.route("/site-settings", methods=["PUT"])
+@require_role("admin")
+def admin_update_site_settings(current_user, current_role):
+    """
+    Upsert one or more site settings.
+    Body: { "settings": { "hospital_name": "New Name", ... } }
+    """
+    data    = request.get_json(silent=True) or {}
+    updates = data.get("settings", {})
+    if not updates:
+        return jsonify({"error": "No settings provided."}), 400
+    db   = get_admin_supabase()
+    rows = [{"key": k, "value": str(v)} for k, v in updates.items()]
+    db.table("site_settings").upsert(rows, on_conflict="key").execute()
+    return jsonify({"message": f"Updated {len(rows)} setting(s).", "updated": list(updates.keys())})
