@@ -136,3 +136,25 @@ def revoke_firebase_tokens(uid: str):
         firebase_auth.revoke_refresh_tokens(uid)
     except Exception:
         pass  # Best-effort; frontend should clear localStorage regardless
+
+
+def set_user_role(uid: str, role: str):
+    """
+    Write the user's role into a Firebase custom claim so every
+    ID token issued from now on carries it. The frontend can then read
+    it via idTokenResult.claims.role without a server roundtrip.
+
+    Supabase profiles.role remains the source of truth — this is a
+    fast-path cache for the frontend + JWT verification.
+
+    Note: existing tokens keep the OLD claim until they refresh
+    (Firebase ID tokens have a 1-hour TTL).
+    """
+    _init_firebase()
+    role = (role or "patient").lower()
+    if role not in ("patient", "doctor", "admin"):
+        raise ValueError(f"Unknown role: {role}")
+    try:
+        firebase_auth.set_custom_user_claims(uid, {"role": role})
+    except firebase_admin.exceptions.FirebaseError as e:
+        raise ValueError(f"Could not set role claim: {e}")

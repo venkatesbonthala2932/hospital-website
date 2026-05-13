@@ -16,6 +16,7 @@ from middleware.auth_middleware import require_role
 from services.auth_service import get_doctor_record
 from services.appointment_service import get_doctor_appointments, get_doctor_stats, update_appointment_status
 from services.leaves_service import request_leave, get_doctor_leaves
+from services.analytics_service import get_visit_analytics
 
 bp = Blueprint("doctor", __name__)
 
@@ -214,3 +215,17 @@ def list_surgeries(current_user, current_role):
 
     result = query.execute()
     return jsonify({"surgeries": result.data or [], "count": len(result.data or [])})
+
+
+# ── GET /api/doctor/analytics ─────────────────────────────────────────────────
+@bp.route("/analytics", methods=["GET"])
+@require_role("doctor")
+def doctor_analytics(current_user, current_role):
+    """
+    Visit analytics for the logged-in doctor.
+    Same payload shape as /api/admin/analytics, scoped to this doctor only.
+    """
+    doctor = _doctor_or_404(current_user["id"])
+    if not doctor:
+        return jsonify({"error": "Doctor profile not linked. Contact admin."}), 404
+    return jsonify(get_visit_analytics(doctor_id=doctor["id"]))

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="require-min-role" content="patient"/>
 <title>My Appointments | Aadityaa Hospital</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -120,6 +121,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="/static/js/api.js"></script>
+<script src="/static/js/rbac.js"></script>
 
 <script>
 (async () => {
@@ -206,7 +208,16 @@
       }
 
       async function cancelAppointment(id, apts) {
-        if (!confirm('Cancel this appointment?')) return;
+        const ok = window.confirmModal
+          ? await confirmModal({
+              title: 'Cancel appointment?',
+              message: 'This will free the slot for other patients. You can always book a new appointment later.',
+              confirmText: 'Cancel Appointment',
+              cancelText:  'Keep It',
+              danger: true,
+            })
+          : confirm('Cancel this appointment?');
+        if (!ok) return;
         try {
           const t   = await user.getIdToken();
           const res = await fetch(`/api/appointments/${id}/cancel`, {

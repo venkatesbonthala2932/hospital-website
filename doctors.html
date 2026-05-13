@@ -128,54 +128,53 @@
 </div>
 </nav>
 </header>
-<main class="py-12 px-8 max-w-7xl mx-auto">
-<section class="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
-<div class="max-w-2xl">
-<span class="text-xs font-bold text-primary uppercase tracking-widest block mb-3">Medical Directory</span>
-<h1 class="font-headline text-5xl md:text-6xl font-extrabold text-on-surface leading-tight mb-6 tracking-tighter">Meet Our Specialized Practitioners</h1>
-<p class="text-lg text-on-surface-variant leading-relaxed max-w-xl">
-                Experience world-class healthcare with Aadityaa's elite team of specialists. Our doctors combine academic excellence with deep clinical compassion.
-            </p>
-</div>
-<div class="bg-surface-container-high p-1.5 rounded-xl flex items-center gap-1 editorial-shadow">
-<button class="px-4 py-2 bg-surface-container-lowest text-primary font-bold rounded-lg shadow-sm text-sm">Guest View</button>
-<button class="px-4 py-2 text-on-surface-variant font-medium text-sm hover:bg-surface-variant/50 rounded-lg transition-colors">Logged In</button>
-</div>
+<main class="py-8 md:py-12 px-4 md:px-8 max-w-7xl mx-auto">
+
+<!-- Page heading -->
+<section class="mb-8 md:mb-12">
+<span class="text-xs font-bold text-primary uppercase tracking-widest block mb-2">Medical Directory</span>
+<h1 class="font-headline text-3xl md:text-5xl font-extrabold text-on-surface leading-tight mb-3 tracking-tighter">Meet Our Specialists</h1>
+<p class="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-2xl">
+  Aadityaa's elite team of specialists, combining academic excellence with clinical compassion.
+</p>
 </section>
-<section class="bg-surface-container-low p-8 rounded-3xl mb-16 editorial-shadow">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-<div class="lg:col-span-4 relative">
+
+<!-- Search + filters -->
+<section class="bg-surface-container-low p-4 md:p-6 rounded-2xl md:rounded-3xl mb-8 md:mb-12 editorial-shadow">
+<div class="flex flex-col gap-4">
+<div class="relative">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border-none rounded-2xl focus:ring-2 focus:ring-primary/20 font-body transition-all editorial-shadow" placeholder="Search by name or keyword..." type="text"/>
+<input class="w-full pl-12 pr-4 py-3 md:py-4 bg-surface-container-lowest border-none rounded-xl md:rounded-2xl focus:ring-2 focus:ring-primary/20 text-sm md:text-base font-body editorial-shadow" placeholder="Search by name or keyword..." type="text"/>
 </div>
-<div id="specialty-filters" class="lg:col-span-8 flex flex-wrap gap-3">
+<div id="specialty-filters" class="flex flex-wrap gap-2">
 <!-- Loaded dynamically by doctors-page.js -->
 </div>
 </div>
 </section>
-<div id="doctors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+<div id="doctors-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
 <div class="col-span-full py-16 text-center text-on-surface-variant">
   <span class="material-symbols-outlined text-4xl animate-spin block mb-2">progress_activity</span>
   Loading doctors...
 </div>
 </div>
-<section class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="md:col-span-2 bg-primary-container rounded-[2.5rem] p-12 text-on-primary flex flex-col justify-center relative overflow-hidden editorial-shadow">
+<section class="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+<div class="md:col-span-2 bg-primary-container rounded-2xl md:rounded-3xl p-6 md:p-10 text-on-primary flex flex-col justify-center relative overflow-hidden editorial-shadow">
 <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
-<h2 class="font-headline text-4xl font-extrabold mb-6 relative z-10">Can't find your specialist?</h2>
-<p class="text-lg opacity-80 mb-10 max-w-md relative z-10 leading-relaxed">Contact our 24/7 care coordination desk for assistance in matching you with the right medical expert for your needs.</p>
-<div class="flex flex-wrap gap-4 relative z-10">
-<button class="bg-on-primary-container text-primary-container px-8 py-4 rounded-2xl font-headline font-bold text-sm hover:bg-white transition-colors editorial-shadow">Call Hotline</button>
-<button class="border border-white/20 px-8 py-4 rounded-2xl font-headline font-bold text-sm hover:bg-white/10 transition-colors">Emergency Services</button>
+<h2 class="font-headline text-2xl md:text-3xl font-extrabold mb-3 md:mb-4 relative z-10">Can't find your specialist?</h2>
+<p class="text-sm md:text-base opacity-80 mb-6 md:mb-8 max-w-md relative z-10 leading-relaxed">Contact our 24/7 care coordination desk for help matching you with the right expert.</p>
+<div class="flex flex-wrap gap-3 relative z-10">
+<button class="bg-on-primary-container text-primary-container px-6 py-3 rounded-xl font-headline font-bold text-sm hover:bg-white transition-colors editorial-shadow">Call Hotline</button>
+<button class="border border-white/20 px-6 py-3 rounded-xl font-headline font-bold text-sm hover:bg-white/10 transition-colors">Emergency</button>
 </div>
 </div>
-<div class="bg-tertiary rounded-[2.5rem] p-12 text-on-tertiary flex flex-col justify-between editorial-shadow">
+<div class="bg-tertiary rounded-2xl md:rounded-3xl p-6 md:p-10 text-on-tertiary flex flex-col justify-between editorial-shadow">
 <div>
-<span class="material-symbols-outlined text-4xl mb-6">emergency</span>
-<h3 class="font-headline text-3xl font-extrabold mb-4 leading-tight">Critical Care &amp; Trauma</h3>
+<span class="material-symbols-outlined text-3xl md:text-4xl mb-3">emergency</span>
+<h3 class="font-headline text-xl md:text-2xl font-extrabold mb-3 leading-tight">Critical Care &amp; Trauma</h3>
 </div>
-<p class="opacity-80 text-sm leading-relaxed mb-8">Direct line to our emergency response unit. Available 24/7 for urgent surgical and medical interventions.</p>
-<button class="w-full bg-white text-tertiary py-4 rounded-2xl font-headline font-bold text-sm editorial-shadow">Emergency: +91 8000 1234</button>
+<p class="opacity-80 text-sm leading-relaxed mb-5">24/7 emergency response unit for urgent medical needs.</p>
+<button class="w-full bg-white text-tertiary py-3 rounded-xl font-headline font-bold text-xs md:text-sm editorial-shadow">Emergency: +91 8000 1234</button>
 </div>
 </section>
 </main>
@@ -238,6 +237,7 @@
 <!-- Aadityaa Hospital API client -->
 <script src="/static/js/api.js"></script>
 <script src="/static/js/nav.js"></script>
+<script src="/static/js/rbac.js"></script>
 <script>
 (async () => {
   const params      = new URLSearchParams(window.location.search);
@@ -338,36 +338,34 @@
     const feeText    = d.consultation_fee ? `₹${d.consultation_fee} consultation` : '';
 
     return `
-      <div class="doctor-card group bg-surface-container-lowest rounded-[2rem] overflow-hidden flex flex-col editorial-shadow hover:-translate-y-2 transition-all duration-300">
-        <div class="relative h-72 overflow-hidden">
+      <div class="doctor-card group bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col editorial-shadow hover:-translate-y-1 transition-all duration-300">
+        <div class="relative h-48 overflow-hidden">
           ${photo}
-          <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary/90 to-transparent">
-            <span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">${badge}</span>
+          <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-primary/90 to-transparent">
+            <span class="bg-on-primary-container text-primary-container text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">${badge}</span>
           </div>
         </div>
-        <div class="p-8 flex flex-col flex-grow">
-          <div class="flex justify-between items-start mb-3 gap-4">
-            <h3 class="font-headline text-2xl font-bold text-on-surface">${d.full_name}</h3>
-            <div class="text-right flex-shrink-0">
-              <span class="inline-block px-3 py-1 bg-secondary-container text-secondary text-[11px] font-bold uppercase tracking-tight rounded-lg">${specialty}</span>
-            </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <div class="flex justify-between items-start mb-2 gap-3">
+            <h3 class="font-headline text-lg font-bold text-on-surface leading-tight">${d.full_name}</h3>
+            ${specialty ? `<span class="inline-block px-2 py-0.5 bg-secondary-container text-secondary text-[10px] font-bold uppercase tracking-tight rounded-md flex-shrink-0">${specialty}</span>` : ''}
           </div>
-          ${d.qualifications ? `<p class="text-xs font-bold text-on-surface-variant mb-2">${d.qualifications}</p>` : ''}
-          <p class="text-on-surface-variant font-body text-sm leading-relaxed mb-4 line-clamp-3">${d.bio || ''}</p>
-          <div class="flex flex-wrap gap-4 text-xs text-on-surface-variant mb-6">
-            ${expText ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span>${expText}</span>` : ''}
-            ${feeText ? `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">payments</span>${feeText}</span>` : ''}
+          ${d.qualifications ? `<p class="text-xs text-on-surface-variant mb-2">${d.qualifications}</p>` : ''}
+          <p class="text-on-surface-variant text-xs leading-relaxed mb-3 line-clamp-2">${d.bio || ''}</p>
+          <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-on-surface-variant mb-4">
+            ${expText ? `<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span>${expText}</span>` : ''}
+            ${feeText ? `<span class="inline-flex items-center gap-1 text-primary font-semibold"><span class="material-symbols-outlined text-[14px]">payments</span>${feeText}</span>` : ''}
           </div>
-          <div class="mt-auto flex flex-col gap-3">
+          <div class="mt-auto flex gap-2">
             <a href="/book-appointment.html?doctor_id=${d.id}"
-               class="w-full bg-primary-container text-white py-4 rounded-2xl font-headline font-bold text-sm hover:opacity-90 active:scale-[0.98] transition-all editorial-shadow flex items-center justify-center gap-2">
-              <span class="material-symbols-outlined text-[18px]">calendar_add_on</span>
-              Book Now
+               class="flex-1 bg-primary text-white py-2.5 rounded-xl font-bold text-xs hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">calendar_add_on</span>
+              Book
             </a>
             <a href="/doctor.html?id=${d.id}"
-               class="w-full border border-outline-variant text-on-surface py-3 rounded-2xl font-semibold text-sm hover:bg-surface-container transition-colors flex items-center justify-center gap-2">
-              <span class="material-symbols-outlined text-[18px]">person</span>
-              View Profile
+               class="px-4 border border-outline-variant text-on-surface py-2.5 rounded-xl font-semibold text-xs hover:bg-surface-container transition-colors flex items-center justify-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">person</span>
+              Profile
             </a>
           </div>
         </div>

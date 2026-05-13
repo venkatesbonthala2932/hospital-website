@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="require-role" content="admin"/>
 <title>Admin Dashboard | Aadityaa Hospital</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -88,55 +89,66 @@
   <div id="dashboard" class="hidden">
 
     <!-- Header -->
-    <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
-      <div class="flex items-center gap-4">
-        <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white flex-shrink-0">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6 md:mb-8">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-xl flex items-center justify-center text-white flex-shrink-0">
           <span class="material-symbols-outlined">admin_panel_settings</span>
         </div>
         <div>
-          <h1 class="font-headline text-2xl font-bold">Admin Dashboard</h1>
-          <p class="text-sm text-on-surface-variant">Aadityaa Hospital — Manage appointments, surgeries &amp; doctors</p>
+          <h1 class="font-headline text-xl md:text-2xl font-bold">Admin Dashboard</h1>
+          <p class="text-xs md:text-sm text-on-surface-variant">Manage appointments, surgeries &amp; doctors</p>
         </div>
       </div>
-      <button id="refresh-btn" class="flex items-center gap-2 text-sm font-semibold text-primary border border-primary px-4 py-2 rounded-full hover:bg-primary/5 transition-colors">
-        <span class="material-symbols-outlined text-[18px]">refresh</span> Refresh
+      <button id="refresh-btn" class="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary border border-primary px-3 md:px-4 py-2 rounded-full hover:bg-primary/5 transition-colors">
+        <span class="material-symbols-outlined text-[16px] md:text-[18px]">refresh</span> Refresh
       </button>
     </div>
 
     <!-- Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
-      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
-        <div class="text-3xl font-black font-headline text-primary" id="stat-apts">—</div>
-        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Appointments</div>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6 md:mb-8">
+      <div class="bg-surface-container-lowest rounded-xl md:rounded-2xl p-3 md:p-4 editorial-shadow text-center">
+        <div class="text-2xl md:text-3xl font-black font-headline text-primary" id="stat-apts">—</div>
+        <div class="text-[10px] md:text-xs text-on-surface-variant mt-0.5 font-semibold uppercase tracking-wide">Appointments</div>
       </div>
-      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
-        <div class="text-3xl font-black font-headline text-amber-600" id="stat-pending">—</div>
-        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Pending</div>
+      <div class="bg-surface-container-lowest rounded-xl md:rounded-2xl p-3 md:p-4 editorial-shadow text-center">
+        <div class="text-2xl md:text-3xl font-black font-headline text-amber-600" id="stat-pending">—</div>
+        <div class="text-[10px] md:text-xs text-on-surface-variant mt-0.5 font-semibold uppercase tracking-wide">Pending</div>
       </div>
-      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
-        <div class="text-3xl font-black font-headline text-secondary" id="stat-doctors">—</div>
-        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Doctors</div>
+      <div class="bg-surface-container-lowest rounded-xl md:rounded-2xl p-3 md:p-4 editorial-shadow text-center">
+        <div class="text-2xl md:text-3xl font-black font-headline text-secondary" id="stat-doctors">—</div>
+        <div class="text-[10px] md:text-xs text-on-surface-variant mt-0.5 font-semibold uppercase tracking-wide">Doctors</div>
       </div>
-      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
-        <div class="text-3xl font-black font-headline" id="stat-surgeries">—</div>
-        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Surgeries</div>
+      <div class="bg-surface-container-lowest rounded-xl md:rounded-2xl p-3 md:p-4 editorial-shadow text-center">
+        <div class="text-2xl md:text-3xl font-black font-headline" id="stat-surgeries">—</div>
+        <div class="text-[10px] md:text-xs text-on-surface-variant mt-0.5 font-semibold uppercase tracking-wide">Surgeries</div>
       </div>
-      <div class="bg-surface-container-lowest rounded-2xl p-5 editorial-shadow text-center">
-        <div class="text-3xl font-black font-headline text-on-surface-variant" id="stat-patients">—</div>
-        <div class="text-xs text-on-surface-variant mt-1 font-semibold uppercase tracking-wide">Patients</div>
+      <div class="bg-surface-container-lowest rounded-xl md:rounded-2xl p-3 md:p-4 editorial-shadow text-center">
+        <div class="text-2xl md:text-3xl font-black font-headline text-on-surface-variant" id="stat-patients">—</div>
+        <div class="text-[10px] md:text-xs text-on-surface-variant mt-0.5 font-semibold uppercase tracking-wide">Patients</div>
       </div>
     </div>
 
-    <!-- Tabs -->
-    <div class="flex flex-wrap gap-1 bg-surface-container p-1 rounded-2xl mb-8 w-fit">
+    <!-- Tabs (horizontal scroll on mobile, no awkward wrapping) -->
+    <div class="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0 mb-6 md:mb-8">
+      <div class="inline-flex gap-1 bg-surface-container p-1 rounded-2xl whitespace-nowrap">
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold bg-surface-container-lowest text-primary shadow-sm" data-tab="appointments">Appointments</button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="surgeries">Surgeries</button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="leaves">Leave Requests</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant flex items-center gap-1.5" data-tab="holidays">
+        <span class="material-symbols-outlined text-[16px]">event_busy</span> Holidays
+      </button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="doctors">Doctors</button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="patients">Patients</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant flex items-center gap-1.5" data-tab="analytics">
+        <span class="material-symbols-outlined text-[16px]">analytics</span> Analytics
+      </button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant flex items-center gap-1.5" data-tab="access">
+        <span class="material-symbols-outlined text-[16px]">admin_panel_settings</span> Access
+      </button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant flex items-center gap-1.5" data-tab="site">
         <span class="material-symbols-outlined text-[16px]">edit_note</span> Site Content
       </button>
+      </div>
     </div>
 
     <!-- ── Appointments tab ───────────────────────────────────────────── -->
@@ -189,6 +201,61 @@
       <div id="leaves-list" class="space-y-3"></div>
     </div>
 
+    <!-- ── Holidays tab ──────────────────────────────────────────────── -->
+    <div id="tab-holidays" class="tab-panel hidden">
+      <div class="grid lg:grid-cols-3 gap-6">
+
+        <!-- Add holiday form -->
+        <div class="lg:col-span-1 bg-surface-container-lowest rounded-2xl p-6 editorial-shadow self-start">
+          <h2 class="font-headline text-lg font-bold mb-2 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">add_circle</span> Declare Holiday
+          </h2>
+          <p class="text-xs text-on-surface-variant mb-5">Patients won't be able to book any doctor for the date you select.</p>
+
+          <form id="add-holiday-form" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-on-surface-variant mb-1 uppercase tracking-wide">Date *</label>
+              <input id="holiday-date" name="holiday_date" type="date" required
+                data-server-min="today"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-on-surface-variant mb-1 uppercase tracking-wide">Holiday Name *</label>
+              <input id="holiday-name" name="name" type="text" required maxlength="80" placeholder="e.g. Diwali, Independence Day"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-on-surface-variant mb-1 uppercase tracking-wide">Note (optional)</label>
+              <textarea id="holiday-desc" name="description" rows="2" maxlength="200" placeholder="Anything patients should know"
+                class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm resize-none focus:ring-2 focus:ring-primary/20"></textarea>
+            </div>
+            <p id="add-holiday-error" class="text-xs text-tertiary hidden"></p>
+            <button type="submit"
+              class="w-full bg-primary text-white py-3 rounded-full font-bold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">event_busy</span> Add Holiday
+            </button>
+          </form>
+        </div>
+
+        <!-- Upcoming + past holidays list -->
+        <div class="lg:col-span-2 space-y-6">
+          <div>
+            <h2 class="font-headline text-lg font-bold mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">upcoming</span> Upcoming Holidays
+            </h2>
+            <div id="holidays-upcoming" class="space-y-2">
+              <p class="text-sm text-on-surface-variant text-center py-8">Loading…</p>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-headline text-sm font-bold mb-3 text-on-surface-variant uppercase tracking-wide">Past Holidays</h3>
+            <div id="holidays-past" class="space-y-2 opacity-70"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- ── Doctors tab ───────────────────────────────────────────────── -->
     <div id="tab-doctors" class="tab-panel hidden">
 
@@ -216,12 +283,27 @@
         <div id="presence-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
       </div>
 
+      <!-- Pending invitations -->
+      <div id="invites-section" class="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-6 hidden">
+        <h3 class="font-headline text-sm font-bold text-amber-900 mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">mark_email_unread</span>
+          Pending Invitations
+        </h3>
+        <p class="text-xs text-amber-800 mb-3">These doctors haven't signed in yet. Once they sign in with Google or email, they'll automatically become doctors.</p>
+        <div id="invites-list" class="space-y-2"></div>
+      </div>
+
       <!-- Full doctor list -->
       <div class="flex flex-wrap gap-3 items-center justify-between mb-4">
         <h2 class="font-headline text-lg font-bold">All Doctors</h2>
-        <button id="open-add-doctor-modal" class="bg-primary text-white px-5 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all">
-          <span class="material-symbols-outlined text-[18px]">person_add</span> Add New Doctor
-        </button>
+        <div class="flex flex-wrap gap-2">
+          <button id="open-invite-doctor-modal" class="bg-primary text-white px-4 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all">
+            <span class="material-symbols-outlined text-[18px]">mail</span> Invite by Email
+          </button>
+          <button id="open-add-doctor-modal" class="border border-primary text-primary px-4 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-primary/5 transition-all">
+            <span class="material-symbols-outlined text-[18px]">person_add</span> Add with Temp Password
+          </button>
+        </div>
       </div>
       <div id="doctors-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </div>
@@ -230,6 +312,102 @@
     <div id="tab-patients" class="tab-panel hidden">
       <h2 class="font-headline text-lg font-bold mb-4">All Patients</h2>
       <div id="patients-list" class="space-y-3"></div>
+    </div>
+
+    <!-- ── Analytics tab ─────────────────────────────────────────────── -->
+    <div id="tab-analytics" class="tab-panel hidden">
+      <div id="analytics-root"></div>
+    </div>
+
+    <!-- ── Access (Admin Management) tab ─────────────────────────────── -->
+    <div id="tab-access" class="tab-panel hidden">
+      <div class="grid lg:grid-cols-3 gap-6">
+
+        <!-- LEFT: Promote / Invite -->
+        <div class="lg:col-span-1 space-y-6 self-start">
+
+          <!-- Promote existing user / send invite -->
+          <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow">
+            <h2 class="font-headline text-lg font-bold mb-2 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">person_add</span> Add Admin
+            </h2>
+            <p class="text-xs text-on-surface-variant mb-5">
+              Enter an email. If they already have an account, they're promoted now.
+              If not, they're invited — they become admin the moment they sign in.
+            </p>
+            <form id="add-admin-form" class="space-y-3">
+              <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1 uppercase tracking-wide">Email *</label>
+                <input id="add-admin-email" name="email" type="email" required
+                  placeholder="new@admin.com"
+                  class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"/>
+              </div>
+              <p id="add-admin-error" class="text-xs text-tertiary hidden"></p>
+              <p id="add-admin-success" class="text-xs text-secondary hidden"></p>
+              <button type="submit"
+                class="w-full bg-primary text-white py-3 rounded-full font-bold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">shield_person</span> Make Admin
+              </button>
+            </form>
+          </div>
+
+          <!-- Change role of existing user -->
+          <div class="bg-surface-container-lowest rounded-2xl p-6 editorial-shadow">
+            <h2 class="font-headline text-lg font-bold mb-2 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">manage_accounts</span> Change Role
+            </h2>
+            <p class="text-xs text-on-surface-variant mb-4">
+              Look up any user by email, then change their role.
+            </p>
+            <div class="space-y-3">
+              <div class="flex gap-2">
+                <input id="lookup-email" type="email" placeholder="user@example.com"
+                  class="flex-1 bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"/>
+                <button id="lookup-btn" class="bg-primary text-white px-4 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[18px]">search</span>
+                </button>
+              </div>
+              <div id="lookup-result" class="hidden bg-surface-container rounded-xl p-4 text-sm space-y-3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Current admins + pending invitations -->
+        <div class="lg:col-span-2 space-y-6">
+
+          <!-- Pending admin invites -->
+          <div id="admin-invites-section" class="bg-amber-50 border border-amber-200 rounded-2xl p-5 hidden">
+            <h3 class="font-headline text-sm font-bold text-amber-900 mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">mark_email_unread</span>
+              Pending Admin Invitations
+            </h3>
+            <div id="admin-invites-list" class="space-y-2"></div>
+          </div>
+
+          <!-- Active admins -->
+          <div>
+            <h2 class="font-headline text-lg font-bold mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">shield_person</span> Current Admins
+            </h2>
+            <div id="admins-list" class="space-y-2">
+              <p class="text-sm text-on-surface-variant text-center py-6">Loading…</p>
+            </div>
+          </div>
+
+          <!-- Security notice -->
+          <div class="bg-primary/5 border border-primary/20 rounded-2xl p-5 text-xs leading-relaxed text-on-surface-variant">
+            <p class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-primary text-[16px]">info</span>
+              <span>
+                <strong class="text-on-surface">Important:</strong> After a role change, the affected user must
+                <strong>sign out and sign in again</strong> for their JWT to refresh.
+                The last remaining admin cannot be demoted — there must always be at least one admin.
+              </span>
+            </p>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- ── Site Content tab ──────────────────────────────────────────── -->
@@ -335,6 +513,75 @@
   </div>
 </div>
 
+<!-- ── Invite Doctor Modal (email-based, no password) ─────────────────── -->
+<div id="invite-doctor-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+  <div class="bg-white rounded-3xl w-full max-w-lg modal-box p-8 relative">
+    <button id="close-invite-doctor-modal" class="absolute top-5 right-5 text-on-surface-variant hover:text-on-surface">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <h2 class="font-headline text-xl font-bold mb-2 flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary">mail</span> Invite Doctor by Email
+    </h2>
+    <p class="text-xs text-on-surface-variant mb-6">
+      Pre-authorise an email so the doctor can sign in with <strong>"Continue with Google"</strong>
+      or email/password and be automatically promoted to a doctor account.
+    </p>
+
+    <form id="invite-doctor-form" class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Doctor's Email *</label>
+          <input id="inv-email" name="email" type="email" required placeholder="doctor@gmail.com"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"/>
+          <p class="text-xs text-on-surface-variant mt-1">Use the Gmail account they'll sign in with.</p>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Full Name *</label>
+          <input id="inv-full_name" name="full_name" required placeholder="Dr. Firstname Lastname"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Specialty *</label>
+          <select id="inv-specialty_id" name="specialty_id" required
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm">
+            <option value="">Select specialty…</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Title</label>
+          <input id="inv-title" name="title" placeholder="Senior Cardiologist"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Experience (years)</label>
+          <input id="inv-experience_years" name="experience_years" type="number" min="0"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Consultation Fee (₹)</label>
+          <input id="inv-consultation_fee" name="consultation_fee" type="number" min="0"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1">Qualifications</label>
+          <input id="inv-qualifications" name="qualifications" placeholder="MBBS, MD"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-semibold mb-1">Bio</label>
+          <textarea id="inv-bio" name="bio" rows="3"
+            class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm resize-none"></textarea>
+        </div>
+      </div>
+      <p id="invite-doctor-error" class="text-xs text-tertiary hidden"></p>
+      <button type="submit" id="invite-doctor-submit"
+        class="w-full bg-primary text-white py-3 rounded-full font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">send</span> Send Invitation
+      </button>
+    </form>
+  </div>
+</div>
+
 <!-- ── Edit Doctor Modal ──────────────────────────────────────────────── -->
 <div id="edit-doctor-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
   <div class="bg-white rounded-3xl w-full max-w-xl modal-box p-8 relative">
@@ -353,10 +600,17 @@
             class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"/>
         </div>
         <div class="col-span-2">
-          <label class="block text-sm font-semibold mb-1">Email Address</label>
+          <label class="block text-sm font-semibold mb-1 flex items-center justify-between">
+            <span>Email Address (login)</span>
+            <span class="text-[10px] font-normal text-on-surface-variant">change carefully — affects login</span>
+          </label>
           <input id="edit-email" name="email" type="email"
             class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20"
             placeholder="doctor@email.com"/>
+          <p class="text-xs text-on-surface-variant mt-1">
+            Changing this updates the doctor's Firebase login email and Supabase profile.
+            The doctor must sign in with the new email going forward.
+          </p>
         </div>
         <div class="col-span-2">
           <label class="block text-sm font-semibold mb-1">Specialty</label>
@@ -521,10 +775,12 @@
 
 <script src="/static/js/server-time.js"></script>
 <script src="/static/js/site-settings.js"></script>
-<!-- Firebase + api.js -->
+<!-- Firebase + api.js + RBAC -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="/static/js/api.js"></script>
+<script src="/static/js/rbac.js"></script>
+<script src="/static/js/analytics.js"></script>
 
 <script>
 (async () => {
@@ -607,6 +863,7 @@
 
   auth.onAuthStateChanged(async user => {
     if (!user) { showAuthError(); return; }
+    window._currentUserId = user.uid;
 
     let token = await user.getIdToken();
     let role  = 'patient';
@@ -681,6 +938,9 @@
 
     // ── Tab switching ──────────────────────────────────────────────────────
     let _cmsLoaded = false;
+    let _holidaysLoaded = false;
+    let _accessLoaded = false;
+    let _analyticsLoaded = false;
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => {
@@ -690,7 +950,313 @@
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
         $(`tab-${btn.dataset.tab}`)?.classList.remove('hidden');
         if (btn.dataset.tab === 'site' && !_cmsLoaded) { _cmsLoaded = true; loadCmsEditor(); }
+        if (btn.dataset.tab === 'holidays' && !_holidaysLoaded) { _holidaysLoaded = true; loadHolidays(); }
+        if (btn.dataset.tab === 'access' && !_accessLoaded) { _accessLoaded = true; loadAccessTab(); }
+        if (btn.dataset.tab === 'analytics' && !_analyticsLoaded) {
+          _analyticsLoaded = true;
+          AHAnalytics.render({
+            endpoint:  '/api/admin/analytics',
+            authFetch: authFetch,
+            title:     'Hospital-wide Patient Visits',
+          });
+        }
       });
+    });
+
+    // ── ACCESS / ADMIN MANAGEMENT ─────────────────────────────────────────────
+    async function loadAccessTab() {
+      loadAdmins();
+      loadAdminInvites();
+    }
+
+    async function loadAdmins() {
+      const el = $('admins-list');
+      try {
+        const res  = await authFetch('/api/admin/admins');
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Could not load admins.');
+        const admins = json.admins || [];
+        if (!admins.length) {
+          el.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-6">No admins found.</p>';
+          return;
+        }
+        el.innerHTML = admins.map(a => {
+          const isSelf = a.id === window._currentUserId;
+          return `
+          <div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow flex items-center gap-4">
+            <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-[20px]">shield_person</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-bold text-sm truncate">${a.full_name || '—'} ${isSelf ? '<span class="text-[10px] text-primary">(you)</span>' : ''}</p>
+              <p class="text-xs text-on-surface-variant truncate">${a.email}</p>
+            </div>
+            ${isSelf ? '' : `<button class="admin-demote text-xs font-bold text-tertiary hover:text-red-800 flex items-center gap-1"
+              data-id="${a.id}" data-email="${a.email}">
+              <span class="material-symbols-outlined text-[16px]">person_remove</span> Revoke
+            </button>`}
+          </div>`;
+        }).join('');
+
+        el.querySelectorAll('.admin-demote').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const ok = await customConfirm({
+              title: 'Revoke admin access?',
+              message: `${btn.dataset.email} will be demoted to a regular patient. They'll need to sign out + back in for the change to take effect.`,
+              confirmText: 'Revoke Admin',
+              danger: true,
+            });
+            if (!ok) return;
+            try {
+              const r = await authFetch(`/api/admin/admins/${btn.dataset.id}`, { method: 'DELETE' });
+              const j = await r.json();
+              if (!r.ok) throw new Error(j.error || 'Failed.');
+              showToast(j.message || 'Admin revoked.');
+              loadAdmins();
+            } catch(e) { showToast(e.message, 'error'); }
+          });
+        });
+      } catch(e) {
+        el.innerHTML = `<p class="text-tertiary text-sm">${e.message}</p>`;
+      }
+    }
+
+    async function loadAdminInvites() {
+      try {
+        const res  = await authFetch('/api/admin/admin-invites');
+        const json = await res.json();
+        if (!res.ok) return;
+        const pending = json.invitations || [];
+        const sec = $('admin-invites-section');
+        if (!pending.length) { sec.classList.add('hidden'); return; }
+        sec.classList.remove('hidden');
+        $('admin-invites-list').innerHTML = pending.map(i => `
+          <div class="bg-white rounded-xl px-4 py-3 flex items-center justify-between gap-3 border border-amber-100">
+            <div class="min-w-0 flex-1">
+              <p class="font-bold text-sm truncate">${i.email}</p>
+              <p class="text-[10px] text-on-surface-variant">Invited ${new Date(i.created_at).toLocaleDateString()}</p>
+            </div>
+            <button class="admin-invite-cancel text-xs font-semibold text-tertiary hover:text-red-800 flex items-center gap-1"
+              data-email="${i.email}">
+              <span class="material-symbols-outlined text-[14px]">close</span> Cancel
+            </button>
+          </div>`).join('');
+        $('admin-invites-list').querySelectorAll('.admin-invite-cancel').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const ok = await customConfirm({
+              title: 'Cancel invitation?',
+              message: `Cancel admin invitation for ${btn.dataset.email}?`,
+              confirmText: 'Cancel Invitation',
+              danger: true,
+            });
+            if (!ok) return;
+            try {
+              const r = await authFetch(`/api/admin/admin-invites/${encodeURIComponent(btn.dataset.email)}`, { method: 'DELETE' });
+              if (!r.ok) throw new Error((await r.json()).error || 'Failed.');
+              showToast('Invitation cancelled.');
+              loadAdminInvites();
+            } catch(e) { showToast(e.message, 'error'); }
+          });
+        });
+      } catch(_) {}
+    }
+
+    // Add admin (promote or invite)
+    $('add-admin-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const email = $('add-admin-email').value.trim().toLowerCase();
+      const err   = $('add-admin-error');
+      const ok    = $('add-admin-success');
+      err.classList.add('hidden'); ok.classList.add('hidden');
+      if (!email) {
+        err.textContent = 'Please enter an email.';
+        err.classList.remove('hidden');
+        return;
+      }
+      try {
+        const res  = await authFetch('/api/admin/admin-invites', {
+          method: 'POST', body: JSON.stringify({ email })
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Failed.');
+        ok.textContent = json.message;
+        ok.classList.remove('hidden');
+        showToast(json.message);
+        e.target.reset();
+        loadAdmins();
+        loadAdminInvites();
+      } catch(ex) {
+        err.textContent = ex.message;
+        err.classList.remove('hidden');
+      }
+    });
+
+    // Change role: look up user by email, show options
+    async function doLookup() {
+      const email = $('lookup-email').value.trim().toLowerCase();
+      const out   = $('lookup-result');
+      if (!email) return;
+      out.classList.remove('hidden');
+      out.innerHTML = '<p class="text-on-surface-variant">Searching…</p>';
+      try {
+        const res  = await authFetch(`/api/admin/users/lookup?email=${encodeURIComponent(email)}`);
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Lookup failed.');
+        if (!json.found) {
+          out.innerHTML = `
+            <p class="text-sm">No account found for <strong>${email}</strong>.</p>
+            <p class="text-xs text-on-surface-variant mt-1">Use "Add Admin" above to send an invitation — they'll be promoted the moment they sign in.</p>`;
+          return;
+        }
+        const u = json.user;
+        const isMe = u.id === window._currentUserId;
+        const roleBadge = {
+          admin:   '<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full">ADMIN</span>',
+          doctor:  '<span class="bg-secondary-container text-secondary text-[10px] font-bold px-2 py-0.5 rounded-full">DOCTOR</span>',
+          patient: '<span class="bg-surface-container-high text-on-surface-variant text-[10px] font-bold px-2 py-0.5 rounded-full">PATIENT</span>',
+        }[u.role] || u.role;
+        out.innerHTML = `
+          <div class="flex items-center gap-3 pb-3 border-b border-outline-variant">
+            <div class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-[20px]">person</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-bold text-sm truncate">${u.full_name || '—'} ${isMe ? '<span class="text-[10px] text-primary">(you)</span>' : ''}</p>
+              <p class="text-xs text-on-surface-variant truncate">${u.email}</p>
+              <p class="mt-1">${roleBadge}</p>
+            </div>
+          </div>
+          <div class="pt-3">
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wide mb-2">Change role to:</p>
+            <div class="flex flex-wrap gap-2">
+              ${u.role !== 'admin'   && !isMe ? `<button class="role-btn flex-1 bg-primary text-white px-3 py-2 rounded-full text-xs font-bold hover:opacity-90" data-role="admin">Make Admin</button>` : ''}
+              ${u.role !== 'doctor'  && !isMe ? `<button class="role-btn flex-1 bg-secondary text-white px-3 py-2 rounded-full text-xs font-bold hover:opacity-90" data-role="doctor">Make Doctor</button>` : ''}
+              ${u.role !== 'patient' && !isMe ? `<button class="role-btn flex-1 border border-outline-variant text-on-surface px-3 py-2 rounded-full text-xs font-bold hover:bg-surface-container" data-role="patient">Demote to Patient</button>` : ''}
+              ${isMe ? `<p class="text-xs text-on-surface-variant italic">You can't change your own role.</p>` : ''}
+            </div>
+          </div>`;
+        out.querySelectorAll('.role-btn').forEach(b => {
+          b.addEventListener('click', async () => {
+            const newRole = b.dataset.role;
+            const ok = await customConfirm({
+              title: `Change role to ${newRole}?`,
+              message: `${u.email} will become a ${newRole}. They must sign out and back in for the change to take effect.`,
+              confirmText: 'Change Role',
+              danger: newRole === 'patient',
+            });
+            if (!ok) return;
+            try {
+              const r = await authFetch(`/api/admin/users/${u.id}/role`, {
+                method: 'PUT', body: JSON.stringify({ role: newRole })
+              });
+              const j = await r.json();
+              if (!r.ok) throw new Error(j.error || 'Failed.');
+              showToast(j.message || `Role changed to ${newRole}.`);
+              doLookup();
+              loadAdmins();
+            } catch(ex) { showToast(ex.message, 'error'); }
+          });
+        });
+      } catch(ex) {
+        out.innerHTML = `<p class="text-tertiary">${ex.message}</p>`;
+      }
+    }
+    $('lookup-btn').addEventListener('click', doLookup);
+    $('lookup-email').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); doLookup(); } });
+
+    // ── HOLIDAYS ──────────────────────────────────────────────────────────────
+    async function loadHolidays() {
+      const upEl   = $('holidays-upcoming');
+      const pastEl = $('holidays-past');
+      upEl.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">Loading…</p>';
+      pastEl.innerHTML = '';
+      try {
+        const res  = await authFetch('/api/admin/holidays');
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Could not load holidays.');
+        const today = (window._serverDate || new Date().toISOString().slice(0,10));
+        const todayStr = (typeof today === 'string') ? today : today.toISOString().slice(0,10);
+        const upcoming = (json.holidays || []).filter(h => h.holiday_date >= todayStr);
+        const past     = (json.holidays || []).filter(h => h.holiday_date <  todayStr);
+        renderHolidayList(upEl,   upcoming, false);
+        renderHolidayList(pastEl, past.reverse(), true);
+      } catch(e) {
+        upEl.innerHTML = `<p class="text-tertiary text-sm">${e.message}</p>`;
+      }
+    }
+
+    function renderHolidayList(container, holidays, isPast) {
+      if (!holidays.length) {
+        container.innerHTML = `<p class="text-sm text-on-surface-variant text-center py-6">${isPast ? 'No past holidays.' : 'No upcoming holidays declared.'}</p>`;
+        return;
+      }
+      container.innerHTML = holidays.map(h => {
+        const d = new Date(h.holiday_date + 'T00:00:00');
+        const formatted = d.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+        return `
+        <div class="bg-surface-container-lowest rounded-2xl p-4 editorial-shadow flex items-center gap-4">
+          <div class="w-12 h-14 bg-primary/10 text-primary rounded-xl flex flex-col items-center justify-center flex-shrink-0">
+            <div class="text-[10px] uppercase font-bold leading-none">${d.toLocaleDateString('en-IN',{month:'short'})}</div>
+            <div class="text-xl font-extrabold leading-none mt-0.5">${d.getDate()}</div>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-sm">${h.name}</p>
+            <p class="text-xs text-on-surface-variant">${formatted}</p>
+            ${h.description ? `<p class="text-xs text-on-surface-variant mt-1 italic">${h.description}</p>` : ''}
+          </div>
+          ${isPast ? '' : `<button class="holiday-delete text-xs font-bold text-tertiary hover:text-red-800 flex items-center gap-1"
+              data-id="${h.id}" data-name="${h.name}">
+              <span class="material-symbols-outlined text-[16px]">close</span> Remove
+            </button>`}
+        </div>`;
+      }).join('');
+
+      container.querySelectorAll('.holiday-delete').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const ok = await customConfirm({
+            title:       'Remove holiday?',
+            message:     `Remove "${btn.dataset.name}"? Patients will be able to book for this date again.`,
+            confirmText: 'Remove',
+            danger:      true,
+          });
+          if (!ok) return;
+          try {
+            const res = await authFetch(`/api/admin/holidays/${btn.dataset.id}`, { method: 'DELETE' });
+            if (!res.ok) throw new Error((await res.json()).error || 'Delete failed.');
+            showToast('Holiday removed.');
+            loadHolidays();
+          } catch(e) { showToast(e.message, 'error'); }
+        });
+      });
+    }
+
+    $('add-holiday-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const errEl = $('add-holiday-error');
+      errEl.classList.add('hidden');
+      const payload = {
+        holiday_date: $('holiday-date').value,
+        name:         $('holiday-name').value.trim(),
+        description:  $('holiday-desc').value.trim(),
+      };
+      if (!payload.holiday_date || !payload.name) {
+        errEl.textContent = 'Please pick a date and enter a name.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+      try {
+        const res  = await authFetch('/api/admin/holidays', {
+          method: 'POST', body: JSON.stringify(payload)
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Could not add holiday.');
+        showToast(`Holiday "${payload.name}" added.`);
+        e.target.reset();
+        loadHolidays();
+      } catch(err) {
+        errEl.textContent = err.message;
+        errEl.classList.remove('hidden');
+      }
     });
 
     // ── CMS EDITOR ────────────────────────────────────────────────────────────
@@ -1075,13 +1641,44 @@
           btn.disabled = true;
           const { id, action } = btn.dataset;
           try {
-            const res = await authFetch(`/api/admin/leaves/${id}/${action}`, { method: 'POST' });
-            if (!res.ok) throw new Error((await res.json()).error);
+            let res  = await authFetch(`/api/admin/leaves/${id}/${action}`, { method: 'POST' });
+            let json = await res.json();
+
+            // 409 = leave overlaps with existing patient appointments
+            if (res.status === 409 && action === 'approve') {
+              const conflicts = json.conflicts || [];
+              const lines = conflicts.map(c =>
+                `  • ${c.patient_name || 'patient'} — ${(c.appointment_time||'').slice(0,5)} (${c.status})`
+              ).join('\n');
+              const ok = await customConfirm({
+                title: 'Appointment conflict',
+                message: `${conflicts.length} patient appointment(s) overlap this leave:\n\n${lines}\n\nApproving will auto-cancel them and email the patients. Continue?`,
+                confirmText: 'Cancel & Approve Leave',
+                cancelText:  'Keep Patients (Reject Leave)',
+                danger: true,
+              });
+              if (!ok) {
+                btn.disabled = false;
+                return;
+              }
+              // Re-approve with force=true
+              res  = await authFetch(`/api/admin/leaves/${id}/approve`, {
+                method: 'POST', body: JSON.stringify({ force: true })
+              });
+              json = await res.json();
+              if (!res.ok) throw new Error(json.error || 'Approval failed.');
+            } else if (!res.ok) {
+              throw new Error(json.error || 'Action failed.');
+            }
+
             const lv = allLeaves.find(l => l.id === id);
             if (lv) lv.status = action === 'approve' ? 'approved' : 'rejected';
-            showToast(`Leave ${action}d.`);
+            showToast(json.message || `Leave ${action}d.`);
             renderLeaves(allLeaves);
-          } catch(e) { showToast(e.message, 'error'); btn.disabled = false; }
+          } catch(e) {
+            showToast(e.message, 'error');
+            btn.disabled = false;
+          }
         });
       });
     }
@@ -1196,7 +1793,7 @@
               <span class="material-symbols-outlined text-[14px]">open_in_new</span>Profile
             </a>
             <button class="doc-edit text-xs font-semibold text-primary hover:text-primary/80"
-              data-doc='${JSON.stringify({id:d.id,full_name:d.full_name,email:(d.profiles?.email||""),title:d.title||"",qualifications:d.qualifications||"",experience_years:d.experience_years||"",consultation_fee:d.consultation_fee||"",bio:d.bio||"",photo_url:d.photo_url||"",specialty_id:d.specialty_id||""})}'>Edit</button>
+              data-doc='${JSON.stringify({id:d.id,full_name:d.full_name,email:(d.profiles?.email||d.pending_email||""),pending:!d.profiles?.email,title:d.title||"",qualifications:d.qualifications||"",experience_years:d.experience_years||"",consultation_fee:d.consultation_fee||"",bio:d.bio||"",photo_url:d.photo_url||"",specialty_id:d.specialty_id||""})}'>Edit</button>
             <button class="doc-toggle text-xs font-semibold ${active ? 'text-amber-600 hover:text-amber-800' : 'text-secondary'}"
               data-id="${d.id}" data-active="${active}">${active ? 'Deactivate' : 'Activate'}</button>
             <button class="doc-delete text-xs font-semibold text-tertiary hover:text-red-800"
@@ -1211,6 +1808,8 @@
           $('edit-doctor-id').value           = d.id;
           $('edit-full_name').value           = d.full_name || '';
           $('edit-email').value               = d.email || '';
+          // Remember the original email so we can detect changes on save
+          $('edit-doctor-form').dataset.origEmail = d.email || '';
           $('edit-title').value               = d.title || '';
           $('edit-qualifications').value      = d.qualifications || '';
           $('edit-experience_years').value    = d.experience_years || '';
@@ -1410,6 +2009,116 @@
       }
     });
 
+    // ── INVITE DOCTOR (email-based, no password) ──────────────────────────
+    function populateInviteSpecialties() {
+      const sel = $('inv-specialty_id');
+      sel.innerHTML = '<option value="">Select specialty…</option>';
+      specialties.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id; opt.textContent = s.name;
+        sel.appendChild(opt);
+      });
+    }
+    $('open-invite-doctor-modal').addEventListener('click', () => {
+      $('invite-doctor-form').reset();
+      $('invite-doctor-error').classList.add('hidden');
+      populateInviteSpecialties();
+      $('invite-doctor-modal').classList.remove('hidden');
+    });
+    $('close-invite-doctor-modal').addEventListener('click', () =>
+      $('invite-doctor-modal').classList.add('hidden'));
+    $('invite-doctor-modal').addEventListener('click', e => {
+      if (e.target === $('invite-doctor-modal')) $('invite-doctor-modal').classList.add('hidden');
+    });
+
+    $('invite-doctor-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = $('invite-doctor-submit');
+      const err = $('invite-doctor-error');
+      err.classList.add('hidden');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const body = {
+        email:            $('inv-email').value.trim().toLowerCase(),
+        full_name:        $('inv-full_name').value.trim(),
+        specialty_id:     $('inv-specialty_id').value,
+        title:            $('inv-title').value.trim(),
+        qualifications:   $('inv-qualifications').value.trim(),
+        experience_years: parseInt($('inv-experience_years').value) || 0,
+        consultation_fee: parseFloat($('inv-consultation_fee').value) || 0,
+        bio:              $('inv-bio').value.trim(),
+      };
+      try {
+        const res  = await authFetch('/api/admin/doctor-invites', {
+          method: 'POST', body: JSON.stringify(body)
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Invite failed.');
+        $('invite-doctor-modal').classList.add('hidden');
+        showToast(`Invited ${body.email}. They can sign in with Google now.`);
+        // Refresh doctors + invites
+        if (json.doctor) allDoctors.push(json.doctor);
+        renderDoctors(allDoctors);
+        loadInvitations();
+      } catch(ex) {
+        err.textContent = ex.message;
+        err.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">send</span> Send Invitation';
+      }
+    });
+
+    async function loadInvitations() {
+      try {
+        const res  = await authFetch('/api/admin/doctor-invites');
+        const json = await res.json();
+        if (!res.ok) return;
+        const pending = (json.invitations || []).filter(i => !i.accepted_at);
+        const sec = $('invites-section');
+        if (!pending.length) { sec.classList.add('hidden'); return; }
+        sec.classList.remove('hidden');
+        $('invites-list').innerHTML = pending.map(i => `
+          <div class="bg-white rounded-xl px-4 py-3 flex items-center justify-between gap-3 border border-amber-100">
+            <div class="min-w-0 flex-1">
+              <p class="font-bold text-sm truncate">${i.doctors?.full_name || '—'}</p>
+              <p class="text-xs text-on-surface-variant truncate">${i.email}</p>
+              ${i.doctors?.specialties?.name ? `<p class="text-[10px] text-primary font-semibold mt-0.5">${i.doctors.specialties.name}</p>` : ''}
+            </div>
+            <button class="cancel-invite text-xs font-semibold text-tertiary hover:text-red-800 flex items-center gap-1"
+              data-email="${i.email}" data-name="${i.doctors?.full_name || i.email}">
+              <span class="material-symbols-outlined text-[14px]">close</span> Cancel
+            </button>
+          </div>`).join('');
+
+        $('invites-list').querySelectorAll('.cancel-invite').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const ok = await customConfirm({
+              title: 'Cancel invitation?',
+              message: `Cancel invitation for ${btn.dataset.name}? Their doctor record will be deleted.`,
+              confirmText: 'Cancel Invitation',
+              danger: true,
+            });
+            if (!ok) return;
+            try {
+              const r = await authFetch(`/api/admin/doctor-invites/${encodeURIComponent(btn.dataset.email)}`, { method: 'DELETE' });
+              if (!r.ok) throw new Error((await r.json()).error || 'Delete failed.');
+              showToast('Invitation cancelled.');
+              loadInvitations();
+              // Refresh doctors too — the placeholder row got deleted
+              authFetch('/api/admin/doctors').then(r=>r.json()).then(j => {
+                allDoctors = j.doctors || [];
+                renderDoctors(allDoctors);
+              });
+            } catch(ex) { showToast(ex.message, 'error'); }
+          });
+        });
+      } catch(_) {}
+    }
+    // Load invitations once the dashboard is ready
+    loadInvitations();
+
     // ── EDIT DOCTOR MODAL ──────────────────────────────────────────────────
     $('close-edit-doctor-modal').addEventListener('click', () => {
       $('edit-doctor-modal').classList.add('hidden');
@@ -1438,6 +2147,21 @@
       const errEl = $('edit-doctor-error');
       const submitBtn = $('edit-doctor-submit');
       errEl.classList.add('hidden');
+
+      // Determine if the email actually changed — needs explicit confirmation
+      const newEmail   = $('edit-email').value.trim().toLowerCase();
+      const origEmail  = ($('edit-doctor-form').dataset.origEmail || '').toLowerCase();
+      const emailChanged = newEmail && newEmail !== origEmail;
+      if (emailChanged) {
+        const ok = await customConfirm({
+          title: 'Change login email?',
+          message: `This will update the doctor's Firebase login email to "${newEmail}". They must use the new email to sign in from now on. Continue?`,
+          confirmText: 'Change Email',
+          danger: false,
+        });
+        if (!ok) return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.textContent = 'Saving…';
 
@@ -1454,8 +2178,7 @@
           consultation_fee: parseFloat($('edit-consultation_fee').value) || 0,
           bio:              $('edit-bio').value.trim(),
         };
-        const emailVal = $('edit-email').value.trim().toLowerCase();
-        if (emailVal) body.email = emailVal;
+        if (emailChanged) body.email = newEmail;
         const specVal = $('edit-specialty_id').value;
         if (specVal) body.specialty_id = specVal;
         if (photo_url) body.photo_url = photo_url;
@@ -1474,8 +2197,14 @@
         _editPhotoDataUrl = null;
         $('edit-photo-file').value = '';
         $('edit-doctor-modal').classList.add('hidden');
-        renderDoctors(allDoctors);
-        showToast('Doctor profile updated.');
+        // Force a full reload of doctors so any pending_email shifts are reflected
+        authFetch('/api/admin/doctors').then(r=>r.json()).then(j => {
+          allDoctors = j.doctors || allDoctors;
+          renderDoctors(allDoctors);
+        });
+        showToast(emailChanged
+          ? `Doctor updated. New login email: ${newEmail}`
+          : 'Doctor profile updated.');
       } catch(err) {
         errEl.textContent = err.message;
         errEl.classList.remove('hidden');
@@ -1486,7 +2215,7 @@
     });
 
     // Close modals on backdrop click
-    [$('add-doctor-modal'), $('surgery-modal')].forEach(modal => {
+    [$('add-doctor-modal'), $('surgery-modal'), $('invite-doctor-modal')].forEach(modal => {
       modal.addEventListener('click', e => { if (e.target === modal) modal.classList.add('hidden'); });
     });
 

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="require-min-role" content="doctor"/>
 <title>Doctor Dashboard | Aadityaa Hospital</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -96,6 +97,9 @@
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="all">All Appointments</button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="surgeries">Surgeries</button>
       <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant" data-tab="leaves">Leave Management</button>
+      <button class="tab-btn px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant flex items-center gap-1.5" data-tab="analytics">
+        <span class="material-symbols-outlined text-[16px]">analytics</span> Analytics
+      </button>
     </div>
 
     <!-- Today tab -->
@@ -194,12 +198,19 @@
       </div>
     </div>
 
+    <!-- Analytics tab -->
+    <div id="tab-analytics" class="tab-panel hidden">
+      <div id="analytics-root"></div>
+    </div>
+
   </div>
 </main>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="/static/js/api.js"></script>
+<script src="/static/js/rbac.js"></script>
+<script src="/static/js/analytics.js"></script>
 <script src="/static/js/server-time.js"></script>
 
 <script>
@@ -465,6 +476,14 @@
 
 
   // ── Tab switching ─────────────────────────────────────────────────────────
+  let _analyticsLoaded = false;
+  async function authFetch(url, opts = {}) {
+    const tok = await user.getIdToken();
+    return fetch(url, {
+      ...opts,
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${tok}`, ...(opts.headers || {}) },
+    });
+  }
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => {
@@ -474,6 +493,14 @@
       });
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
       document.getElementById(`tab-${btn.dataset.tab}`).classList.remove('hidden');
+      if (btn.dataset.tab === 'analytics' && !_analyticsLoaded) {
+        _analyticsLoaded = true;
+        AHAnalytics.render({
+          endpoint:  '/api/doctor/analytics',
+          authFetch: authFetch,
+          title:     'My Patient Visits',
+        });
+      }
     });
   });
 

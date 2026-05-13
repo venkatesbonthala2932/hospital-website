@@ -180,9 +180,13 @@
           </div>
           <div>
             <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Phone <span class="font-normal opacity-60">(optional)</span></label>
-            <input id="register-phone" type="tel"
+            <input id="register-phone" type="tel" inputmode="numeric"
+              maxlength="10" pattern="[0-9]{10}"
+              autocomplete="tel-national"
+              oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)"
               class="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-              placeholder="+91 98765 43210"/>
+              placeholder="9876543210 (10 digits)"/>
+            <p class="text-[11px] text-on-surface-variant mt-1">Enter your 10-digit mobile number, digits only.</p>
           </div>
           <div>
             <label class="text-sm font-semibold text-on-surface-variant block mb-1.5">Password</label>
@@ -309,7 +313,21 @@ document.getElementById('reset-btn').addEventListener('click', async () => {
     try {
       const result = await Auth.loginWithGoogle();
       redirectAfterAuth(result.user?.role || 'patient');
-    } catch(e) { alert(e.message); }
+    } catch(e) {
+      // If Firebase actually signed the user in already, the
+      // onAuthStateChanged listener above will handle the redirect — don't
+      // pop a scary error in that case. Only show an error if there's no
+      // signed-in user after the failure.
+      const auth = _initFirebase();
+      const user = auth && auth.currentUser;
+      if (user) return;   // let onAuthStateChanged finish the login
+      if (window.alertModal) {
+        await alertModal({ title: 'Sign-in failed', message: e.message, kind: 'error' });
+      } else {
+        const errEl = document.getElementById('login-error');
+        if (errEl) { errEl.textContent = e.message; errEl.classList.remove('hidden'); }
+      }
+    }
   }
   document.getElementById('login-google').addEventListener('click', handleGoogle);
   document.getElementById('register-google').addEventListener('click', handleGoogle);

@@ -128,13 +128,13 @@
 
   <!-- Main grid (hidden until loaded) -->
   <div id="booking-grid" class="hidden">
-    <h1 class="font-headline text-4xl font-extrabold tracking-tighter mb-10">Book an Appointment</h1>
+    <h1 class="font-headline text-2xl md:text-4xl font-extrabold tracking-tighter mb-6 md:mb-10">Book an Appointment</h1>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
 
-      <!-- Doctor card (sticky) -->
+      <!-- Doctor card (sticky on desktop only) -->
       <div class="lg:col-span-1">
-        <div id="doctor-card" class="sticky top-28 bg-surface-container-lowest rounded-3xl overflow-hidden editorial-shadow">
+        <div id="doctor-card" class="lg:sticky lg:top-28 bg-surface-container-lowest rounded-2xl lg:rounded-3xl overflow-hidden editorial-shadow">
           <!-- Rendered by JS -->
         </div>
       </div>
@@ -349,6 +349,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="/static/js/api.js"></script>
 <script src="/static/js/nav.js"></script>
+<script src="/static/js/rbac.js"></script>
 
 <script>
 (async () => {
@@ -376,19 +377,39 @@
 
   const initials = doctor.full_name.split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('');
   document.getElementById('doctor-card').innerHTML = `
-    <div class="relative h-52 overflow-hidden">
-      ${doctor.photo_url
-        ? `<img src="${doctor.photo_url}" alt="${doctor.full_name}" class="w-full h-full object-cover">`
-        : `<div class="w-full h-full bg-primary/10 flex items-center justify-center"><span class="text-7xl font-black text-primary/30">${initials}</span></div>`}
-      <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/80 to-transparent"></div>
+    <!-- Mobile / tablet: compact horizontal card -->
+    <div class="lg:hidden flex items-center gap-4 p-5">
+      <div class="w-20 h-20 rounded-2xl overflow-hidden bg-primary/10 flex-shrink-0">
+        ${doctor.photo_url
+          ? `<img src="${doctor.photo_url}" alt="${doctor.full_name}" class="w-full h-full object-cover">`
+          : `<div class="w-full h-full flex items-center justify-center"><span class="text-2xl font-black text-primary/40">${initials}</span></div>`}
+      </div>
+      <div class="flex-1 min-w-0">
+        <h2 class="font-headline text-lg font-bold truncate">${doctor.full_name}</h2>
+        ${doctor.specialties?.name ? `<p class="text-xs text-primary font-semibold mt-0.5">${doctor.specialties.name}</p>` : ''}
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-on-surface-variant mt-1.5">
+          ${doctor.experience_years ? `<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span>${doctor.experience_years}+ yrs</span>` : ''}
+          ${doctor.consultation_fee ? `<span class="inline-flex items-center gap-1 text-primary font-semibold"><span class="material-symbols-outlined text-[14px]">payments</span>₹${doctor.consultation_fee}</span>` : ''}
+        </div>
+      </div>
     </div>
-    <div class="p-6 space-y-3">
-      <h2 class="font-headline text-xl font-bold">${doctor.full_name}</h2>
-      ${doctor.specialties?.name ? `<p class="text-sm text-primary font-semibold">${doctor.specialties.name}</p>` : ''}
-      ${doctor.qualifications ? `<p class="text-xs text-on-surface-variant leading-relaxed">${doctor.qualifications}</p>` : ''}
-      <div class="space-y-1.5 text-sm pt-1">
-        ${doctor.experience_years ? `<div class="flex items-center gap-2 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span>${doctor.experience_years}+ years experience</div>` : ''}
-        ${doctor.consultation_fee ? `<div class="flex items-center gap-2 text-primary font-semibold"><span class="material-symbols-outlined text-[16px]">payments</span>₹${doctor.consultation_fee} consultation fee</div>` : ''}
+
+    <!-- Desktop: full vertical card with hero photo -->
+    <div class="hidden lg:block">
+      <div class="relative h-44 overflow-hidden">
+        ${doctor.photo_url
+          ? `<img src="${doctor.photo_url}" alt="${doctor.full_name}" class="w-full h-full object-cover object-top">`
+          : `<div class="w-full h-full bg-primary/10 flex items-center justify-center"><span class="text-7xl font-black text-primary/30">${initials}</span></div>`}
+        <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/80 to-transparent"></div>
+      </div>
+      <div class="p-6 space-y-3">
+        <h2 class="font-headline text-xl font-bold">${doctor.full_name}</h2>
+        ${doctor.specialties?.name ? `<p class="text-sm text-primary font-semibold">${doctor.specialties.name}</p>` : ''}
+        ${doctor.qualifications ? `<p class="text-xs text-on-surface-variant leading-relaxed">${doctor.qualifications}</p>` : ''}
+        <div class="space-y-1.5 text-sm pt-1">
+          ${doctor.experience_years ? `<div class="flex items-center gap-2 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">schedule</span>${doctor.experience_years}+ years experience</div>` : ''}
+          ${doctor.consultation_fee ? `<div class="flex items-center gap-2 text-primary font-semibold"><span class="material-symbols-outlined text-[16px]">payments</span>₹${doctor.consultation_fee} consultation fee</div>` : ''}
+        </div>
       </div>
     </div>`;
 

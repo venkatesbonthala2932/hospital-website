@@ -59,11 +59,17 @@ def get_available_slots(doctor_id: str, date_str: str) -> dict:
     if requested_date <= date.today():
         return {"error": "Only future dates are allowed for booking."}
 
-    # Sunday (weekday 6) is always a day off
-    if requested_date.weekday() == 6:
-        return {"slots": [], "message": "Doctor does not work on Sundays.", "date": date_str}
-
     db = get_admin_supabase()
+
+    # Hospital-wide public holidays (admin-declared closures)
+    holiday = (
+        db.table("public_holidays")
+        .select("name")
+        .eq("holiday_date", date_str)
+        .execute()
+    )
+    if holiday.data:
+        return {"slots": [], "message": f"Hospital closed — {holiday.data[0]['name']}.", "date": date_str}
 
     # Check blocked dates (full-day blocks have start_time IS NULL or block_type='full_day')
     blocked = (
@@ -156,26 +162,46 @@ def get_available_dates(doctor_id: str, days_ahead: int = 60) -> list[str]:
     if not working_days:
         return []
 
-    # Blocked dates in range
+    # Blocked dates in range — but ONLY treat full-day blocks as unavailable.
+    # Partial blocks (e.g. doctor took a half-day leave 14:00-18:00) still
+    # have free slots in the morning, so the date should remain bookable.
     today = date.today()
     future_limit = today + timedelta(days=days_ahead)
     blocked_result = (
         db.table("doctor_blocked_dates")
-        .select("blocked_date")
+        .select("blocked_date, start_time, end_time, block_type")
         .eq("doctor_id", doctor_id)
         .gte("blocked_date", today.isoformat())
         .lte("blocked_date", future_limit.isoformat())
         .execute()
     )
-    blocked_dates = {row["blocked_date"] for row in (blocked_result.data or [])}
+    blocked_dates = set()
+    for row in (blocked_result.data or []):
+        # full-day blocks have block_type='full_day' OR no start_time
+        if row.get("block_type") == "full_day" or row.get("start_time") is None:
+            blocked_dates.add(row["blocked_date"])
+        # else: partial block — leave the date available, the slots API
+        # will hide the busy hours
+
+    # Hospital-wide public holidays in the same window
+    holidays_result = (
+        db.table("public_holidays")
+        .select("holiday_date")
+        .gte("holiday_date", today.isoformat())
+        .lte("holiday_date", future_limit.isoformat())
+        .execute()
+    )
+    holiday_dates = {row["holiday_date"] for row in (holidays_result.data or [])}
 
     available_dates: list[str] = []
     check = today + timedelta(days=1)   # start from tomorrow
 
     while check <= future_limit:
-        # weekday 6 = Sunday — always off regardless of doctor_availability entries
-        if check.weekday() != 6 and check.weekday() in working_days and check.isoformat() not in blocked_dates:
-            available_dates.append(check.isoformat())
+        iso = check.isoformat()
+        if (check.weekday() in working_days
+            and iso not in blocked_dates
+            and iso not in holiday_dates):
+            available_dates.append(iso)
         check += timedelta(days=1)
 
     return available_dates

@@ -83,6 +83,13 @@ def register():
             "role":      "patient",
         }).execute()
 
+        # Step 3: Mirror the role into Firebase custom claims so the JWT carries it
+        try:
+            from services.firebase_service import set_user_role
+            set_user_role(uid, "patient")
+        except Exception as e:
+            print(f"[warn] Could not set initial role claim for {uid}: {e}")
+
         return jsonify({
             "message":   "Account created. Please log in with your email and password.",
             "user_id":   uid,
@@ -132,13 +139,17 @@ def login():
     email = decoded.get("email", "")
 
     db = get_admin_supabase()
+    # Use .execute() not .single() — .single() raises an exception when
+    # 0 rows are returned, which is the normal case for first-time Google
+    # sign-in (no profile yet).
     profile = db.table("profiles").select("role, full_name, phone") \
-        .eq("id", uid).single().execute()
+        .eq("id", uid).execute()
 
     if profile.data:
-        role      = profile.data.get("role", "patient")
-        full_name = profile.data.get("full_name", "")
-        phone     = profile.data.get("phone", "")
+        row       = profile.data[0]
+        role      = row.get("role", "patient")
+        full_name = row.get("full_name", "")
+        phone     = row.get("phone", "")
     else:
         # Google login — user may not have a profile yet, create it
         role      = "patient"
@@ -149,12 +160,20 @@ def login():
         }).execute()
         phone = ""
 
+    # Auto-promote if a doctor invitation is pending for this email
+    if role == "patient" and email:
+        from services.auth_service import _maybe_accept_invitation
+        promoted = _maybe_accept_invitation(db, email, uid, full_name)
+        if promoted == "doctor":
+            role = "doctor"
+
     # For doctors: also return their doctor_id so the dashboard loads in one call
     extra = {}
     if role == "doctor":
         doc = db.table("doctors").select("id, full_name, title") \
-            .eq("user_id", uid).single().execute()
-        extra["doctor"] = doc.data
+            .eq("user_id", uid).execute()
+        if doc.data:
+            extra["doctor"] = doc.data[0]
 
     return jsonify({
         "message":   "Login successful.",

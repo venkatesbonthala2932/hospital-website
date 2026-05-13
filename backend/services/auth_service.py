@@ -50,12 +50,18 @@ def get_current_user() -> tuple[dict | None, str | None]:
 
     db = get_admin_supabase()
 
-    # Get existing profile
-    result = db.table("profiles").select("role, full_name") \
-        .eq("id", uid).single().execute()
+    # Get existing profile (use .execute() not .single() — .single() crashes
+    # with PGRST116 if 0 rows are returned, which makes every protected
+    # request return 500 for brand-new users).
+    try:
+        result = db.table("profiles").select("role, full_name") \
+            .eq("id", uid).execute()
+    except Exception as e:
+        print(f"[warn] profile lookup failed for {uid}: {e}")
+        result = type("_", (), {"data": []})()
 
     if result.data:
-        role = result.data.get("role", "patient")
+        role = result.data[0].get("role", "patient")
     else:
         # First time this user hits a protected route — auto-create their profile
         role = "patient"
@@ -66,8 +72,76 @@ def get_current_user() -> tuple[dict | None, str | None]:
             "role":      role,
         }).execute()
 
+    # If they're still 'patient' but have a pending doctor invitation, promote.
+    # This is what makes "Continue with Google" work for invited doctors —
+    # no extra UI step needed.
+    if role == "patient" and email:
+        role = _maybe_accept_invitation(db, email, uid, name) or role
+
     user = {"id": uid, "email": email, "name": name}
     return user, role
+
+
+def _maybe_accept_invitation(db, email: str, uid: str, display_name: str) -> str | None:
+    """
+    Check for a pending doctor OR admin invitation for this email and
+    auto-promote the user on first sign-in.
+
+    Admin invitations take precedence over doctor invitations
+    (if both somehow exist).
+
+    Returns 'admin' | 'doctor' | None. Best-effort — never raises.
+    """
+    email = (email or "").lower()
+    if not email:
+        return None
+
+    # ── Admin invitation first ────────────────────────────────────────────────
+    try:
+        adm = db.table("admin_invitations") \
+            .select("email, accepted_at") \
+            .eq("email", email).execute()
+        if adm.data and not adm.data[0].get("accepted_at"):
+            db.table("profiles").update({
+                "role": "admin",
+                "full_name": display_name or email.split("@")[0],
+            }).eq("id", uid).execute()
+            try:
+                from services.firebase_service import set_user_role
+                set_user_role(uid, "admin")
+            except Exception as e:
+                print(f"[warn] could not set admin claim for {uid}: {e}")
+            db.table("admin_invitations").update({"accepted_at": "now()"}) \
+                .eq("email", email).execute()
+            return "admin"
+    except Exception as e:
+        print(f"[warn] admin invitation check failed for {email}: {e}")
+
+    # ── Doctor invitation ─────────────────────────────────────────────────────
+    try:
+        doc = db.table("doctor_invitations") \
+            .select("email, doctor_id, accepted_at") \
+            .eq("email", email).execute()
+        if not doc.data or doc.data[0].get("accepted_at"):
+            return None
+
+        doctor_id = doc.data[0]["doctor_id"]
+        db.table("doctors").update({"user_id": uid}).eq("id", doctor_id).execute()
+        db.table("profiles").update({
+            "role": "doctor",
+            "full_name": display_name or email.split("@")[0],
+        }).eq("id", uid).execute()
+        try:
+            from services.firebase_service import set_user_role
+            set_user_role(uid, "doctor")
+        except Exception as e:
+            print(f"[warn] could not set doctor claim for {uid}: {e}")
+        db.table("doctor_invitations").update({"accepted_at": "now()"}) \
+            .eq("email", email).execute()
+        return "doctor"
+    except Exception as e:
+        print(f"[warn] doctor invitation check failed for {email}: {e}")
+        return None
 
 
 def get_doctor_record(firebase_uid: str) -> dict | None:

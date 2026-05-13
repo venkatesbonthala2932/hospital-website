@@ -19,6 +19,7 @@ from flask import Blueprint, jsonify, request
 from middleware.auth_middleware import require_role
 from services.appointment_service import get_all_appointments, update_appointment_status
 from services.leaves_service import get_all_leaves, approve_leave, reject_leave
+from services.analytics_service import get_visit_analytics
 from services.supabase_client import get_admin_supabase
 from services.firebase_service import create_firebase_user, update_firebase_user
 from services import email_service
@@ -159,10 +160,19 @@ def approve_leave_route(leave_id: str, current_user, current_role):
     Optional body: { "note": "Approved. Patients rescheduled." }
     """
     data  = request.get_json(silent=True) or {}
-    leave, err = approve_leave(leave_id, admin_note=data.get("note", ""))
+    force = bool(data.get("force"))
+    leave, err, conflicts = approve_leave(
+        leave_id,
+        admin_note=data.get("note", ""),
+        force=force,
+    )
     if err:
-        return jsonify({"error": err}), 400
-    return jsonify({"message": "Leave approved. Date is now blocked.", "leave": leave})
+        # 409 = conflict — admin needs to confirm with ?force
+        return jsonify({"error": err, "conflicts": conflicts or []}), 409
+    msg = "Leave approved. Date is now blocked."
+    if conflicts:
+        msg += f" {len(conflicts)} appointment(s) were auto-cancelled."
+    return jsonify({"message": msg, "leave": leave, "cancelled": conflicts or []})
 
 
 # ── POST /api/admin/leaves/:id/reject ────────────────────────────────────────
@@ -194,7 +204,21 @@ def all_doctors(current_user, current_role):
     result = db.table("doctors") \
         .select("*, specialties(name, slug), profiles(email)") \
         .order("full_name").execute()
-    return jsonify({"doctors": result.data or []})
+    doctors = result.data or []
+
+    # For pre-invited doctors (no profile yet) include their pending
+    # invitation email so the admin edit form can show + change it.
+    invites = db.table("doctor_invitations") \
+        .select("email, doctor_id, accepted_at") \
+        .is_("accepted_at", "null").execute()
+    invite_by_doc = {row["doctor_id"]: row["email"] for row in (invites.data or [])
+                     if row.get("doctor_id")}
+    for d in doctors:
+        if (not d.get("profiles") or not d.get("profiles", {}).get("email")) \
+           and d["id"] in invite_by_doc:
+            d["pending_email"] = invite_by_doc[d["id"]]
+
+    return jsonify({"doctors": doctors})
 
 
 # ── GET /api/admin/patients ───────────────────────────────────────────────────
@@ -244,6 +268,16 @@ def set_role(user_id: str, current_user, current_role):
     if not result.data:
         return jsonify({"error": "User not found."}), 404
 
+    # Mirror the role into Firebase custom claims so the frontend's JWT
+    # carries it without an extra /me lookup. Best-effort: Supabase is the
+    # source of truth, so we don't fail the request if this errors.
+    try:
+        from services.firebase_service import set_user_role
+        set_user_role(user_id, new_role)
+    except Exception as e:
+        # Log only — the role still updated in Supabase
+        print(f"[warn] Could not sync Firebase claim for {user_id}: {e}")
+
     return jsonify({"message": f"Role updated to '{new_role}'."})
 
 
@@ -267,6 +301,11 @@ def link_doctor_user(doctor_id: str, current_user, current_role):
     db.table("doctors").update({"user_id": user_id, "is_active": True}) \
         .eq("id", doctor_id).execute()
     db.table("profiles").update({"role": "doctor"}).eq("id", user_id).execute()
+    try:
+        from services.firebase_service import set_user_role
+        set_user_role(user_id, "doctor")
+    except Exception as e:
+        print(f"[warn] Could not sync doctor role claim for {user_id}: {e}")
 
     return jsonify({"message": "Doctor account activated."})
 
@@ -335,6 +374,13 @@ def create_doctor(current_user, current_role):
         "id": uid, "email": email, "full_name": name, "role": "doctor",
     }, on_conflict="id").execute()
 
+    # Mirror role into Firebase claims
+    try:
+        from services.firebase_service import set_user_role
+        set_user_role(uid, "doctor")
+    except Exception as e:
+        print(f"[warn] Could not set doctor claim for {uid}: {e}")
+
     # 3. Create doctor record
     doctor_row = {
         "user_id":          uid,
@@ -352,8 +398,8 @@ def create_doctor(current_user, current_role):
     if not result.data:
         return jsonify({"error": "Failed to create doctor record."}), 500
 
-    # 4. Auto-insert Mon-Sat (0–5) availability: 9:00-17:00, 30-min slots
-    #    Sunday (6) is deliberately excluded — always a day off
+    # 4. Auto-insert full-week availability (Mon-Sun, 0–6): 9:00-17:00, 30-min slots.
+    #    Admin can later deactivate specific weekdays per doctor if needed.
     new_doctor_id = result.data[0]["id"]
     avail_rows = [
         {
@@ -364,7 +410,7 @@ def create_doctor(current_user, current_role):
             "slot_duration_minutes": 30,
             "is_active":             True,
         }
-        for day in range(6)
+        for day in range(7)
     ]
     db.table("doctor_availability").insert(avail_rows).execute()
 
@@ -393,36 +439,86 @@ def update_doctor(doctor_id: str, current_user, current_role):
     update = {k: v for k, v in data.items() if k in doctor_fields}
 
     db  = get_admin_supabase()
-    doc = db.table("doctors").select("id, user_id, full_name").eq("id", doctor_id).single().execute()
-    if not doc.data:
+    # .execute() not .single() — .single() crashes if doctor doesn't exist
+    doc_q = db.table("doctors").select("id, user_id, full_name").eq("id", doctor_id).execute()
+    if not doc_q.data:
         return jsonify({"error": "Doctor not found."}), 404
+    doc_row = doc_q.data[0]
+    uid     = doc_row.get("user_id")
 
-    # Handle email change separately
-    new_email = data.get("email", "").strip().lower()
+    # ── Handle email change (the powerful admin action) ──────────────────────
+    new_email = (data.get("email") or "").strip().lower()
     if new_email:
-        uid = doc.data.get("user_id")
+        # 1. Make sure no other account already uses this email
+        clash_profile = db.table("profiles").select("id, email, role") \
+            .eq("email", new_email).execute()
+        clash = [r for r in (clash_profile.data or []) if r["id"] != (uid or "")]
+        if clash:
+            return jsonify({
+                "error": f"That email is already used by another '{clash[0]['role']}' account.",
+            }), 409
+
         if uid:
+            # Doctor has already signed in — change Firebase login email + profile
             try:
-                update_firebase_user(uid, email=new_email,
-                                     display_name=data.get("full_name") or doc.data["full_name"])
+                update_firebase_user(
+                    uid,
+                    email=new_email,
+                    display_name=data.get("full_name") or doc_row["full_name"],
+                )
             except ValueError as e:
-                return jsonify({"error": str(e)}), 400
+                return jsonify({"error": f"Firebase rejected the email: {e}"}), 400
             db.table("profiles").update({"email": new_email}).eq("id", uid).execute()
+        else:
+            # Doctor was only invited (no Firebase account yet) — update the
+            # invitation so the email-only auth flow recognises the new address.
+            try:
+                # Find the existing invitation row and move it to the new email.
+                inv = db.table("doctor_invitations").select("email, accepted_at") \
+                    .eq("doctor_id", doctor_id).execute()
+                if inv.data and not inv.data[0].get("accepted_at"):
+                    old_email = inv.data[0]["email"]
+                    # Re-key the invitation: delete old + insert new
+                    db.table("doctor_invitations").delete().eq("email", old_email).execute()
+                    db.table("doctor_invitations").insert({
+                        "email":      new_email,
+                        "doctor_id":  doctor_id,
+                        "invited_by": None,  # Firebase UIDs aren't UUIDs — see ALTER in invitations_fix.sql to enable audit
+                    }).execute()
+                else:
+                    # No pending invite — create one so the new email can sign in
+                    db.table("doctor_invitations").upsert({
+                        "email":      new_email,
+                        "doctor_id":  doctor_id,
+                        "invited_by": None,  # Firebase UIDs aren't UUIDs — see ALTER in invitations_fix.sql to enable audit
+                    }, on_conflict="email").execute()
+            except Exception as e:
+                return jsonify({"error": f"Could not update invitation: {e}"}), 400
 
-    # Sync display_name to Firebase if name changed
-    if "full_name" in update and doc.data.get("user_id"):
+    # ── Sync display_name to Firebase if name changed ────────────────────────
+    if "full_name" in update and uid:
         try:
-            update_firebase_user(doc.data["user_id"], display_name=update["full_name"])
+            update_firebase_user(uid, display_name=update["full_name"])
         except ValueError:
-            pass
+            pass  # display_name sync is best-effort
+        # Keep profile name in sync too
+        db.table("profiles").update({"full_name": update["full_name"]}).eq("id", uid).execute()
 
+    # ── Apply doctor-table updates ──────────────────────────────────────────
     if not update:
-        return jsonify({"message": "No doctor fields to update — only profile fields changed."})
+        return jsonify({
+            "message": "Doctor updated." if new_email else "No changes detected.",
+            "email_changed": bool(new_email),
+        })
 
     result = db.table("doctors").update(update).eq("id", doctor_id).execute()
     if not result.data:
         return jsonify({"error": "Update failed."}), 500
-    return jsonify({"message": "Doctor updated.", "doctor": result.data[0]})
+    return jsonify({
+        "message": "Doctor updated.",
+        "doctor":  result.data[0],
+        "email_changed": bool(new_email),
+    })
 
 
 # ── DELETE /api/admin/doctors/:id ─────────────────────────────────────────────
@@ -553,3 +649,422 @@ def admin_update_site_settings(current_user, current_role):
     rows = [{"key": k, "value": str(v)} for k, v in updates.items()]
     db.table("site_settings").upsert(rows, on_conflict="key").execute()
     return jsonify({"message": f"Updated {len(rows)} setting(s).", "updated": list(updates.keys())})
+
+
+# ── GET /api/admin/analytics ──────────────────────────────────────────────────
+@bp.route("/analytics", methods=["GET"])
+@require_role("admin")
+def admin_analytics(current_user, current_role):
+    """
+    Hospital-wide visit analytics for the admin dashboard.
+    Counts every non-cancelled / non-rejected appointment across all doctors.
+    """
+    return jsonify(get_visit_analytics(doctor_id=None))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PUBLIC HOLIDAYS
+# ─────────────────────────────────────────────────────────────────────────────
+
+@bp.route("/holidays", methods=["GET"])
+@require_role("admin")
+def list_holidays(current_user, current_role):
+    """Return all upcoming + recent public holidays."""
+    db = get_admin_supabase()
+    result = db.table("public_holidays") \
+        .select("id, holiday_date, name, description") \
+        .order("holiday_date").execute()
+    return jsonify({"holidays": result.data or []})
+
+
+@bp.route("/holidays", methods=["POST"])
+@require_role("admin")
+def add_holiday(current_user, current_role):
+    """
+    Add a hospital-wide closure date.
+    Body: { "holiday_date": "YYYY-MM-DD", "name": "Diwali", "description": "..." }
+    """
+    data        = request.get_json(silent=True) or {}
+    holiday_date = (data.get("holiday_date") or "").strip()
+    name        = (data.get("name") or "").strip()
+    description = (data.get("description") or "").strip()
+
+    if not holiday_date or not name:
+        return jsonify({"error": "holiday_date and name are required."}), 400
+
+    db = get_admin_supabase()
+    try:
+        result = db.table("public_holidays").insert({
+            "holiday_date": holiday_date,
+            "name":         name,
+            "description":  description or None,
+        }).execute()
+    except Exception as e:
+        # Most likely a unique-constraint violation
+        return jsonify({"error": f"Could not add holiday: {e}"}), 400
+
+    return jsonify({"message": "Holiday added.", "holiday": result.data[0]}), 201
+
+
+@bp.route("/holidays/<holiday_id>", methods=["DELETE"])
+@require_role("admin")
+def delete_holiday(holiday_id: str, current_user, current_role):
+    """Remove a hospital-wide closure."""
+    db = get_admin_supabase()
+    db.table("public_holidays").delete().eq("id", holiday_id).execute()
+    return jsonify({"message": "Holiday removed."})
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DOCTOR INVITATIONS — admin pre-authorises a doctor by email so they can
+# sign in with Google / email & get promoted to 'doctor' automatically.
+# ─────────────────────────────────────────────────────────────────────────────
+
+@bp.route("/doctor-invites", methods=["GET"])
+@require_role("admin")
+def list_doctor_invites(current_user, current_role):
+    """Return all pending + accepted invitations with the linked doctor info."""
+    db = get_admin_supabase()
+    result = db.table("doctor_invitations") \
+        .select("email, doctor_id, accepted_at, created_at, "
+                "doctors(id, full_name, title, specialty_id, "
+                "       specialties(name, slug))") \
+        .order("created_at", desc=True).execute()
+    return jsonify({"invitations": result.data or []})
+
+
+@bp.route("/doctor-invites", methods=["POST"])
+@require_role("admin")
+def create_doctor_invite(current_user, current_role):
+    """
+    Pre-authorise a doctor by email. Creates a placeholder doctor row that
+    will be linked to the Firebase UID the first time this email signs in.
+
+    Body: { email, full_name, specialty_id, title?, qualifications?,
+            experience_years?, consultation_fee?, bio?, photo_url? }
+    """
+    import traceback
+    data = request.get_json(silent=True) or {}
+    email   = (data.get("email") or "").strip().lower()
+    name    = (data.get("full_name") or "").strip()
+    spec_id = (data.get("specialty_id") or "").strip()
+    if not email or not name or not spec_id:
+        return jsonify({"error": "email, full_name, and specialty_id are required."}), 400
+
+    db = get_admin_supabase()
+
+    try:
+        # If invitation already exists, reject (admin can DELETE first)
+        existing = db.table("doctor_invitations").select("email, accepted_at") \
+            .eq("email", email).execute()
+        if existing.data:
+            row = existing.data[0]
+            if row.get("accepted_at"):
+                return jsonify({"error": "This email has already been onboarded as a doctor."}), 409
+            return jsonify({"error": "An invitation for this email is already pending."}), 409
+
+        # Also reject if the email already belongs to an active doctor or admin
+        existing_profile = db.table("profiles").select("id, email, role") \
+            .eq("email", email).execute()
+        if existing_profile.data and existing_profile.data[0].get("role") in ("doctor", "admin"):
+            return jsonify({"error": f"This email already has '{existing_profile.data[0]['role']}' role."}), 409
+
+        # Create placeholder doctor row (user_id will be filled on first login).
+        # Some columns have NOT NULL constraints in the older schema — never
+        # pass actual None for them; use empty string as a safe default.
+        doctor_row = {
+            "user_id":          None,
+            "specialty_id":     spec_id,
+            "full_name":        name,
+            "title":            data.get("title", "").strip() or "—",
+            "qualifications":   data.get("qualifications", "").strip() or "—",
+            "experience_years": int(data.get("experience_years", 0) or 0),
+            "consultation_fee": float(data.get("consultation_fee", 0) or 0),
+            "bio":              data.get("bio", "").strip(),
+            "is_active":        True,
+            "is_available":     True,
+        }
+        photo = (data.get("photo_url") or "").strip()
+        if photo:
+            doctor_row["photo_url"] = photo
+
+        try:
+            result = db.table("doctors").insert(doctor_row).execute()
+        except Exception as e:
+            # Most likely cause: doctors.user_id is still NOT NULL because the
+            # migration in doctor_invitations_schema.sql wasn't run yet.
+            print(f"[error] doctor insert failed: {e}")
+            msg = str(e)
+            if "user_id" in msg and "not-null" in msg:
+                return jsonify({
+                    "error": "Schema not migrated. Run backend/doctor_invitations_schema.sql in Supabase SQL Editor first.",
+                }), 400
+            return jsonify({"error": f"Could not create doctor record: {e}"}), 400
+        if not result.data:
+            return jsonify({"error": "Failed to create doctor record."}), 500
+
+        new_doctor_id = result.data[0]["id"]
+
+        # Auto-seed 7-day availability (admin can disable per weekday later)
+        avail_rows = [{
+            "doctor_id":             new_doctor_id,
+            "day_of_week":           day,
+            "start_time":            "09:00",
+            "end_time":              "17:00",
+            "slot_duration_minutes": 30,
+            "is_active":             True,
+        } for day in range(7)]
+        try:
+            db.table("doctor_availability").insert(avail_rows).execute()
+        except Exception as e:
+            print(f"[warn] availability seed failed: {e}")
+
+        # Insert invitation
+        try:
+            db.table("doctor_invitations").insert({
+                "email":      email,
+                "doctor_id":  new_doctor_id,
+                "invited_by": None,  # Firebase UIDs aren't UUIDs — see ALTER in invitations_fix.sql to enable audit
+            }).execute()
+        except Exception as e:
+            # Rollback the doctor row we just created so admin can retry cleanly
+            db.table("doctors").delete().eq("id", new_doctor_id).execute()
+            print(f"[error] invitation insert failed: {e}")
+            if "doctor_invitations" in str(e):
+                return jsonify({
+                    "error": "doctor_invitations table missing. Run backend/doctor_invitations_schema.sql in Supabase SQL Editor.",
+                }), 400
+            return jsonify({"error": f"Could not save invitation: {e}"}), 400
+
+        # If the email already has a profile (e.g. patient account), promote them now
+        if existing_profile.data:
+            existing_uid = existing_profile.data[0]["id"]
+            try:
+                _accept_invitation(db, email, existing_uid, name)
+            except Exception as e:
+                print(f"[warn] auto-promote failed: {e}")
+            return jsonify({
+                "message": "Doctor invited and promoted (account already existed).",
+                "doctor":  result.data[0],
+            }), 201
+
+        return jsonify({
+            "message": "Doctor invited. They can sign in with Google or email to activate.",
+            "doctor":  result.data[0],
+        }), 201
+
+    except Exception as e:
+        print(f"[error] create_doctor_invite crashed: {e}\n{traceback.format_exc()}")
+        return jsonify({"error": f"Server error: {e}"}), 500
+
+
+@bp.route("/doctor-invites/<email>", methods=["DELETE"])
+@require_role("admin")
+def cancel_doctor_invite(email: str, current_user, current_role):
+    """Cancel a pending invitation. Also deletes the placeholder doctor row."""
+    email = email.strip().lower()
+    db    = get_admin_supabase()
+
+    invite = db.table("doctor_invitations").select("email, doctor_id, accepted_at") \
+        .eq("email", email).execute()
+    if not invite.data:
+        return jsonify({"error": "Invitation not found."}), 404
+    if invite.data[0].get("accepted_at"):
+        return jsonify({"error": "Cannot cancel — invitation has already been accepted."}), 409
+
+    doc_id = invite.data[0].get("doctor_id")
+    db.table("doctor_invitations").delete().eq("email", email).execute()
+    if doc_id:
+        # Only delete the placeholder row if it was never linked to a user
+        db.table("doctors").delete().eq("id", doc_id).is_("user_id", "null").execute()
+    return jsonify({"message": "Invitation cancelled."})
+
+
+def _accept_invitation(db, email: str, uid: str, display_name: str = ""):
+    """
+    Promote a user to 'doctor': link the placeholder doctor row to their UID,
+    set their profile role to 'doctor', set the Firebase custom claim,
+    and mark the invitation as accepted.
+
+    Returns the doctor row, or None if no invitation existed.
+    """
+    invite = db.table("doctor_invitations").select("email, doctor_id, accepted_at") \
+        .eq("email", email).execute()
+    if not invite.data:
+        return None
+    if invite.data[0].get("accepted_at"):
+        return None  # already used
+
+    doctor_id = invite.data[0]["doctor_id"]
+    # Link the doctor row to this Firebase UID
+    db.table("doctors").update({"user_id": uid}).eq("id", doctor_id).execute()
+    # Promote profile role
+    db.table("profiles").update({"role": "doctor", "full_name": display_name or email}) \
+        .eq("id", uid).execute()
+    # Set Firebase custom claim so the JWT carries the role
+    try:
+        from services.firebase_service import set_user_role
+        set_user_role(uid, "doctor")
+    except Exception as e:
+        print(f"[warn] Could not set doctor claim for {uid}: {e}")
+    # Mark invitation accepted
+    db.table("doctor_invitations").update({"accepted_at": "now()"}).eq("email", email).execute()
+
+    doc = db.table("doctors").select("*").eq("id", doctor_id).single().execute()
+    return doc.data
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ADMIN MANAGEMENT — create/change admins, list current admins, invite by email
+# ─────────────────────────────────────────────────────────────────────────────
+
+@bp.route("/users/lookup", methods=["GET"])
+@require_role("admin")
+def lookup_user_by_email(current_user, current_role):
+    """
+    Find a user by email. Returns the profile + (if applicable) doctor row.
+    Used by the admin "Manage Access" UI to show what role someone has before
+    promoting / demoting them.
+    """
+    email = (request.args.get("email") or "").strip().lower()
+    if not email:
+        return jsonify({"error": "email query param is required."}), 400
+    db = get_admin_supabase()
+    profile = db.table("profiles") \
+        .select("id, email, full_name, role, created_at, phone") \
+        .eq("email", email).execute()
+    if not profile.data:
+        return jsonify({"found": False, "email": email}), 200
+    p = profile.data[0]
+    extra = {}
+    if p["role"] == "doctor":
+        doc = db.table("doctors").select("id, full_name, title") \
+            .eq("user_id", p["id"]).execute()
+        if doc.data:
+            extra["doctor"] = doc.data[0]
+    return jsonify({"found": True, "user": p, **extra})
+
+
+@bp.route("/admins", methods=["GET"])
+@require_role("admin")
+def list_admins(current_user, current_role):
+    """List every account currently holding the 'admin' role."""
+    db = get_admin_supabase()
+    result = db.table("profiles") \
+        .select("id, email, full_name, created_at") \
+        .eq("role", "admin").order("created_at").execute()
+    return jsonify({"admins": result.data or []})
+
+
+@bp.route("/admin-invites", methods=["GET"])
+@require_role("admin")
+def list_admin_invites(current_user, current_role):
+    """List pending admin invitations."""
+    db = get_admin_supabase()
+    result = db.table("admin_invitations") \
+        .select("email, accepted_at, created_at") \
+        .is_("accepted_at", "null") \
+        .order("created_at", desc=True).execute()
+    return jsonify({"invitations": result.data or []})
+
+
+@bp.route("/admin-invites", methods=["POST"])
+@require_role("admin")
+def create_admin_invite(current_user, current_role):
+    """
+    Invite a new admin by email. If the email already has an account,
+    promote them to admin immediately. Otherwise insert a pending invitation
+    that auto-activates the next time they sign in.
+
+    Body: { "email": "new@admin.com" }
+    """
+    data  = request.get_json(silent=True) or {}
+    email = (data.get("email") or "").strip().lower()
+    if not email:
+        return jsonify({"error": "email is required."}), 400
+
+    db = get_admin_supabase()
+
+    # If user already exists → promote immediately
+    profile = db.table("profiles").select("id, role, full_name") \
+        .eq("email", email).execute()
+    if profile.data:
+        uid       = profile.data[0]["id"]
+        full_name = profile.data[0].get("full_name", "")
+        cur_role  = profile.data[0].get("role")
+        if cur_role == "admin":
+            return jsonify({"message": "This user is already an admin."}), 200
+        db.table("profiles").update({"role": "admin"}).eq("id", uid).execute()
+        try:
+            from services.firebase_service import set_user_role
+            set_user_role(uid, "admin")
+        except Exception as e:
+            print(f"[warn] could not set admin claim for {uid}: {e}")
+        return jsonify({
+            "message": f"{full_name or email} promoted to admin. They must sign out and back in for the change to take effect.",
+            "promoted_immediately": True,
+        }), 200
+
+    # Otherwise create a pending invitation
+    existing = db.table("admin_invitations").select("email, accepted_at") \
+        .eq("email", email).execute()
+    if existing.data and not existing.data[0].get("accepted_at"):
+        return jsonify({"error": "An admin invitation for this email is already pending."}), 409
+
+    db.table("admin_invitations").upsert({
+        "email":      email,
+        "invited_by": None,  # Firebase UIDs aren't UUIDs — see ALTER in invitations_fix.sql to enable audit
+        "accepted_at": None,
+    }, on_conflict="email").execute()
+    return jsonify({
+        "message": "Admin invitation sent. They'll become admin on first sign-in.",
+        "promoted_immediately": False,
+    }), 201
+
+
+@bp.route("/admin-invites/<email>", methods=["DELETE"])
+@require_role("admin")
+def cancel_admin_invite(email: str, current_user, current_role):
+    """Cancel a pending admin invitation."""
+    email = email.strip().lower()
+    db = get_admin_supabase()
+    invite = db.table("admin_invitations").select("email, accepted_at") \
+        .eq("email", email).execute()
+    if not invite.data:
+        return jsonify({"error": "Invitation not found."}), 404
+    if invite.data[0].get("accepted_at"):
+        return jsonify({"error": "Already accepted — demote via 'Change Role' instead."}), 409
+    db.table("admin_invitations").delete().eq("email", email).execute()
+    return jsonify({"message": "Invitation cancelled."})
+
+
+@bp.route("/admins/<user_id>", methods=["DELETE"])
+@require_role("admin")
+def demote_admin(user_id: str, current_user, current_role):
+    """
+    Revoke admin privileges. The user is demoted to 'patient'.
+    Safety: an admin cannot demote themselves.
+    """
+    if user_id == current_user["id"]:
+        return jsonify({"error": "You cannot revoke your own admin access."}), 400
+
+    db = get_admin_supabase()
+    profile = db.table("profiles").select("id, role, email, full_name") \
+        .eq("id", user_id).execute()
+    if not profile.data:
+        return jsonify({"error": "User not found."}), 404
+    if profile.data[0]["role"] != "admin":
+        return jsonify({"error": "This user is not an admin."}), 400
+
+    # Make sure we're never left with zero admins
+    count = db.table("profiles").select("id", count="exact").eq("role", "admin").execute()
+    if (count.count or 0) <= 1:
+        return jsonify({"error": "Cannot demote — at least one admin must remain."}), 400
+
+    db.table("profiles").update({"role": "patient"}).eq("id", user_id).execute()
+    try:
+        from services.firebase_service import set_user_role
+        set_user_role(user_id, "patient")
+    except Exception as e:
+        print(f"[warn] could not reset claim for {user_id}: {e}")
+    return jsonify({"message": f"{profile.data[0].get('email')} is no longer an admin."})
